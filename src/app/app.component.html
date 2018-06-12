@@ -8,12 +8,14 @@
       </ion-header>
       <ion-content>
         <ion-list>
-          <ion-item-group>
-            <ion-item [routerLink]="['home']">
-              <ion-icon name="home" item-left></ion-icon>
-              Home
-            </ion-item>
-          </ion-item-group>
+          <ion-menu-toggle>
+            <ion-item-group>
+              <ion-item [routerLink]="['home']">
+                <ion-icon name="home" item-left></ion-icon>
+                Home
+              </ion-item>
+            </ion-item-group>
+          </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages$ | async">
             <ion-item-group>
               <ion-item-divider color="light" [routerDirection]="'root'" [routerLink]="['course', p.urlName, p.sessions[0].urlName, p.sessions[0].pages[0].urlName]">

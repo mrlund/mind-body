@@ -1,1 +1,17 @@
 
+ion-card-content {
+    font-size: 2em; 
+    ion-icon {
+        font-size: 5em; 
+        color: #E5053A;
+    }
+}
+ion-header  ion-toolbar  ion-title {
+    img {
+        height: 40px;
+        float: right;
+    }
+    span {
+        vertical-align: -webkit-baseline-middle;
+    }
+}
