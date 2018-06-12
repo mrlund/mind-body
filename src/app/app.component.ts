@@ -9,7 +9,8 @@ import { GET_TABLE_OF_CONTENT } from '../girls-platform/state/table-of-content-a
 
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html'
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss']
 })
 export class AppComponent {
   public appPages$;
