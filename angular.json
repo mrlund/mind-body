@@ -6,7 +6,7 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
-      "prefix": "app",
+      "prefix": "gi",
       "schematics": {},
       "architect": {
         "build": {
@@ -139,5 +139,5 @@
       }
     }
   },
-  "defaultProject": "app"
+  "defaultProject": "gi"
 }
