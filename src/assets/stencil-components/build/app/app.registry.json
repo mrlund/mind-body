@@ -1,0 +1,34 @@
+{
+  "namespace": "App",
+  "fsNamespace": "app",
+  "loader": "../app.js",
+  "global": "app.global.js",
+  "core": "app.rtrdglx6.js",
+  "corePolyfilled": "app.ovq895hp.js",
+  "components": {
+    "app-animation": {
+      "$": "zmssxqkm"
+    },
+    "app-animation-progress-bar": {
+      "$": "nreel8ak"
+    },
+    "app-home": {
+      "$": "zmssxqkm"
+    },
+    "app-profile": {
+      "$": "qykklvra"
+    },
+    "lazy-img": {
+      "$": "x9rws4qn"
+    },
+    "my-app": {
+      "$": "mxhzm5b2"
+    },
+    "stencil-route": {
+      "$": "mxhzm5b2"
+    },
+    "stencil-router": {
+      "$": "mxhzm5b2"
+    }
+  }
+}

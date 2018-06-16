@@ -9,7 +9,7 @@
     </ion-toolbar>
   </ion-header>
   
-  <ion-content padding *ngIf="pageModel && pageModel.page">
+  <ion-content  *ngIf="pageModel && pageModel.page">
         <div [innerHTML]="safeHtml(pageModel?.page?.htmlContent)"></div>
     </ion-content>
     
