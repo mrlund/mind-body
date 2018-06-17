@@ -3,32 +3,32 @@
   "fsNamespace": "app",
   "loader": "../app.js",
   "global": "app.global.js",
-  "core": "app.rtrdglx6.js",
   "corePolyfilled": "app.ovq895hp.js",
+  "core": "app.rtrdglx6.js",
   "components": {
     "app-animation": {
-      "$": "kwglmzc8"
+      "$": "tjbtetwn"
     },
     "app-animation-progress-bar": {
       "$": "nreel8ak"
     },
     "app-home": {
-      "$": "h7wk1meh"
+      "$": "tjbtetwn"
     },
     "app-profile": {
-      "$": "loettoy3"
+      "$": "qykklvra"
     },
-    "app-root": {
-      "$": "3wtgif4m"
+    "lazy-img": {
+      "$": "x9rws4qn"
+    },
+    "my-app": {
+      "$": "mxhzm5b2"
     },
     "stencil-route": {
-      "$": "3wtgif4m"
-    },
-    "stencil-route-link": {
-      "$": "h7wk1meh"
+      "$": "mxhzm5b2"
     },
     "stencil-router": {
-      "$": "3wtgif4m"
+      "$": "mxhzm5b2"
     }
   }
 }
