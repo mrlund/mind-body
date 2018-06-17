@@ -22,26 +22,6 @@ export class CoursePageView {
     ) {
         this.pageModel$ = this.store.select(fromRootStore.getPageContents);
     }
-
-    aa(){
-        //this.pauseAnimation('app-animation',)
-    }
-
-    pauseAnimation(ctrlName: string, methodName: string, ...args: any[]) {
-        const controller = this.ensureElementInBody(ctrlName);
-        return controller.componentOnReady()
-            .then(() => (controller as any)[methodName].apply(controller, args));
-    }
-    ensureElementInBody(elementName: string) {
-        let element = document.querySelector(elementName);
-        if (!element) {
-            element = document.createElement(elementName);
-            document.body.appendChild(element);
-        }
-        return element as HTMLStencilElement;
-    }
-
-
     public safeHtml(html) {
         if (html && html.length) {
             return this.sanitizer.bypassSecurityTrustHtml(html);
