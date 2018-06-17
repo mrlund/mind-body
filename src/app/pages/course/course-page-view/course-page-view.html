@@ -1,20 +1,5 @@
-<ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>
-        {{pageModel?.page?.name}}
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content  *ngIf="pageModel && pageModel.page">
-        <div [innerHTML]="safeHtml(pageModel?.page?.htmlContent)"></div>
-    </ion-content>
-    
-    <ion-footer>
-        <ion-toolbar>
-                <gi-course-page-footer [pageModel]="pageModel" *ngIf="pageModel && pageModel.page"></gi-course-page-footer>
-        </ion-toolbar>
-    </ion-footer>        
+<ng-container *ngIf="(pageModel$|async) as pageModel">
+  <ng-container *ngIf="pageModel && pageModel.page">
+    <div [innerHTML]="safeHtml(pageModel?.page?.htmlContent)"></div>
+  </ng-container>
+</ng-container>

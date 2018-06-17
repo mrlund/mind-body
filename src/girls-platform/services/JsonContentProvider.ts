@@ -2,7 +2,9 @@ import {ICourseContentProvider, ICourseModule, IPageModel, IPageReference, IPage
 import { Observable, of } from 'rxjs';
 import { tap, switchMap, map, debounceTime } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import {Injectable} from "@angular/core";
 
+@Injectable()
 export class JsonContentProvider implements ICourseContentProvider {
 
     private toc : Array<ICourseModule>;

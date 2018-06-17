@@ -15,11 +15,15 @@ import { CoursePageView } from './course-page-view/course-page-view';
     IonicModule,
     RouterModule.forChild([
       {
-        path: ':courseModuleUrlPart/:sessionUrlPart/:pageUrlPart',
-        component: CoursePage
+        path: '',
+        component: CoursePage,
+        children: [{
+          path: ':courseModuleUrlPart/:sessionUrlPart/:pageUrlPart',
+          component: CoursePageView
+        }]
       }
-    ])
 
+    ])
   ],
   declarations: [
     CoursePage,
@@ -27,4 +31,4 @@ import { CoursePageView } from './course-page-view/course-page-view';
     CoursePageFooter
   ]
 })
-export class CoursePageModule {}
+export class CoursePageModule { }

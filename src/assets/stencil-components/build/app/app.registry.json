@@ -7,28 +7,28 @@
   "corePolyfilled": "app.ovq895hp.js",
   "components": {
     "app-animation": {
-      "$": "zmssxqkm"
+      "$": "njm7lwte"
     },
     "app-animation-progress-bar": {
       "$": "nreel8ak"
     },
     "app-home": {
-      "$": "zmssxqkm"
+      "$": "h7wk1meh"
     },
     "app-profile": {
-      "$": "qykklvra"
+      "$": "loettoy3"
     },
-    "lazy-img": {
-      "$": "x9rws4qn"
-    },
-    "my-app": {
-      "$": "mxhzm5b2"
+    "app-root": {
+      "$": "3wtgif4m"
     },
     "stencil-route": {
-      "$": "mxhzm5b2"
+      "$": "3wtgif4m"
+    },
+    "stencil-route-link": {
+      "$": "h7wk1meh"
     },
     "stencil-router": {
-      "$": "mxhzm5b2"
+      "$": "3wtgif4m"
     }
   }
 }
