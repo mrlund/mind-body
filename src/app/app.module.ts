@@ -11,10 +11,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { ComponentsModule } from './components/components.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { TableOfContentEffects } from '../girls-platform/state/table-of-content-effects';
-import { TableOfContentReducer } from '../girls-platform/state/table-of-content-reducer';
-import { courseContentFactoryProvider } from '../girls-platform/services/JsonContentProvider';
+import {
+  StoreRouterConnectingModule,
+  RouterStateSerializer
+} from "@ngrx/router-store";
+import { effects, CustomSerializer, reducers } from '../girls-platform/state';
+import { courseContentFactoryProvider, JsonContentProvider } from '../girls-platform/services/JsonContentProvider';
 import { HttpClientModule } from '@angular/common/http';
+
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { environment } from "../environments/environment"
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,15 +31,27 @@ import { HttpClientModule } from '@angular/common/http';
     IonicModule.forRoot(),
     AppRoutingModule,
     ComponentsModule,
-    StoreModule.forRoot({ TableOfContentReducer }),
-    EffectsModule.forRoot([TableOfContentEffects])
+
+    StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument({
+      logOnly: environment.production // Restrict extension to log-only mode
+    }),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'routerReducer', // name of reducer key
+    }),
+    EffectsModule.forRoot(effects)
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    courseContentFactoryProvider
+    courseContentFactoryProvider,
+    JsonContentProvider,
+    {
+      provide: RouterStateSerializer,
+      useClass: CustomSerializer
+    }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

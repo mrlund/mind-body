@@ -1,12 +1,12 @@
 <ion-toolbar>
     <ion-buttons slot="start">
-        <ion-button [disabled]="!pageModel?.prevPage" [routerLink]="urlMap(pageModel?.prevPage?.urlName)">
+        <ion-button [disabled]="!pageModel?.prevPage" [routerLink]="urlMap(pageModel?.prevPage?.urlName)" routerDirection="root">
             <ion-icon name="ios-arrow-back" slot="icon-only"></ion-icon>
         </ion-button>
     </ion-buttons>
     <ion-title>{{pageModel.page.name}}</ion-title>
     <ion-buttons slot="end">
-        <ion-button [disabled]="!pageModel?.nextPage" [routerLink]="urlMap(pageModel?.nextPage?.urlName)">
+        <ion-button [disabled]="!pageModel?.nextPage" routerDirection="root" [routerLink]="urlMap(pageModel?.nextPage?.urlName)">
             <ion-icon slot="icon-only" name="ios-arrow-forward"></ion-icon>
         </ion-button>
     </ion-buttons>
