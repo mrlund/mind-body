@@ -1,42 +1,48 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import { NavController } from "@ionic/angular"
 
 @Component({
     selector: 'gi-course-page-footer',
     templateUrl: 'course-page-footer.html',
     styleUrls: ['course-page-footer.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CoursePageFooter {
 
     @Input()
     public pageModel;
 
-    constructor(
-    ) {
+    constructor(private navCtrl: NavController) {
 
     }
+    prev(url) {
+        this.pauseAnimation('app-animation', 'canvasPauseAnimation');
 
-    public urlMap(url) {
-        this.pauseAnimation('app-animation', 'pauseAnimation');
         if (url && this.pageModel.page) {
-            return ['/course', this.pageModel.page.pageReference.courseModuleUrlPart, this.pageModel.page.pageReference.sessionUrlPart, url];
+           // this.pauseAnimation('app-animation', 'canvasPlayAnimation');
+            this.navCtrl.goRoot('/course/'+this.pageModel.page.pageReference.courseModuleUrlPart+"/"+ this.pageModel.page.pageReference.sessionUrlPart+"/"+ url)
+           // return ['/course', this.pageModel.page.pageReference.courseModuleUrlPart, this.pageModel.page.pageReference.sessionUrlPart, url];
         }
         return [];
     }
-
-    pauseAnimation(ctrlName: string, methodName: string, ...args: any[]) {
-        const controller = this.ensureElementInBody(ctrlName);
-        return controller.componentOnReady()
-            .then(() => (controller as any)[methodName].apply(controller, args));
-    }
-    ensureElementInBody(elementName: string) {
-        let element = document.querySelector(elementName);
-        if (!element) {
-            element = document.createElement(elementName);
-            document.body.appendChild(element);
+    next(url) {
+        this.pauseAnimation('app-animation', 'canvasPauseAnimation');
+        //this.pauseAnimation('app-animation', 'canvasPlayAnimation');
+        if (url && this.pageModel.page) {
+            this.navCtrl.goRoot('/course/'+this.pageModel.page.pageReference.courseModuleUrlPart+"/"+ this.pageModel.page.pageReference.sessionUrlPart+"/"+ url)
+           // return ['/course', this.pageModel.page.pageReference.courseModuleUrlPart, this.pageModel.page.pageReference.sessionUrlPart, url];
         }
-        return element as HTMLStencilElement;
+        return [];
     }
+  
+    pauseAnimation(elementName: string, methodName: string, ...args: any[]) {
+        const controller = document.querySelector(elementName) as HTMLStencilElement;
+        if (controller) {
+            return controller.componentOnReady()
+                .then(() => (controller as any)[methodName].apply(controller, args));
+        }
+    }
+
 
 }

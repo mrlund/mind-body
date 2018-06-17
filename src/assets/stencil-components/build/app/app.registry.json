@@ -3,17 +3,17 @@
   "fsNamespace": "app",
   "loader": "../app.js",
   "global": "app.global.js",
-  "corePolyfilled": "app.ovq895hp.js",
   "core": "app.rtrdglx6.js",
+  "corePolyfilled": "app.ovq895hp.js",
   "components": {
     "app-animation": {
-      "$": "tjbtetwn"
+      "$": "99loqvh9"
     },
     "app-animation-progress-bar": {
       "$": "nreel8ak"
     },
     "app-home": {
-      "$": "tjbtetwn"
+      "$": "99loqvh9"
     },
     "app-profile": {
       "$": "qykklvra"
