@@ -5,6 +5,10 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { MyMoodComponent } from './my-mood/my-mood.component';
+import { MyHealthComponent } from './my-health/my-health.component';
+import { MyGoalsComponent } from './my-goals/my-goals.component';
+import { FindHelpComponent } from './find-help/find-help.component';
 
 @NgModule({
   imports: [
@@ -15,9 +19,25 @@ import { HomePage } from './home.page';
       {
         path: '',
         component: HomePage
-      }
+      },
+      {
+        path: 'find-help',
+        component: FindHelpComponent
+      },
+      {
+        path: 'my-mood',
+        component: MyMoodComponent
+      },
+      {
+        path: 'my-health',
+        component: MyHealthComponent
+      },
+      {
+        path: 'my-goals',
+        component: MyGoalsComponent
+      },
     ])
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, MyMoodComponent, MyHealthComponent, MyGoalsComponent, FindHelpComponent]
 })
 export class HomePageModule {}

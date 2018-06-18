@@ -14,7 +14,7 @@
   <ion-grid>
     <ion-row>
       <ion-col col-6>
-        <ion-card>
+        <ion-card [routerLink]="['my-mood']">
           <ion-card-content>
             <h1>
               <ion-icon name="happy"></ion-icon>
@@ -24,7 +24,7 @@
         </ion-card>
       </ion-col>
       <ion-col col-6>
-        <ion-card>
+        <ion-card [routerLink]="['my-health']">
           <ion-card-content>
             <h1>
               <ion-icon name="fitness"></ion-icon>
@@ -34,7 +34,7 @@
         </ion-card>
       </ion-col>
       <ion-col col-6>
-        <ion-card>
+        <ion-card [routerLink]="['my-goals']">
           <ion-card-content>
             <h1>
               <ion-icon name="ribbon"></ion-icon>
@@ -44,7 +44,7 @@
         </ion-card>
       </ion-col>
       <ion-col col-6>
-        <ion-card>
+        <ion-card [routerLink]="['find-help']">
           <ion-card-content>
             <h1>
               <ion-icon name="medkit"></ion-icon>

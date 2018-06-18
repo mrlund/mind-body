@@ -2,55 +2,29 @@
 [
     {
     "id" : 1,
-    "name": "Introduction to Course",
-    "urlName": "introduction",
+    "name": "How Your Body Talks To You",
+    "urlName": "how-your-body-talks-to-you",
     "sessions": [
         { 
             "id": 1,
-            "name" : "About the course",
-            "urlName": "about",
+            "name" : "How Your Mind and Body Work Together",
+            "urlName": "how-mind-and.body-work-together",
             "pages" : [
                 {
                     "id": 1,
                     "name" : "Getting started",
                     "urlName": "getting-started"
-                },
-                {
-                    "id": 3,
-                    "name" : "More started",
-                    "urlName": "more-started"
-                },
-                {
-                    "id": 4,
-                    "name" : "Even More Started",
-                    "urlName": "even-more-started"
                 }                                
 
             ]
-         }
-    ]},
-    {
-    "id" : 2,
-    "name": "Starting with the basics",
-    "urlName": "basics",
-    "sessions": [
-        { 
+         },
+         { 
             "id": 2,
-            "name" : "About the basics",
-            "urlName": "about",
+            "name" : "The Science Behind the Mind Body Connection",
+            "urlName": "science-behind-mind-body",
             "pages" : [
                 {
-                    "id": 5,
-                    "name" : "Getting started",
-                    "urlName": "getting-started"
-                },
-                {
-                    "id": 6,
-                    "name" : "Getting started",
-                    "urlName": "getting-started"
-                },
-                {
-                    "id": 7,
+                    "id": 1,
                     "name" : "Getting started",
                     "urlName": "getting-started"
                 }                                
@@ -59,26 +33,111 @@
          },
          { 
             "id": 3,
-            "name" : "Next about basics",
-            "urlName": "next",
+            "name" : "Self Worth",
+            "urlName": "self-worth",
             "pages" : [
                 {
-                    "id": 5,
-                    "name" : "Getting started",
-                    "urlName": "getting-started"
-                },
-                {
-                    "id": 6,
-                    "name" : "Getting started",
-                    "urlName": "getting-started"
-                },
-                {
-                    "id": 7,
+                    "id": 1,
                     "name" : "Getting started",
                     "urlName": "getting-started"
                 }                                
 
             ]
-         } 
+         },
+         { 
+            "id": 4,
+            "name" : "Re-Setting Your Day: Intro to Daily Practice",
+            "urlName": "resetting-your-day",
+            "pages" : [
+                {
+                    "id": 1,
+                    "name" : "Getting started",
+                    "urlName": "getting-started"
+                }
+            ]
+         },
+         { 
+            "id": 5,
+            "name" : "Silence and Visualization as Daily Practice",
+            "urlName": "silence-and-visualization",
+            "pages" : [
+                {
+                    "id": 1,
+                    "name" : "Getting started",
+                    "urlName": "getting-started"
+                }                                
+
+            ]
+         },
+         { 
+            "id": 6,
+            "name" : "Affirmations and Exercise as Daily Practice",
+            "urlName": "affirmations-and-exercise",
+            "pages" : [
+                {
+                    "id": 1,
+                    "name" : "Getting started",
+                    "urlName": "getting-started"
+                }                                
+
+            ]
+         },
+         { 
+            "id": 7,
+            "name" : "Reading and Journaling As Daily Practice",
+            "urlName": "reading-and-journalization",
+            "pages" : [
+                {
+                    "id": 1,
+                    "name" : "Getting started",
+                    "urlName": "getting-started"
+                }                                
+
+            ]
+         },
+         { 
+            "id": 8,
+            "name" : "The Unconscious Mind",
+            "urlName": "the-unconscious-mind",
+            "pages" : [
+                {
+                    "id": 1,
+                    "name" : "Getting started",
+                    "urlName": "getting-started"
+                }                                
+
+            ]
+         },
+         { 
+            "id": 9,
+            "name" : "Time to Take Action!",
+            "urlName": "time-to-take-action",
+            "pages" : [
+                {
+                    "id": 1,
+                    "name" : "Getting started",
+                    "urlName": "getting-started"
+                }                                
+
+            ]
+         }
+    ]},
+    {
+    "id" : 2,
+    "name": "Feelings and Emotions",
+    "urlName": "feelings-and-emotions",
+    "sessions": [
+    ]}, 
+    {
+    "id" : 3,
+    "name": "Stress",
+    "urlName": "feelings-and-emotions",
+    "sessions": [
+    ]}, 
+    {
+    "id" : 4,
+    "name": "The Physical Body",
+    "urlName": "the-physical-body",
+    "sessions": [ 
     ]} 
 ]
