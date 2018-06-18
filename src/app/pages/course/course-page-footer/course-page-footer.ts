@@ -16,26 +16,16 @@ export class CoursePageFooter {
     constructor(private navCtrl: NavController) {
 
     }
-    prev(url) {
+    nextOrPrev(url) {
         this.pauseAnimation('app-animation', 'canvasPauseAnimation');
+        if (url && this.pageModel.page) {
+            // this.pauseAnimation('app-animation', 'canvasPlayAnimation');
+            this.navCtrl.goRoot('/course/' + this.pageModel.page.pageReference.courseModuleUrlPart + "/" + this.pageModel.page.pageReference.sessionUrlPart + "/" + url)
+            // return ['/course', this.pageModel.page.pageReference.courseModuleUrlPart, this.pageModel.page.pageReference.sessionUrlPart, url];
+        }
+        return [];
+    }
 
-        if (url && this.pageModel.page) {
-           // this.pauseAnimation('app-animation', 'canvasPlayAnimation');
-            this.navCtrl.goRoot('/course/'+this.pageModel.page.pageReference.courseModuleUrlPart+"/"+ this.pageModel.page.pageReference.sessionUrlPart+"/"+ url)
-           // return ['/course', this.pageModel.page.pageReference.courseModuleUrlPart, this.pageModel.page.pageReference.sessionUrlPart, url];
-        }
-        return [];
-    }
-    next(url) {
-        this.pauseAnimation('app-animation', 'canvasPauseAnimation');
-        //this.pauseAnimation('app-animation', 'canvasPlayAnimation');
-        if (url && this.pageModel.page) {
-            this.navCtrl.goRoot('/course/'+this.pageModel.page.pageReference.courseModuleUrlPart+"/"+ this.pageModel.page.pageReference.sessionUrlPart+"/"+ url)
-           // return ['/course', this.pageModel.page.pageReference.courseModuleUrlPart, this.pageModel.page.pageReference.sessionUrlPart, url];
-        }
-        return [];
-    }
-  
     pauseAnimation(elementName: string, methodName: string, ...args: any[]) {
         const controller = document.querySelector(elementName) as HTMLStencilElement;
         if (controller) {
