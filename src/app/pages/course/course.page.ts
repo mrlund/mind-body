@@ -16,13 +16,19 @@ import * as fromRootStore from "../../../girls-platform/state/";
 export class CoursePage {
   public pageModel$;
   public parameters$: Observable<any>;
+
+  public contentRoot: string;
+
   constructor(
     private route: ActivatedRoute,
     private courseProvider: CourseContentProvider,
     private store: Store<fromRootStore.State>,
   ) { }
 
+
   ngOnInit() {
     this.pageModel$ = this.store.select(fromRootStore.getPageContents);
+
+    this.contentRoot = ""; 
   }
 }

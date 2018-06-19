@@ -19,3 +19,14 @@
     --ion-toolbar-md-background-color: #E5053A;
     --ion-toolbar-md-text-color: #fff;
 }
+
+gi-course-page-view {
+    h1 {
+        color: #E5053A;
+    }
+    ul > li {
+        font-size: 1.5em;
+        line-height: 1.5em; 
+    }
+    padding: 15px;
+}
