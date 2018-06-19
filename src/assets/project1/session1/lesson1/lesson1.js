@@ -1,7 +1,7 @@
 (function (cjs, an) {
 
 var p; // shortcut to reference prototypes
-var lib={};var ss={};var img={};
+ lib={};var ss={};var img={};
 lib.ssMetadata = [];
 
 
@@ -2986,7 +2986,7 @@ p.nominalBounds = new cjs.Rectangle(-618,-431.1,1529.1,1119.2);
 
 
 // stage content:
-(lib.Lesson1 = function(mode,startPosition,loop) {
+(lib.lesson1 = function(mode,startPosition,loop) {
 if (loop == null) { loop = false; }	this.initialize(mode,startPosition,loop,{});
 
 	// timeline functions:
