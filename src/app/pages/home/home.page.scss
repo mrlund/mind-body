@@ -17,3 +17,18 @@ ion-header  ion-toolbar  ion-title {
         vertical-align: -webkit-baseline-middle;
     }
 }
+
+@media only screen and (max-width: 600px) {
+    ion-card {
+        font-size: 1.2em;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    ion-card-content {
+        font-size: 15px; 
+        ion-icon {
+            font-size: 3em; 
+        }
+    }
+}
