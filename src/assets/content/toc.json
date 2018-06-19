@@ -13,6 +13,26 @@
                         "id": 1,
                         "name": "Introduction",
                         "urlName": "introduction"
+                    },
+                    {
+                        "id": 2,
+                        "name": "Objectives",
+                        "urlName": "objectives"
+                    },
+                    {
+                        "id": 3,
+                        "name": "Video: Physical-Mental Connection",
+                        "urlName": "video-physical-mental"
+                    },
+                    {
+                        "id": 4,
+                        "name": "Activity: How Emotions Feel",
+                        "urlName": "how-emotions-feel"
+                    },
+                    {
+                        "id": 5,
+                        "name": "Summary",
+                        "urlName": "summary"
                     }
                 ]
             },

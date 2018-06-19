@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { environment } from "../environments/environment"
+import { CreateJsService } from '../girls-platform/services/CreateJsService';
 
 @NgModule({
   declarations: [AppComponent],
@@ -47,6 +48,7 @@ import { environment } from "../environments/environment"
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     courseContentFactoryProvider,
     JsonContentProvider,
+    CreateJsService,
     {
       provide: RouterStateSerializer,
       useClass: CustomSerializer
