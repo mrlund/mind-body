@@ -45,6 +45,26 @@
                         "id": 1,
                         "name": "Introduction",
                         "urlName": "introduction"
+                    },
+                    {
+                        "id": 2,
+                        "name": "Objectives",
+                        "urlName": "objectives"
+                    },
+                    {
+                        "id": 3,
+                        "name": "Neuropeptides",
+                        "urlName": "neuropeptides"
+                    },
+                    {
+                        "id": 4,
+                        "name": "Noradrenaline, Serotonin and Dopamine",
+                        "urlName": "noradrenaline-serotonin-dopamine"
+                    },
+                    {
+                        "id": 5,
+                        "name": "Summary",
+                        "urlName": "summary"
                     }
                 ]
             },

@@ -23,6 +23,7 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { environment } from "../environments/environment"
 import { CreateJsService } from '../girls-platform/services/CreateJsService';
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

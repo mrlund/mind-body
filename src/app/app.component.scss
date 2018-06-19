@@ -1,8 +1,9 @@
 ion-content {
-    ion-list {
-        margin: 0;
-    }
     ion-scroll {
         overflow-y: auto;
     }
 }    
+
+ion-item-divider {
+    font-size: 1.5em;
+}

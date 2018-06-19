@@ -3,7 +3,9 @@
     <ion-menu>
       <ion-header>
         <ion-toolbar>
-          <ion-title [routerLink]="['home']">Menu</ion-title>
+          <ion-title [routerLink]="['home']">
+              <ion-icon name="home"></ion-icon> Home
+          </ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
@@ -19,10 +21,10 @@
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages$ | async">
             <ion-item-group>
               <ion-item-divider color="light" [routerDirection]="'root'" [routerLink]="['course', p.urlName, p.sessions[0]?.urlName, p.sessions[0]?.pages[0]?.urlName]">
-                <ion-icon slot="start" name="bonfire"></ion-icon>
-                {{p.name}}
+                <ion-icon slot="start" name="paper"></ion-icon>
+                <ion-label>{{p.id}}: {{p.name}}</ion-label>
               </ion-item-divider>
-              <ion-item *ngFor="let s of p.sessions" [routerLink]="['course', p.urlName, s.urlName, s.pages[0]?.urlName]">{{s.name}}</ion-item>
+              <ion-item *ngFor="let s of p.sessions" [routerLink]="['course', p.urlName, s.urlName, s.pages[0]?.urlName]"><ion-icon name="ios-arrow-forward"></ion-icon> {{s.name}}</ion-item>
             </ion-item-group>
           </ion-menu-toggle>
         </ion-list>
