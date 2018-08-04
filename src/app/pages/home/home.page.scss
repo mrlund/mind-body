@@ -8,14 +8,12 @@ ion-card-content {
         color: #E5053A;
     }
 }
-ion-header  ion-toolbar  ion-title {
+ion-header  ion-toolbar {
     img {
         height: 40px;
         float: right;
     }
-    span {
-        vertical-align: -webkit-baseline-middle;
-    }
+
 }
 
 @media only screen and (max-width: 600px) {
