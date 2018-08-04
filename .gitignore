@@ -31,3 +31,6 @@ $RECYCLE.BIN/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
+
+src/assets/st-build
+/st-dist

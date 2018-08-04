@@ -3,13 +3,22 @@
   "version": "0.0.1",
   "author": "Girls Inc of New York City",
   "homepage": "http://www.girlsincnyc.org",
+  "module": "st-dist/esm/index.js",
+  "main": "st-dist/index.js",
+  "types": "st-dist/types/components.d.ts",
+  "collection": "st-dist/collection/collection-manifest.json",
+  "files": [
+    "st-dist/"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ionic serve",
     "build": "ionic build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "st-build": "stencil build",
+    "st-start": "stencil build --dev --watch --serve"
   },
   "private": true,
   "dependencies": {
@@ -46,9 +55,11 @@
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~10.5.2",
+    "@stencil/core": "^0.11.0",
     "codelyzer": "~4.4.2",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
+    "jest": "^23.4.2",
     "karma": "~2.0.2",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.0",
