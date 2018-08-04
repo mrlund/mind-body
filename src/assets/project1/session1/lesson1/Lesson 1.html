@@ -49,6 +49,8 @@ function handleComplete(evt,comp) {
 	fnStartAnimation = function() {
 		stage.addChild(exportRoot);
 		createjs.Ticker.setFPS(lib.properties.fps);
+		createjs.Ticker.timingMode = createjs.Ticker.RAF_SYNCHED;
+		console.log(createjs.Ticker);
 		createjs.Ticker.addEventListener("tick", stage);
 	}	    
 	//Code to support hidpi screens and responsive scaling.
