@@ -1,5 +1,5 @@
 import { Component, Prop, State, Method } from '@stencil/core';
-import { map, tap, mergeMap, share, switchMap } from 'rxjs/operators';
+import { map, tap, mergeMap, share, switchMap, filter } from 'rxjs/operators';
 import { Observable, from, of } from 'rxjs/';
 
 
@@ -9,39 +9,43 @@ import { Observable, from, of } from 'rxjs/';
 })
 export class GIDataProvider {
     @Prop() pageContentUrl: string;
-  
+
     @State()
     private data;
-  
-    data$ : Observable<any>;
-  
-    constructor(){
+
+    data$: Observable<any>;
+
+    constructor() {
     }
-    componentWillLoad() {
+    componentDidLoad() {
+    }
+    loadData(){
         this.data$ = from(fetch(this.pageContentUrl + "/data.json")).pipe(
-            switchMap(r=> r.json()),
+            switchMap(r => r.json()),
             share()
-          );
-    }
-  
-    @Method()
-    getData(key: string) : Observable<any>{
-      console.log("requested ", key);
-      if(this.data && this.data[key]){
-        console.log("returned ", this.data[key]);
-        return from([this.data[key]]);
-      } else if (!this.data){
-        console.log("not found, waiting");
-        
-        return of(0).pipe(
-          mergeMap(() => this.data$),
-          tap(x=> console.log("returned ", x)),
-          tap(x=> this.data = x),
-          map(x=>x[key]),
         );
-      }
     }
-  
+
+    @Method()
+    getData(key: string): Observable<any> {
+        console.log("requested ", key);
+        if (this.data && this.data[key]) {
+            console.log("returned ", this.data[key]);
+            return from([this.data[key]]);
+        } else if (!this.data) {
+            console.log("not found, waiting");
+            if (!this.data$){
+                this.loadData();
+            }
+            return of(0).pipe(
+                mergeMap(() => this.data$),
+                tap(x => console.log("returned ", x)),
+                tap(x => this.data = x),
+                map(x => x[key]),
+            );
+        }
+    }
+
     render() {
         return (
             <slot />

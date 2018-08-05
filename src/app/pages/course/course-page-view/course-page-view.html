@@ -1,5 +1,7 @@
 <ng-container *ngIf="(pageModel$|async) as pageModel">
   <ng-container *ngIf="pageModel && pageModel.page">
+    <gi-data-provider *ngIf="pageContentUrl" [pageContentUrl]="pageContentUrl" >
     <div [innerHTML]="safeHtml(pageModel?.page?.htmlContent)"></div>
+  </gi-data-provider>
   </ng-container>
 </ng-container>
