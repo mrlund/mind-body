@@ -32,6 +32,84 @@ import {
 declare global {
 
   namespace StencilComponents {
+    interface GiAnimationProgressBar {
+
+    }
+  }
+
+  interface HTMLGiAnimationProgressBarElement extends StencilComponents.GiAnimationProgressBar, HTMLStencilElement {}
+
+  var HTMLGiAnimationProgressBarElement: {
+    prototype: HTMLGiAnimationProgressBarElement;
+    new (): HTMLGiAnimationProgressBarElement;
+  };
+  interface HTMLElementTagNameMap {
+    'gi-animation-progress-bar': HTMLGiAnimationProgressBarElement;
+  }
+  interface ElementTagNameMap {
+    'gi-animation-progress-bar': HTMLGiAnimationProgressBarElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'gi-animation-progress-bar': JSXElements.GiAnimationProgressBarAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface GiAnimationProgressBarAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface GiAnimation {
+      'animation': string;
+      'canvasPauseAnimation': () => void;
+      'canvasPlayAnimation': () => void;
+      'chapter': string;
+      'imgext': string;
+      'isClassroomModeOn': boolean;
+      'project': string;
+      'session': string;
+    }
+  }
+
+  interface HTMLGiAnimationElement extends StencilComponents.GiAnimation, HTMLStencilElement {}
+
+  var HTMLGiAnimationElement: {
+    prototype: HTMLGiAnimationElement;
+    new (): HTMLGiAnimationElement;
+  };
+  interface HTMLElementTagNameMap {
+    'gi-animation': HTMLGiAnimationElement;
+  }
+  interface ElementTagNameMap {
+    'gi-animation': HTMLGiAnimationElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'gi-animation': JSXElements.GiAnimationAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface GiAnimationAttributes extends HTMLAttributes {
+      'animation'?: string;
+      'chapter'?: string;
+      'imgext'?: string;
+      'isClassroomModeOn'?: boolean;
+      'project'?: string;
+      'session'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface GiComponentDataWrapper {
       'propNames': string;
       'propValues': string;

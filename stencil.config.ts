@@ -1,4 +1,5 @@
 import { Config } from '@stencil/core';
+import { sass } from '@stencil/sass';
 
 export const config: Config = {
   namespace: 'girlsinc',
@@ -13,5 +14,8 @@ export const config: Config = {
       dir: 'src/assets/st-build',
       serviceWorker: null
     }
+  ],
+  plugins: [
+    sass()
   ]
 };

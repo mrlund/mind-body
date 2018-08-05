@@ -1,0 +1,55 @@
+.video-canvas {
+  // background-color: #ffffff;
+  // position: relative;
+  // display: block;
+  // max-width: 100%;
+  // height: auto;
+  position: absolute; display: block; background-color:rgba(255, 255, 255, 1.00);
+  width: auto;
+  height: 500px;
+}
+.canvas-container{
+  position: relative;
+  background-color:rgba(255, 255, 255, 1.00); width:auto; height:500px;
+}
+.frame-img {
+  position: absolute;
+      display: block;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+}
+.overlay-img {
+  position: absolute;
+  z-index: 9999;
+  top: 0px;
+      display: block;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+}
+.button-panel {
+  display: flex;
+  justify-content: center;
+}
+
+.navControls {
+  position: relative;
+  .progressBar {
+    position: relative;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background-color: #8aadea;
+
+    .currentProgress {
+      position: relative;
+      height: 20px;
+      background-color: #488aff;
+      transition: width 0.5s;
+    }
+  }
+}
+#dom_overlay_container{
+  pointer-events:none; overflow:hidden; width:800px; height:800px; position: absolute; left: 0px; top: 0px; display: block;
+}
