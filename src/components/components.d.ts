@@ -32,6 +32,41 @@ import {
 declare global {
 
   namespace StencilComponents {
+    interface GiComponentDataWrapper {
+      'propNames': string;
+      'propValues': string;
+    }
+  }
+
+  interface HTMLGiComponentDataWrapperElement extends StencilComponents.GiComponentDataWrapper, HTMLStencilElement {}
+
+  var HTMLGiComponentDataWrapperElement: {
+    prototype: HTMLGiComponentDataWrapperElement;
+    new (): HTMLGiComponentDataWrapperElement;
+  };
+  interface HTMLElementTagNameMap {
+    'gi-component-data-wrapper': HTMLGiComponentDataWrapperElement;
+  }
+  interface ElementTagNameMap {
+    'gi-component-data-wrapper': HTMLGiComponentDataWrapperElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'gi-component-data-wrapper': JSXElements.GiComponentDataWrapperAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface GiComponentDataWrapperAttributes extends HTMLAttributes {
+      'propNames'?: string;
+      'propValues'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface GiDataProvider {
       'getData': (key: string) => Observable<any>;
       'pageContentUrl': string;
@@ -58,6 +93,39 @@ declare global {
   namespace JSXElements {
     export interface GiDataProviderAttributes extends HTMLAttributes {
       'pageContentUrl'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface GiSimpleData {
+      'value': string;
+    }
+  }
+
+  interface HTMLGiSimpleDataElement extends StencilComponents.GiSimpleData, HTMLStencilElement {}
+
+  var HTMLGiSimpleDataElement: {
+    prototype: HTMLGiSimpleDataElement;
+    new (): HTMLGiSimpleDataElement;
+  };
+  interface HTMLElementTagNameMap {
+    'gi-simple-data': HTMLGiSimpleDataElement;
+  }
+  interface ElementTagNameMap {
+    'gi-simple-data': HTMLGiSimpleDataElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'gi-simple-data': JSXElements.GiSimpleDataAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface GiSimpleDataAttributes extends HTMLAttributes {
+      'value'?: string;
     }
   }
 }
