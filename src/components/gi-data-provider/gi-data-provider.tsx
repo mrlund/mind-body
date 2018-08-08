@@ -9,6 +9,9 @@ import { Observable, from, of } from 'rxjs/';
 })
 export class GIDataProvider {
     @Prop() pageContentUrl: string;
+    
+    @Prop() baseServerUrl: string;
+
 
     @State()
     private data;
@@ -20,7 +23,7 @@ export class GIDataProvider {
     componentDidLoad() {
     }
     loadData(){
-        this.data$ = from(fetch(this.pageContentUrl + "/data.json")).pipe(
+        this.data$ = from(fetch(this.pageContentUrl + ".json")).pipe(
             switchMap(r => r.json()),
             share()
         );
@@ -39,11 +42,28 @@ export class GIDataProvider {
             }
             return of(0).pipe(
                 mergeMap(() => this.data$),
-                tap(x => console.log("returned ", x)),
+                tap(x => console.log("returned ", x[key])),
                 tap(x => this.data = x),
                 map(x => x[key]),
             );
         }
+    }
+
+    @Method()
+    saveData(data: any){
+        let postData = {
+            page: this.pageContentUrl,
+            data: data
+        };
+        return from(fetch(this.baseServerUrl, {
+            method: 'POST', 
+            body: JSON.stringify(postData),
+            headers:{
+              'Content-Type': 'application/json'
+            }
+        })).pipe(
+            switchMap(x => x.json())
+        );
     }
 
     render() {

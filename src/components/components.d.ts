@@ -146,8 +146,10 @@ declare global {
 
   namespace StencilComponents {
     interface GiDataProvider {
+      'baseServerUrl': string;
       'getData': (key: string) => Observable<any>;
       'pageContentUrl': string;
+      'saveData': (data: any) => Observable<any>;
     }
   }
 
@@ -170,7 +172,41 @@ declare global {
   }
   namespace JSXElements {
     export interface GiDataProviderAttributes extends HTMLAttributes {
+      'baseServerUrl'?: string;
       'pageContentUrl'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface GiRoadmap {
+
+    }
+  }
+
+  interface HTMLGiRoadmapElement extends StencilComponents.GiRoadmap, HTMLStencilElement {}
+
+  var HTMLGiRoadmapElement: {
+    prototype: HTMLGiRoadmapElement;
+    new (): HTMLGiRoadmapElement;
+  };
+  interface HTMLElementTagNameMap {
+    'gi-roadmap': HTMLGiRoadmapElement;
+  }
+  interface ElementTagNameMap {
+    'gi-roadmap': HTMLGiRoadmapElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'gi-roadmap': JSXElements.GiRoadmapAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface GiRoadmapAttributes extends HTMLAttributes {
+
     }
   }
 }

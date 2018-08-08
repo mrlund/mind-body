@@ -29,7 +29,7 @@ export class CoursePageView {
             // tap(x=> {
                 x=> {
                     if (x && x.page){
-                        this.pageContentUrl = "/assets/content/" +  x.page.pageReference.courseModuleUrlPart + "/" + x.page.pageReference.sessionUrlPart; //"/"+ x.page.pageReference.pageUrlPart
+                        this.pageContentUrl = "/assets/content/" +  x.page.pageReference.courseModuleUrlPart + "/" + x.page.pageReference.sessionUrlPart + "/" + x.page.pageReference.pageUrlPart; 
                         console.log(this.pageContentUrl);
                     }
                 } 
