@@ -14,7 +14,7 @@ export class GiRoadmap {
     dataSvc: HTMLGiDataProviderElement;
 
     @State()
-    roadmap: Array<any>;
+    roadmap: Array<any> = [];
     
     componentDidLoad() {
         let node = this.el.parentElement;
