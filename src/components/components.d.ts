@@ -182,6 +182,39 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface GiQuiz {
+
+    }
+  }
+
+  interface HTMLGiQuizElement extends StencilComponents.GiQuiz, HTMLStencilElement {}
+
+  var HTMLGiQuizElement: {
+    prototype: HTMLGiQuizElement;
+    new (): HTMLGiQuizElement;
+  };
+  interface HTMLElementTagNameMap {
+    'gi-quiz': HTMLGiQuizElement;
+  }
+  interface ElementTagNameMap {
+    'gi-quiz': HTMLGiQuizElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'gi-quiz': JSXElements.GiQuizAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface GiQuizAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface GiRoadmap {
 
     }

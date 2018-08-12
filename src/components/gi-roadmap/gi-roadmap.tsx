@@ -1,4 +1,4 @@
-import { Component, Element } from '@stencil/core';
+import { Component, Element, State } from '@stencil/core';
 import { tap } from 'rxjs/operators';
 
 
@@ -13,6 +13,7 @@ export class GiRoadmap {
 
     dataSvc: HTMLGiDataProviderElement;
 
+    @State()
     roadmap: Array<any>;
     
     componentDidLoad() {

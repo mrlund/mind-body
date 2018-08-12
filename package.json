@@ -18,6 +18,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "st-build": "stencil build",
+    "st-build-watch": "stencil build --dev --watch",
     "st-start": "stencil build --dev --watch --serve"
   },
   "private": true,

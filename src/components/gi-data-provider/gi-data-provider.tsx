@@ -51,19 +51,25 @@ export class GIDataProvider {
 
     @Method()
     saveData(data: any){
-        let postData = {
-            page: this.pageContentUrl,
-            data: data
-        };
-        return from(fetch(this.baseServerUrl, {
-            method: 'POST', 
-            body: JSON.stringify(postData),
-            headers:{
-              'Content-Type': 'application/json'
-            }
-        })).pipe(
-            switchMap(x => x.json())
-        );
+        console.log("Saving ", data);
+        let token = localStorage.getItem("token");
+        if (token){
+            let postData = {
+                page: this.pageContentUrl,
+                data: data
+            };
+            return from(fetch(this.baseServerUrl, {
+                method: 'POST', 
+                body: JSON.stringify(postData),
+                headers:{
+                  'Content-Type': 'application/json'
+                }
+            })).pipe(
+                switchMap(x => x.json())
+            );
+        } else {
+            console.log("No token, cant save");
+        }
     }
 
     render() {
