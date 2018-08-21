@@ -18,7 +18,7 @@ export interface ICourseModule extends ICoursePart {
     sessions : Array<ISession>;
 }
 export interface ICourse extends ICoursePart {
-    modules: Array<ICourseModule>;
+    courseModules: Array<ICourseModule>;
 }
 export interface IPageModel {
     prevPage: IPageReference;
@@ -29,7 +29,7 @@ export interface IPageModel {
 //TODO: Add UserDataProvider for profile and saving datas
 export interface ICourseContentProvider {
     
-    getTableOfContent() : Observable<ICourseModule[]>;
+    getTableOfContent() : Observable<ICourse>;
 
     getPageContent(page: IPageReference) : Observable<string>;
 
@@ -70,7 +70,7 @@ export class CourseContentProvider implements ICourseContentProvider {
         throw new Error("Method not implemented.");
     }
     
-    getTableOfContent() : Observable<ICourseModule[]> {
+    getTableOfContent() : Observable<ICourse> {
         return Observable.create(()=>new Array<ICourseModule>());
     }
 

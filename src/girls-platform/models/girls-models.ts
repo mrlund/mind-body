@@ -23,7 +23,7 @@ export class CourseModule implements ICourseModule {
 }
 
 export class Course implements ICourse {
-    modules: ICourseModule[];
+    courseModules: ICourseModule[];
     id: number;
     name: string;
     urlName: string;

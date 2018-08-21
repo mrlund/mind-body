@@ -1,14 +1,14 @@
 import { ActionReducer, Action } from '@ngrx/store';
 import * as TableOfContentActions from '../actions/table-of-content.action';
-import { ICourseModule } from '../../interfaces/girls-interfaces';
+import { ICourse, ICourseModule } from '../../interfaces/girls-interfaces';
 import * as fromTOC from "../actions/table-of-content.action";
 
 export interface TOCState {
-    contents: ICourseModule[]
+    contents: ICourse
 }
 
 export const initialState: TOCState = {
-    contents: new Array<ICourseModule>()
+    contents: { id: 0, urlName:"", name: "", courseModules: new Array<ICourseModule>() }
 };
 export function reducer(state: TOCState = initialState, action: fromTOC.TableOfContentActions) {
     switch (action.type) {
