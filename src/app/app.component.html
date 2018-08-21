@@ -18,7 +18,7 @@
               </ion-item>
             </ion-item-group>
           </ion-menu-toggle>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages$ | async">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of (appPages$ | async).courseModules">
             <ion-item-group>
               <ion-item-divider color="light" [routerDirection]="'root'" [routerLink]="['course', p.urlName, p.sessions[0]?.urlName, p.sessions[0]?.pages[0]?.urlName]">
                 <ion-icon slot="start" name="paper"></ion-icon>
