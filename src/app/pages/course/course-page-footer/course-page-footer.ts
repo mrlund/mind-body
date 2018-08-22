@@ -17,7 +17,7 @@ export class CoursePageFooter {
 
     }
     nextOrPrev(url) {
-        this.pauseAnimation('app-animation', 'canvasPauseAnimation');
+        this.pauseAnimation('gi-animation', 'canvasPauseAnimation');
         if (url && this.pageModel.page) {
             // this.pauseAnimation('app-animation', 'canvasPlayAnimation');
             this.navCtrl.goRoot('/course/' + this.pageModel.page.pageReference.courseModuleUrlPart + "/" + this.pageModel.page.pageReference.sessionUrlPart + "/" + url)
@@ -32,6 +32,9 @@ export class CoursePageFooter {
             return controller.componentOnReady()
                 .then(() => (controller as any)[methodName].apply(controller, args));
         }
+    }
+    ngOnDestroy() {
+        console.log('dest');
     }
 
 

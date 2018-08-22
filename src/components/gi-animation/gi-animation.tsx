@@ -1,4 +1,4 @@
-import { Component, State, Prop, Method } from "@stencil/core";
+import { Component, State, Prop, Method, Element } from "@stencil/core";
 //import {  Toast } from "@ionic/core";
 declare var createjs;
 declare var lib;
@@ -17,6 +17,7 @@ export class AppAnimation {
   @State() sizeOfCanvas: any;
   @State() dataLoaded: boolean = false;
   @State() currentProgressWidth: any = 0;
+  @Element() el: HTMLElement;
   canvas: any;
   anim_container: any;
   dom_overlay_container: any;
@@ -31,6 +32,7 @@ export class AppAnimation {
   formattedProgress: string = "0";
   library: any;
   componentWillLoad() {
+    console.log('componentWillLoad');
     const script = document.createElement("script");
     this.firstFramePath = this.src.replace(".js", ".png");
     script.src = this.src;
@@ -41,41 +43,50 @@ export class AppAnimation {
       if (self.sound) {
         self.sound.stop();
       }
-      self.sound = createjs.Sound.play(
-        id,
-        createjs.Sound.INTERRUPT_EARLY,
-        0,
-        0,
-        loop
-      );
+      // self.sound = createjs.Sound.play(
+      //   id,
+      //   createjs.Sound.INTERRUPT_EARLY,
+      //   0,
+      //   0,
+      //   loop
+      // );
+      self.sound = createjs.Sound.play(id, { interrupt: createjs.Sound.INTERRUPT_EARLY, loop: loop, volume: 1 });
+
       return self.sound;
     };
 
   }
   componentDidLoad() {
   }
+  loader: any
   loadAnimation() {
+    this.isBusy = true;
+    this.paused = false;
+    console.log('loadAnimation');
     if (!createjs.Sound.initializeDefaultPlugins()) {
       return;
     }
 
-    this.canvas = document.getElementById("canvas1");
-    this.anim_container = document.getElementById("canvas-container");
-    this.dom_overlay_container = document.getElementById("dom_overlay_container");
+    this.canvas = this.el.querySelector(".video-canvas");
+    this.anim_container = this.el.querySelector(".canvas-container");
+    this.dom_overlay_container = this.el.querySelector(".dom_overlay_container");
     this.comp = AdobeAn.getComposition(this.composition);
 
     this.canvas.style.width = "100%";
-    this.canvas.style.height = document.getElementById("canvas1").offsetWidth + "px";
-    this.anim_container.style.height = document.getElementById("canvas1").offsetWidth + "px";
-    var loader = new createjs.LoadQueue(false);
-    loader.installPlugin(createjs.Sound);
-    loader.addEventListener("complete", (evt) => { this.handleComplete(evt); });
-    loader.addEventListener("fileload", (evt) => { this.handleFileLoad(evt) });
-    loader.addEventListener("progress", this.handleQueueProgress(this));
+    this.canvas.style.height = this.canvas.offsetWidth + "px";
+    this.anim_container.style.height = this.canvas.offsetWidth + "px";
+    this.library = this.comp.getLibrary();
+
+
+    this.loader = new createjs.LoadQueue(false);
+    this.loader.installPlugin(createjs.Sound);
+    this.loader.addEventListener("complete", (evt) => { this.handleComplete(evt); });
+    this.loader.addEventListener("fileload", (evt) => { this.handleFileLoad(evt) });
+    this.loader.addEventListener("progress", this.handleQueueProgress(this));
     //TODO :can't figure out https://github.com/CreateJS/SoundJS/issues/283
     console.log("comp", this);
-    this.library = this.comp.getLibrary();
-    loader.loadManifest(
+
+    this.loader.loadManifest(
       this.library.properties.manifest,
       true,
       this.src.substring(0, this.src.lastIndexOf("/") + 1)
@@ -101,17 +112,15 @@ export class AppAnimation {
   }
 
   handleQueueProgress(that) {
-    this.isBusy = true;
-    return function (progress) {
-      that.formattedProgress = progress.loaded
+
+    return (progress) => {
+      this.formattedProgress = progress.loaded
         ? (progress.loaded * 100).toFixed(0)
         : "0";
-
+      //this.stage.update();
       if (progress.loaded == 1) {
-
-        that.doneLoading();
+        this.doneLoading();
       }
-      console.log("after queue progress");
     };
   }
 
@@ -171,7 +180,9 @@ export class AppAnimation {
     //createjs.Ticker.setFPS(lib.properties.fps);
     createjs.Ticker.addEventListener("tick", this.stage);
     createjs.Ticker.addEventListener("tick", (evt) => { this.tickHandler(evt) });
+    //this.makeResponsive(true, 'both', false, 1);
   }
+
   handleTick(event) {
     // Actions carried out each tick (aka frame)
     if (!event.paused) {
@@ -207,7 +218,7 @@ export class AppAnimation {
       }
     }
 
-    var anim_container = document.getElementById("canvas-container");
+    var anim_container = this.el.querySelector(".canvas-container") as HTMLElement;
     // this.canvas.width = w * pRatio * sRatio;
     // this.canvas.height = h * pRatio * sRatio;
     // this.canvas.style.width = this.dom_overlay_container.style.width = anim_container.style.width = w * sRatio + 'px';
@@ -216,13 +227,13 @@ export class AppAnimation {
     this.canvas.width = w * pRatio * sRatio;
     this.canvas.height = h * pRatio * sRatio;
     this.canvas.style.width = "100%";
-    this.canvas.style.height = document.getElementById("canvas1").offsetWidth + "px";
-    anim_container.style.height = document.getElementById("canvas1").offsetWidth + "px";
+    this.canvas.style.height = this.canvas.offsetWidth + "px";
+    anim_container.style.height = this.canvas.offsetWidth + "px";
 
     this.stage.scaleX = pRatio * sRatio;
     this.stage.scaleY = pRatio * sRatio;
     lastW = iw; lastH = ih; lastS = sRatio;
-    var newWidth = document.getElementById("canvas1").offsetWidth;
+    var newWidth = this.canvas.offsetWidth;
     this.sizeOfCanvas = newWidth;
     this.stage.tickOnUpdate = false;
     this.stage.update();
@@ -232,7 +243,7 @@ export class AppAnimation {
     if (!this.dataLoaded) {
       return;
     }
-    var newWidth = document.getElementById("canvas1").offsetWidth;
+    var newWidth = this.canvas.offsetWidth;
     // document.getElementById("canvas1").style.height = newWidth + "px";
     // document.getElementById("canvas1").style.width = newWidth + "px";
     that.sizeOfCanvas = newWidth;
@@ -290,6 +301,9 @@ export class AppAnimation {
   }
 
   playPauseAnimation() {
+    if (this.loader != null) {
+      this.loader.close();
+    }
     if (createjs && createjs.Ticker) {
       let newState = !createjs.Ticker.paused;
       let st = this.sound;
@@ -388,6 +402,7 @@ export class AppAnimation {
     if (this.stage && this.stage.children) {
       let stage = this.stage.children[0];
       let timeline = stage["timeline"];
+      this.stage.clear();
       stage.removeAllChildren()
       stage.removeAllEventListeners()
       stage.canvas = null
@@ -395,7 +410,20 @@ export class AppAnimation {
     }
   }
 
-
+  @Method()
+  destroyAnimation() {
+    console.log('destroy animation');
+    this.canvasPauseAnimation();
+    if (this.stage && this.stage.children) {
+      let stage = this.stage.children[0];
+      let timeline = stage["timeline"];
+      this.stage.clear();
+      stage.removeAllChildren();
+      stage.removeAllEventListeners();
+      stage.canvas = null
+      stage._eventListeners = null;
+    }
+  }
 
   @Method()
   canvasPlayAnimation() {
@@ -419,15 +447,22 @@ export class AppAnimation {
   }
   @Method()
   canvasPauseAnimation() {
+    if (this.loader != null) {
+      this.loader.close();
+    }
     if (createjs && createjs.Ticker) {
       let newState = true;
       let st = this.sound;
       if (st) {
         st.paused = newState;
       }
+
       createjs.Ticker.paused = newState;
       if (newState) {
-        createjs.Ticker.removeEventListener("tick");
+        createjs.Ticker.removeEventListener("tick", this.stage);
+      }
+      else {
+        createjs.Ticker.addEventListener("tick", this.stage);
       }
       this.paused = newState;
     }
@@ -460,11 +495,11 @@ export class AppAnimation {
         <div class="canvas-container" id="canvas-container">
           {!this.isClassroomModeOn ? (
             <div><canvas
-              id="canvas1"
+
               onClick={() => this.playButtonAction()}
               class="video-canvas"
             />
-              <div id="dom_overlay_container">
+              <div id="dom_overlay_container" class="dom_overlay_container">
               </div>
             </div>
           ) : (
@@ -493,10 +528,10 @@ export class AppAnimation {
               ""
             )}
           {this.isBusy ? (
-            <div>
+            <div class="loading-container">
               <div class="uil-ring-css">
                 <div />
-                <a>{this.formattedProgress}</a>
+                <a>Loading {this.formattedProgress}%</a>
               </div>
             </div>
           ) : (

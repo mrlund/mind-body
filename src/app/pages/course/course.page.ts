@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CourseContentProvider } from '../../../girls-platform/interfaces/girls-interfaces';
@@ -13,7 +13,7 @@ import * as fromRootStore from "../../../girls-platform/state/";
   styleUrls: ['course.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CoursePage {
+export class CoursePage implements OnDestroy {
   public pageModel$;
   public parameters$: Observable<any>;
 
@@ -23,12 +23,17 @@ export class CoursePage {
     private route: ActivatedRoute,
     private courseProvider: CourseContentProvider,
     private store: Store<fromRootStore.State>,
-  ) { }
+  ) {
+  }
 
 
   ngOnInit() {
     this.pageModel$ = this.store.select(fromRootStore.getPageContents);
 
-    this.contentRoot = ""; 
+    this.contentRoot = "";
+  }
+
+  ngOnDestroy() {
+    console.log('dest');
   }
 }

@@ -43,9 +43,13 @@ export class LoginPage extends BaseFormComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.alive = false;
     this.loginForm.reset();
+    console.log('destr')
   }
   ngOnInit() {
     this.createForm();
+  }
+  ionViewDidLeave() {
+    console.log('destr5454')
   }
 
   createForm() {

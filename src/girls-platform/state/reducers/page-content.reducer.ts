@@ -18,6 +18,7 @@ export function reducer(
 ): PageContentState {
   switch (action.type) {
     case fromPageContent.GET_NEXT_AND_PREV_PAGE_SUCCESS: {
+      console.log('reducer');
       return {
         ...state,
         page:action.payload
