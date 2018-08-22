@@ -17,7 +17,9 @@ export class CoursePageView {
 
     public pageModel$;
 
+    private baseUrl: string ="";
     public pageContentUrl: string = "none yet";
+    
 
     constructor(
         private sanitizer: DomSanitizer,
@@ -29,7 +31,8 @@ export class CoursePageView {
             // tap(x=> {
                 x=> {
                     if (x && x.page){
-                        this.pageContentUrl = "/assets/content/" +  x.page.pageReference.courseModuleUrlPart + "/" + x.page.pageReference.sessionUrlPart + "/" + x.page.pageReference.pageUrlPart; 
+                        this.baseUrl = "/assets/content/" +  x.page.pageReference.courseModuleUrlPart + "/" + x.page.pageReference.sessionUrlPart;
+                        this.pageContentUrl = this.baseUrl + "/" + x.page.pageReference.pageUrlPart; 
                         console.log(this.pageContentUrl);
                     }
                 } 
@@ -40,6 +43,8 @@ export class CoursePageView {
     }
     public safeHtml(html) {
         if (html && html.length) {
+
+            html = html.replace(/BASE_URL/g, this.baseUrl);
             return this.sanitizer.bypassSecurityTrustHtml(html);
         }
     }

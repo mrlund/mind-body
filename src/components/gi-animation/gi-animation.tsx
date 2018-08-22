@@ -8,11 +8,8 @@ declare var AdobeAn;
   styleUrl: "gi-animation.scss"
 })
 export class AppAnimation {
-  @Prop() animation: string;
-  @Prop() project: string;
-  @Prop() session: string;
-  @Prop() chapter: string;
-  @Prop() imgext: string;
+  @Prop() src : string;
+  @Prop() composition : string;
   @Prop() isClassroomModeOn: boolean = false;
   // @Prop({ connect: "ion-toast-controller" })
   // toastCtrl: ToastController;
@@ -29,33 +26,14 @@ export class AppAnimation {
   stage: any;
   sound: any;
   firstFramePath: string = "";
-  basePath: string = "../../assets/project";
+  
   isBusy: boolean = false;
   formattedProgress: string = "0";
 
   componentWillLoad() {
     const script = document.createElement("script");
-    this.firstFramePath =
-      this.basePath +
-      this.project +
-      "/session" +
-      this.session +
-      "/" +
-      this.chapter +
-      "/" +
-      this.animation +
-      "." +
-      this.imgext;
-    script.src =
-      this.basePath +
-      this.project +
-      "/session" +
-      this.session +
-      "/" +
-      this.chapter +
-      "/" +
-      this.animation +
-      ".js";
+    this.firstFramePath = this.src.replace(".js", ".png");
+    script.src = this.src;
     //script.async = true;
     document.body.appendChild(script);
     let self = this;
@@ -84,7 +62,7 @@ export class AppAnimation {
     this.canvas = document.getElementById("canvas1");
     this.anim_container = document.getElementById("canvas-container");
     this.dom_overlay_container = document.getElementById("dom_overlay_container");
-    this.comp = AdobeAn.getComposition("44F55725416534409D0912E1F9993575");
+    this.comp = AdobeAn.getComposition(this.composition);
 
     this.canvas.style.width = "100%";
     this.canvas.style.height = document.getElementById("canvas1").offsetWidth + "px";
@@ -98,13 +76,7 @@ export class AppAnimation {
     loader.loadManifest(
       lib.properties.manifest,
       true,
-      this.basePath +
-      this.project +
-      "/session" +
-      this.session +
-      "/" +
-      this.chapter +
-      "/"
+      this.src.substring(0, this.src.lastIndexOf("/") + 1)
     );
   }
 
