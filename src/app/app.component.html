@@ -4,7 +4,7 @@
       <ion-header>
         <ion-toolbar>
           <ion-title [routerLink]="['home']">
-              <ion-icon name="home"></ion-icon> Home
+            <ion-icon name="home"></ion-icon> Home
           </ion-title>
         </ion-toolbar>
       </ion-header>
@@ -18,13 +18,28 @@
               </ion-item>
             </ion-item-group>
           </ion-menu-toggle>
+          <ion-menu-toggle>
+            <ion-item-group>
+              <ion-item-divider color="light" [routerDirection]="'root'">
+                <ion-icon slot="start" name="contact"></ion-icon>
+                <ion-label>Account</ion-label>
+              </ion-item-divider>
+              <ion-item [routerLink]="['login']" *ngIf="!(isUserAuthenticate$|async)">
+                <ion-icon name="log-in"></ion-icon>Login
+              </ion-item>
+              <ion-item [routerLink]="['profile']" *ngIf="isUserAuthenticate$|async">
+                <ion-icon name="person"></ion-icon>Profile
+              </ion-item>
+            </ion-item-group>
+          </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages$ | async">
             <ion-item-group>
               <ion-item-divider color="light" [routerDirection]="'root'" [routerLink]="['course', p.urlName, p.sessions[0]?.urlName, p.sessions[0]?.pages[0]?.urlName]">
                 <ion-icon slot="start" name="paper"></ion-icon>
                 <ion-label>{{p.id}}: {{p.name}}</ion-label>
               </ion-item-divider>
-              <ion-item *ngFor="let s of p.sessions" [routerLink]="['course', p.urlName, s.urlName, s.pages[0]?.urlName]"><ion-icon name="ios-arrow-forward"></ion-icon> {{s.name}}</ion-item>
+              <ion-item *ngFor="let s of p.sessions" [routerLink]="['course', p.urlName, s.urlName, s.pages[0]?.urlName]">
+                <ion-icon name="ios-arrow-forward"></ion-icon> {{s.name}}</ion-item>
             </ion-item-group>
           </ion-menu-toggle>
         </ion-list>

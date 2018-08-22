@@ -31,12 +31,12 @@ export class GIDataProvider {
 
     @Method()
     getData(key: string): Observable<any> {
-        console.log("requested ", key);
+        //console.log("requested ", key);
         if (this.data && this.data[key]) {
-            console.log("returned ", this.data[key]);
+           // console.log("returned ", this.data[key]);
             return from([this.data[key]]);
         } else if (!this.data) {
-            console.log("not found, waiting");
+           // console.log("not found, waiting");
             if (!this.data$){
                 this.loadData();
             }

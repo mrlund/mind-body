@@ -19,7 +19,7 @@ export class AppAnimation {
   @State() paused: boolean = true;
   @State() sizeOfCanvas: any;
   @State() dataLoaded: boolean = false;
-  @State() currentProgressWidth: any;
+  @State() currentProgressWidth: any = 0;
   canvas: any;
   anim_container: any;
   dom_overlay_container: any;
@@ -35,7 +35,6 @@ export class AppAnimation {
 
   componentWillLoad() {
     const script = document.createElement("script");
-    console.log(this.imgext);
     this.firstFramePath =
       this.basePath +
       this.project +
@@ -76,7 +75,6 @@ export class AppAnimation {
 
   }
   componentDidLoad() {
-    console.log('Component has been rendered');
   }
   loadAnimation() {
     if (!createjs.Sound.initializeDefaultPlugins()) {
@@ -87,12 +85,16 @@ export class AppAnimation {
     this.anim_container = document.getElementById("canvas-container");
     this.dom_overlay_container = document.getElementById("dom_overlay_container");
     this.comp = AdobeAn.getComposition("44F55725416534409D0912E1F9993575");
-    console.log("comp", this.comp);
+
+    this.canvas.style.width = "100%";
+    this.canvas.style.height = document.getElementById("canvas1").offsetWidth + "px";
+    this.anim_container.style.height = document.getElementById("canvas1").offsetWidth + "px";
     var loader = new createjs.LoadQueue(false);
     loader.installPlugin(createjs.Sound);
     loader.addEventListener("complete", (evt) => { this.handleComplete(evt); });
     loader.addEventListener("fileload", (evt) => { this.handleFileLoad(evt) });
     loader.addEventListener("progress", this.handleQueueProgress(this));
+    //TODO :can't figure out https://github.com/CreateJS/SoundJS/issues/283
     loader.loadManifest(
       lib.properties.manifest,
       true,
@@ -109,12 +111,13 @@ export class AppAnimation {
   doneLoading() {
     this.isBusy = false;
     this.dataLoaded = true;
+    this.paused = false;
   }
 
   handleFileLoad(evt) {
+
     var images = this.comp.getImages();
     if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }
-
     // if (evt.item.type == "image") {
     //   if (!window["createJSImages"]) window["createJSImages"] = {};
     //   if (!window["images"]) window["images"] = {};
@@ -126,7 +129,6 @@ export class AppAnimation {
   handleQueueProgress(that) {
     this.isBusy = true;
     return function (progress) {
-      //console.log(progress.loaded);
       that.formattedProgress = progress.loaded
         ? (progress.loaded * 100).toFixed(0)
         : "0";
@@ -135,6 +137,7 @@ export class AppAnimation {
 
         that.doneLoading();
       }
+      console.log("after queue progress");
     };
   }
 
@@ -186,20 +189,27 @@ export class AppAnimation {
   }
 
   fnStartAnimation() {
-    console.log('start animation');
+    this.paused = false;
     this.stage.addChild(this.exportRoot);
-    createjs.Ticker.setFPS(lib.properties.fps);
+    createjs.Ticker.framerate = lib.properties.fps;
+    //createjs.Ticker.setFPS(lib.properties.fps);
     createjs.Ticker.addEventListener("tick", this.stage);
+    createjs.Ticker.addEventListener("tick", (evt) => { this.tickHandler(evt) });
   }
-
+  handleTick(event) {
+    // Actions carried out each tick (aka frame)
+    if (!event.paused) {
+      console.log("paused or not", event.paused)
+      console.log("paused or not", event)
+      // Actions carried out when the Ticker is not paused.
+    }
+  }
   makeResponsive(isResp, respDim, isScale, scaleType) {
-    console.log('make responsive');
     window.addEventListener('resize', () => this.resizeCanvas(isResp, respDim, isScale, scaleType));
     this.resizeCanvas(isResp, respDim, isScale, scaleType);
 
   }
   resizeCanvas(isResp, respDim, isScale, scaleType) {
-    console.log('resize canvas');
     var lastW, lastH, lastS = 1;
     var w = lib.properties.width, h = lib.properties.height;
     var iw = window.innerWidth, ih = window.innerHeight;
@@ -221,10 +231,17 @@ export class AppAnimation {
     }
 
     var anim_container = document.getElementById("canvas-container");
+    // this.canvas.width = w * pRatio * sRatio;
+    // this.canvas.height = h * pRatio * sRatio;
+    // this.canvas.style.width = this.dom_overlay_container.style.width = anim_container.style.width = w * sRatio + 'px';
+    // this.canvas.style.height = anim_container.style.height = this.dom_overlay_container.style.height = h * sRatio + 'px';
+
     this.canvas.width = w * pRatio * sRatio;
     this.canvas.height = h * pRatio * sRatio;
-    this.canvas.style.width = this.dom_overlay_container.style.width = anim_container.style.width = w * sRatio + 'px';
-    this.canvas.style.height = anim_container.style.height = this.dom_overlay_container.style.height = h * sRatio + 'px';
+    this.canvas.style.width = "100%";
+    this.canvas.style.height = document.getElementById("canvas1").offsetWidth + "px";
+    anim_container.style.height = document.getElementById("canvas1").offsetWidth + "px";
+
     this.stage.scaleX = pRatio * sRatio;
     this.stage.scaleY = pRatio * sRatio;
     lastW = iw; lastH = ih; lastS = sRatio;
@@ -238,11 +255,9 @@ export class AppAnimation {
     if (!this.dataLoaded) {
       return;
     }
-    console.log(document.getElementById("canvas1"));
-    console.log(this.dataLoaded);
     var newWidth = document.getElementById("canvas1").offsetWidth;
-    document.getElementById("canvas1").style.height = newWidth + "px";
-    document.getElementById("canvas1").style.width = newWidth + "px";
+    // document.getElementById("canvas1").style.height = newWidth + "px";
+    // document.getElementById("canvas1").style.width = newWidth + "px";
     that.sizeOfCanvas = newWidth;
     if (that.stage) {
       that.stage.width = newWidth;
@@ -250,82 +265,74 @@ export class AppAnimation {
     }
   }
 
-  tickHandler(that) {
-    var newCircle = false;
-    return function (event) {
-      if (!that.paused && !event.paused) {
-        that.stage.update();
-      }
-      let stage = that.stage.children[0];
-      that.timeline = stage["timeline"];
 
-      if (that.timeline.position % 10 == 0) {
-        that.currentProgressWidth = parseFloat(
-          (that.timeline.position /
-            that.timeline.duration *
-            that.sizeOfCanvas).toFixed(0)
+  // tickHandler(event) {
+  //   var newCircle = false;
+
+  //   if (!this.paused && !event.paused) {
+  //     this.stage.update();
+  //   }
+  //   let stage = this.stage.children[0];
+  //   this.timeline = stage["timeline"];
+
+  //   if (this.timeline.position % 10 == 0) {
+  //     this.currentProgressWidth = parseFloat(
+  //       (this.timeline.position /
+  //         this.timeline.duration *
+  //         this.sizeOfCanvas).toFixed(0)
+  //     );
+  //     console.log(this.currentProgressWidth);
+  //   }
+
+  //   if (this.timeline.position == 0) newCircle = false;
+  //   if (this.timeline.duration - this.timeline.position == 1 && !newCircle) {
+  //     //to pause at the end of movie
+  //     newCircle = true;
+
+  //     createjs.Ticker.setPaused(true);
+  //     let st = this.sound;
+  //     if (st) {
+  //       st.paused = true;
+  //     }
+  //   }
+
+  // }
+
+  tickHandler(event) {
+    if (!event.paused) {
+      let stage = this.stage.children[0];
+      this.timeline = stage["timeline"];
+      if (this.timeline.position % 10 == 0) {
+        this.currentProgressWidth = parseFloat(
+          (this.timeline.position /
+            this.timeline.duration *
+            this.sizeOfCanvas).toFixed(0)
         );
-
       }
-
-      if (that.timeline.position == 0) newCircle = false;
-      if (that.timeline.duration - that.timeline.position == 1 && !newCircle) {
-        //to pause at the end of movie
-        newCircle = true;
-
-        createjs.Ticker.setPaused(true);
-        let st = that.sound;
-        if (st) {
-          st.setPaused(true);
-        }
-      }
-    };
+    }
   }
 
   playPauseAnimation() {
     if (createjs && createjs.Ticker) {
-      let newState = !createjs.Ticker.getPaused();
+      let newState = !createjs.Ticker.paused;
       let st = this.sound;
       if (st) {
-        st.setPaused(newState);
+        st.paused = newState;
       }
 
-      createjs.Ticker.setPaused(newState);
+      createjs.Ticker.paused = newState;
+      if (newState) {
+        createjs.Ticker.removeEventListener("tick", this.stage);
+      }
+      else {
+        createjs.Ticker.addEventListener("tick", this.stage);
+      }
       this.paused = newState;
     }
-    //var anim = this.stage.getChildAt(0);
-    // if (createjs && createjs.Ticker) {
-    //   //let newState = !createjs.Ticker.getPaused();
-    //   console.log(this.stage.tickEnabled);
-    //   console.log(this.stage);
-    //   if (this.stage.tickEnabled) {
-    //     createjs.Ticker.removeventListener("tick");
-    //     console.log('enabled');
-    //     this.stage.stop();
-    //     let st = this.sound;
-    //     if (st) {
-    //       st.setPaused(true);
-    //     }
-    //     this.paused = true;
-
-    //   }
-    //   else {
-    //     createjs.Ticker.addEventListener("tick", this.stage);
-    //     console.log('else');
-    //     this.stage.play();
-    //     let st = this.sound;
-    //     if (st) {
-    //       st.setPaused(false);
-    //     }
-    //     this.paused = false;
-    //     this.fnStartAnimation()
-    //   }
-
-    // }
   }
 
   rewindAnimationTo(newPosition, soundPosition) {
-   
+
     let stage = this.stage.children[0];
     let timeline = stage["timeline"];
 
@@ -336,35 +343,27 @@ export class AppAnimation {
     if (newPosition > timeline.duration) {
       newPosition = timeline.duration - 10;
     }
+
     let st = this.sound;
     if (st) {
-      st.setPaused(true);
+      st.paused = true;
     }
-    this.sound.setPosition(soundPosition);
+    //this.sound.setPosition(soundPosition);
+    this.sound.position = soundPosition;
     if (this.paused) {
-     
+
       stage.gotoAndStop(newPosition);
       this.stage.update();
       if (st && !st.getPaused()) {
-        st.setPaused(true);
+        st.paused = true;
       }
     } else {
-     
+
       stage.gotoAndPlay(newPosition);
-      st.setPaused(false);
+      st.paused = false;
+
     }
   }
-
-  // showToast(message) {
-  //   this.toastCtrl
-  //     .create({
-  //       message: message,
-  //       duration: 1500
-  //     })
-  //     .then((toast: Toast) => {
-  //       toast.present();
-  //     });
-  // }
 
   rewindAnimation(event) {
     event.stopPropagation();
@@ -388,7 +387,7 @@ export class AppAnimation {
     this.rewindAnimationTo(newPosition, soundPosition);
   }
   componentDidUpdate() {
-    console.log('Component did update');
+
   }
 
   fastForward5Sec() {
@@ -407,6 +406,19 @@ export class AppAnimation {
       this.playPauseAnimation();
     }
   }
+  componentDidUnload() {
+    this.canvasPauseAnimation();
+    if (this.stage && this.stage.children) {
+      let stage = this.stage.children[0];
+      let timeline = stage["timeline"];
+      stage.removeAllChildren()
+      stage.removeAllEventListeners()
+      stage.canvas = null
+      stage._eventListeners = null;
+    }
+  }
+
+
 
   @Method()
   canvasPlayAnimation() {
@@ -417,12 +429,16 @@ export class AppAnimation {
         let newState = false;
         let st = this.sound;
         if (st) {
-          st.setPaused(newState);
+          st.paused = newState;
         }
-        createjs.Ticker.setPaused(newState);
+        createjs.Ticker.paused = newState;
+        if (newState) {
+          createjs.Ticker.addEventListener("tick", this.stage);
+        }
         this.paused = newState;
       }
     }
+
   }
   @Method()
   canvasPauseAnimation() {
@@ -430,9 +446,12 @@ export class AppAnimation {
       let newState = true;
       let st = this.sound;
       if (st) {
-        st.setPaused(newState);
+        st.paused = newState;
       }
-      createjs.Ticker.setPaused(newState);
+      createjs.Ticker.paused = newState;
+      if (newState) {
+        createjs.Ticker.removeEventListener("tick");
+      }
       this.paused = newState;
     }
   }
@@ -460,7 +479,7 @@ export class AppAnimation {
   }
   render() {
     return (
-      <div>
+      <div class="cavase-main-container">
         <div class="canvas-container" id="canvas-container">
           {!this.isClassroomModeOn ? (
             <div><canvas

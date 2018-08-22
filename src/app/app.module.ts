@@ -23,6 +23,9 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { environment } from "../environments/environment"
 import { CreateJsService } from '../girls-platform/services/CreateJsService';
 
+import { CoreModule } from '@app/core/core.module';
+import { SharedModule } from '@app/shared/shared.module';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,7 +36,8 @@ import { CreateJsService } from '../girls-platform/services/CreateJsService';
     IonicModule.forRoot(),
     AppRoutingModule,
     ComponentsModule,
-
+    CoreModule,
+    SharedModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production // Restrict extension to log-only mode

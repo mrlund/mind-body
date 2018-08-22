@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Signup</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="signup-logo">
+    <img src="assets/img/G3-Girls.jpg" alt="GI logo">
+  </div>
+  <ion-text color="danger" *ngFor="let error of formErrors(signupForm,submitted)">
+    <strong>{{error.error}}</strong>: {{error.params}}
+  </ion-text>
+  <div [formGroup]="signupForm">
+    <ion-list padding>
+      <ion-item>
+        <ion-label position="stacked" color="primary">Email</ion-label>
+        <ion-input formControlName="Email" name="username" type="text" required>
+        </ion-input>
+      </ion-item>
+      <ion-text padding>
+        <small *ngIf="signupForm.get('Email').hasError('required') && signupForm.get('Email').touched" padding-left>
+          Email is required
+        </small>
+        <small *ngIf="signupForm.get('Email').hasError('email') && signupForm.get('Email').touched" padding-left>
+          Email is invalid
+        </small>
+        <small *ngFor="let error of serverErrors('Email',signupForm,submitted)">{{error.params}}</small>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Password</ion-label>
+        <ion-input formControlName="Password" name="Password" type="password" required>
+        </ion-input>
+      </ion-item>
+      <ion-text padding>
+        <small *ngIf="signupForm.get('Password').hasError('required') && signupForm.get('Password').touched" padding-left>
+          Password is required
+        </small>
+        <small *ngFor="let error of serverErrors('Password',signupForm,submitted)">{{error.params}}</small>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Confirm Password</ion-label>
+        <ion-input formControlName="ConfirmPassword" name="ConfirmPassword" type="password" required>
+        </ion-input>
+      </ion-item>
+      <ion-text padding>
+        <small *ngIf="signupForm.get('ConfirmPassword').hasError('required') && signupForm.get('ConfirmPassword').touched" padding-left>
+          Confirm Password is required
+        </small>
+        <small *ngFor="let error of serverErrors('ConfirmPassword',signupForm,submitted)">{{error.params}}</small>
+      </ion-text>
+      <div padding>
+        <ion-button (click)="onSignup()" expand="block" [disabled]="isLoading$|async">Register
+          <ion-spinner name="bubbles" *ngIf="isLoading$|async"></ion-spinner>
+        </ion-button>
+      </div>
+      <ion-item>
+        Already have an account? <a (click)="onLogin()" color="light" expand="block">Login</a>
+      </ion-item>
+    </ion-list>
+
+
+  </div>
+
+</ion-content>
