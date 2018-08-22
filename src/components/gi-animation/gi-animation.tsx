@@ -8,8 +8,8 @@ declare var AdobeAn;
   styleUrl: "gi-animation.scss"
 })
 export class AppAnimation {
-  @Prop() src : string;
-  @Prop() composition : string;
+  @Prop() src: string;
+  @Prop() composition: string;
   @Prop() isClassroomModeOn: boolean = false;
   // @Prop({ connect: "ion-toast-controller" })
   // toastCtrl: ToastController;
@@ -26,10 +26,10 @@ export class AppAnimation {
   stage: any;
   sound: any;
   firstFramePath: string = "";
-  
+
   isBusy: boolean = false;
   formattedProgress: string = "0";
-
+  library: any;
   componentWillLoad() {
     const script = document.createElement("script");
     this.firstFramePath = this.src.replace(".js", ".png");
@@ -73,8 +73,10 @@ export class AppAnimation {
     loader.addEventListener("fileload", (evt) => { this.handleFileLoad(evt) });
     loader.addEventListener("progress", this.handleQueueProgress(this));
     //TODO :can't figure out https://github.com/CreateJS/SoundJS/issues/283
+    console.log("comp", this);
+    this.library = this.comp.getLibrary();
     loader.loadManifest(
-      lib.properties.manifest,
+      this.library.properties.manifest,
       true,
       this.src.substring(0, this.src.lastIndexOf("/") + 1)
     );
@@ -146,24 +148,26 @@ export class AppAnimation {
   handleComplete(evt) {
     var ss = this.comp.getSpriteSheet();
     var queue = evt.target;
-    var lib = this.comp.getLibrary();
-    var ssMetadata = lib.ssMetadata;
+    //var lib = this.comp.getLibrary();
+    var ssMetadata = this.library.ssMetadata;
     for (var i = 0; i < ssMetadata.length; i++) {
       ss[ssMetadata[i].name] = new createjs.SpriteSheet({ "images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames })
     }
-
-    this.exportRoot = new lib.lesson1();
-    this.stage = new lib.Stage(this.canvas);
+    //console.log("const ", lib);
+    //this.exportRoot = new lib.lesson1();
+    var jsFileName = this.src.substring(this.src.lastIndexOf('/') + 1, this.src.lastIndexOf('.'))
+    this.exportRoot = new this.library[jsFileName];
+    this.stage = new this.library.Stage(this.canvas);
 
     this.makeResponsive(true, 'both', false, 1);
-    AdobeAn.compositionLoaded(lib.properties.id);
+    AdobeAn.compositionLoaded(this.library.properties.id);
     this.fnStartAnimation();
   }
 
   fnStartAnimation() {
     this.paused = false;
     this.stage.addChild(this.exportRoot);
-    createjs.Ticker.framerate = lib.properties.fps;
+    createjs.Ticker.framerate = this.library.properties.fps;
     //createjs.Ticker.setFPS(lib.properties.fps);
     createjs.Ticker.addEventListener("tick", this.stage);
     createjs.Ticker.addEventListener("tick", (evt) => { this.tickHandler(evt) });
@@ -182,8 +186,9 @@ export class AppAnimation {
 
   }
   resizeCanvas(isResp, respDim, isScale, scaleType) {
+    //var lib = this.comp.getLibrary();
     var lastW, lastH, lastS = 1;
-    var w = lib.properties.width, h = lib.properties.height;
+    var w = this.library.properties.width, h = this.library.properties.height;
     var iw = window.innerWidth, ih = window.innerHeight;
     var pRatio = window.devicePixelRatio || 1, xRatio = iw / w, yRatio = ih / h, sRatio = 1;
     if (isResp) {
@@ -350,7 +355,7 @@ export class AppAnimation {
   }
 
   rewind5Sec() {
-    let fps = lib.properties.fps;
+    let fps = this.library.properties.fps;
     let stage = this.stage.children[0];
     let timeline = stage["timeline"];
 
@@ -363,7 +368,7 @@ export class AppAnimation {
   }
 
   fastForward5Sec() {
-    let fps = lib.properties.fps;
+    let fps = this.library.properties.fps;
     let stage = this.stage.children[0];
     let timeline = stage["timeline"];
 
