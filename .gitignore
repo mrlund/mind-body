@@ -34,3 +34,4 @@ UserInterfaceState.xcuserstate
 
 src/assets/st-build
 /st-dist
+src/components/components.d.ts
