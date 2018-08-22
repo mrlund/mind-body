@@ -10,16 +10,20 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: './pages/home/home.module#HomePageModule',
-    canActivate: [AuthGuardService]
+    //canActivate: [AuthGuardService]
   },
   {
     path: 'course',
     loadChildren: './pages/course/course.module#CoursePageModule',
-    canActivate: [AuthGuardService]
+    //canActivate: [AuthGuardService]
   },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'signup', loadChildren: './pages/signup/signup.module#SignupPageModule' },
-  { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule', canActivate: [AuthGuardService] },  { path: 'forgot-password', loadChildren: './pages/forgot-password/forgot-password.module#ForgotPasswordPageModule' }
+  {
+    path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule',
+    // canActivate: [AuthGuardService] 
+  },
+  { path: 'forgot-password', loadChildren: './pages/forgot-password/forgot-password.module#ForgotPasswordPageModule' }
 
 
 

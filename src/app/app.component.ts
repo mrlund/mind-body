@@ -23,14 +23,14 @@ export class AppComponent {
   ) {
     this.appPages$ = this.store.select(fromRootStore.getTableOfContents);
     this.isUserAuthenticate$ = this.store.select(fromRootStore.getUserAuthenticated);
-    this.isUserAuthenticate$.subscribe(status => {
-      if (status) {
-        this.store.dispatch(new fromRootStore.GetTableOfContent());
-      }
-      else {
-        //this.appPages$ = of([]);
-      }
-    });
+    // this.isUserAuthenticate$.subscribe(status => {
+    //   if (status) {
+    //     this.store.dispatch(new fromRootStore.GetTableOfContent());
+    //   }
+    //   else {
+    //     //this.appPages$ = of([]);
+    //   }
+    // });
 
     this.initializeApp();
   }
@@ -40,6 +40,7 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.store.dispatch(new fromRootStore.CheckUserAuthenticated());
+      this.store.dispatch(new fromRootStore.GetTableOfContent());
     });
   }
 }
