@@ -1,40 +1,45 @@
 import * as fromRouter from "@ngrx/router-store";
-import { ActionReducerMap, createFeatureSelector ,createSelector} from "@ngrx/store";
+import { ActionReducerMap, createFeatureSelector, createSelector } from "@ngrx/store";
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 
 import * as fromRouterReducer from "./router.reducer";
 import * as fromTOC from "./table-of-content.reducer";
 import * as fromPageContent from "./page-content.reducer";
+import * as fromAuth from "./auth.reducer";
 
 export interface State {
   routerReducer: fromRouter.RouterReducerState<
-    fromRouterReducer.RouterStateUrl
+  fromRouterReducer.RouterStateUrl
   >;
   toc: fromTOC.TOCState;
-  pageContent:fromPageContent.PageContentState
+  pageContent: fromPageContent.PageContentState,
+  auth: fromAuth.AuthState
 }
 export const reducers: ActionReducerMap<State> = {
   routerReducer: fromRouter.routerReducer,
   toc: fromTOC.reducer,
-  pageContent: fromPageContent.reducer
+  pageContent: fromPageContent.reducer,
+  auth: fromAuth.reducer
 };
 
 export const getRouterState = createFeatureSelector<
   fromRouter.RouterReducerState<fromRouterReducer.RouterStateUrl>
->("routerReducer");
+  >("routerReducer");
 
 export const getSelectedRouteParameters = createSelector(
-    getRouterState,
-    router => router.state && router.state.params
-  );
+  getRouterState,
+  router => router.state && router.state.params
+);
 export const getTOCState = createFeatureSelector<fromTOC.TOCState>("toc");
 
 export const getPageContentState = createFeatureSelector<fromPageContent.PageContentState>("pageContent");
 
+export const getAuthState = createFeatureSelector<fromAuth.AuthState>("auth");
+
 export class CustomSerializer
   implements fromRouter.RouterStateSerializer<
-      fromRouterReducer.RouterStateUrl
-    > {
+  fromRouterReducer.RouterStateUrl
+  > {
   serialize(
     routerState: RouterStateSnapshot
   ): fromRouterReducer.RouterStateUrl {
