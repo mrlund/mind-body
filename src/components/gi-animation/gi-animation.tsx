@@ -44,6 +44,7 @@ export class AppAnimation {
 
   rergisterSoundControls() {
     window["playSound"] = (id, loop) => {
+      console.log("window", id, loop)
       if (this.sound) {
         this.sound.stop();
       }
@@ -97,8 +98,12 @@ export class AppAnimation {
 
     this.stage.addChild(this.exportRoot);
     createjs.Ticker.framerate = this.library.properties.fps;
+    createjs.Ticker.paused = false;
     createjs.Ticker.addEventListener("tick", this.stage);
     createjs.Ticker.addEventListener("tick", (evt) => { this.tickHandler(evt) });
+
+    console.log('handlecomplte');
+    console.log(createjs.Ticker);
   }
 
 
@@ -111,7 +116,7 @@ export class AppAnimation {
     this.canvas = this.el.querySelector(".video-canvas");
     this.anim_container = this.el.querySelector(".canvas-container");
     this.comp = AdobeAn.getComposition(this.composition);
-
+    console.log(this.comp);
     this.canvas.style.width = "100%";
     this.canvas.style.height = this.canvas.offsetWidth + "px";
     this.anim_container.style.height = this.canvas.offsetWidth + "px";
@@ -124,7 +129,6 @@ export class AppAnimation {
     this.loader.addEventListener("fileload", (evt) => { this.handleFileLoad(evt) });
     this.loader.addEventListener("progress", this.handleQueueProgress(this));
     //TODO :can't figure out https://github.com/CreateJS/SoundJS/issues/283
-
     this.loader.loadManifest(
       this.library.properties.manifest,
       true,
@@ -151,6 +155,7 @@ export class AppAnimation {
   }
   @Method()
   playAnimation() {
+    console.log('play');
     if (this.loader != null) {
       this.loader.close();
     }
@@ -167,6 +172,7 @@ export class AppAnimation {
   }
   @Method()
   pauseAnimation() {
+    console.log('pause');
     if (this.loader != null) {
       this.loader.close();
     }
@@ -261,6 +267,8 @@ export class AppAnimation {
   }
 
   tickHandler(event) {
+    // console.log("event", event);
+    // console.log("paused", event.paused);
     if (!event.paused) {
       let stage = this.stage.children[0];
       this.timeline = stage["timeline"];
@@ -274,7 +282,7 @@ export class AppAnimation {
     }
   }
 
-  rewindAnimationTo(newPosition, soundPosition) {
+  rewindAnimationTo(newPosition) {
     let st = this.sound;
     if (st) {
       st.paused = true;
@@ -292,16 +300,18 @@ export class AppAnimation {
     }
 
     //this.sound.setPosition(soundPosition);
-    this.sound.position = soundPosition;
+    //this.sound.position = soundPosition;
     if (this.paused) {
       stage.gotoAndStop(newPosition);
       this.stage.update();
       if (st && !st.getPaused()) {
-        st.paused = true;
+        //st.paused = true;
+        createjs.Ticker.paused = true;
       }
     } else {
       stage.gotoAndPlay(newPosition);
-      st.paused = false;
+      //st.paused = false;
+      createjs.Ticker.paused = false;
     }
   }
 
@@ -313,10 +323,10 @@ export class AppAnimation {
     let newPosition = Math.round(
       event.offsetX / this.sizeOfCanvas * timeline.duration
     );
-    var soundPosition = this.sound.position + 5000;
-    console.log("video", newPosition / 1000);
-    console.log("sound", soundPosition / 1000);
-    this.rewindAnimationTo(newPosition, soundPosition);
+    // var soundPosition = this.sound.position + 5000;
+    // console.log("video", newPosition / 1000);
+    // console.log("sound", soundPosition / 1000);
+    this.rewindAnimationTo(newPosition);
   }
 
   rewind5Sec() {
@@ -325,8 +335,8 @@ export class AppAnimation {
     let timeline = stage["timeline"];
 
     let newPosition = timeline.position - fps * 5;
-    var soundPosition = this.sound.position - 5000;
-    this.rewindAnimationTo(newPosition, soundPosition);
+    //var soundPosition = this.sound.position - 5000;
+    this.rewindAnimationTo(newPosition);
   }
 
   fastForward5Sec() {
@@ -335,8 +345,8 @@ export class AppAnimation {
     let timeline = stage["timeline"];
 
     let newPosition = timeline.position + fps * 5;
-    var soundPosition = this.sound.position + 5000;
-    this.rewindAnimationTo(newPosition, soundPosition);
+    // var soundPosition = this.sound.position + 5000;
+    this.rewindAnimationTo(newPosition);
   }
   muteVolume() {
     let st = this.sound;
