@@ -1,26 +1,26 @@
 import { Component, State, Prop, Method, Element } from "@stencil/core";
-//import {  Toast } from "@ionic/core";
+
 declare var createjs;
 declare var lib;
 declare var AdobeAn;
+
 @Component({
   tag: "gi-animation",
   styleUrl: "gi-animation.scss"
 })
+
 export class AppAnimation {
   @Prop() src: string;
   @Prop() composition: string;
   @Prop() isClassroomModeOn: boolean = false;
-  // @Prop({ connect: "ion-toast-controller" })
-  // toastCtrl: ToastController;
   @State() paused: boolean = true;
   @State() sizeOfCanvas: any;
   @State() dataLoaded: boolean = false;
   @State() currentProgressWidth: any = 0;
   @Element() el: HTMLElement;
+
   canvas: any;
   anim_container: any;
-  dom_overlay_container: any;
   comp: any;
   exportRoot: any;
   timeline: any;
@@ -29,47 +29,87 @@ export class AppAnimation {
   firstFramePath: string = "";
 
   isBusy: boolean = false;
-  formattedProgress: string = "0";
+  animationVideoProgress: string = "0";
   library: any;
+  loader: any;
+
   componentWillLoad() {
-    console.log('componentWillLoad');
     const script = document.createElement("script");
     this.firstFramePath = this.src.replace(".js", ".png");
     script.src = this.src;
     //script.async = true;
     document.body.appendChild(script);
-    let self = this;
-    window["playSound"] = function (id, loop) {
-      if (self.sound) {
-        self.sound.stop();
+    this.rergisterSoundControls();
+  }
+
+  rergisterSoundControls() {
+    window["playSound"] = (id, loop) => {
+      if (this.sound) {
+        this.sound.stop();
       }
-      // self.sound = createjs.Sound.play(
-      //   id,
-      //   createjs.Sound.INTERRUPT_EARLY,
-      //   0,
-      //   0,
-      //   loop
-      // );
-      self.sound = createjs.Sound.play(id, { interrupt: createjs.Sound.INTERRUPT_EARLY, loop: loop, volume: 1 });
-
-      return self.sound;
+      this.sound = createjs.Sound.play(id, { interrupt: createjs.Sound.INTERRUPT_EARLY, loop: loop, volume: 1 });
+      return this.sound;
     };
+  }
 
-  }
-  componentDidLoad() {
-  }
-  loader: any
-  loadAnimation() {
+
+  startLoading() {
     this.isBusy = true;
+    this.paused = true;
+  }
+
+  doneLoading() {
+    this.isBusy = false;
+    this.dataLoaded = true;
     this.paused = false;
-    console.log('loadAnimation');
+  }
+
+  handleFileLoad(evt) {
+    var images = this.comp.getImages();
+    if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }
+  }
+
+  handleQueueProgress(that) {
+    return (progress) => {
+      this.animationVideoProgress = progress.loaded
+        ? (progress.loaded * 100).toFixed(0)
+        : "0";
+      if (progress.loaded == 1) {
+        this.doneLoading();
+      }
+    };
+  }
+
+  handleComplete(evt) {
+    var ss = this.comp.getSpriteSheet();
+    var queue = evt.target;
+    //var lib = this.comp.getLibrary();
+    var ssMetadata = this.library.ssMetadata;
+    for (var i = 0; i < ssMetadata.length; i++) {
+      ss[ssMetadata[i].name] = new createjs.SpriteSheet({ "images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames })
+    }
+    var jsFileName = this.src.substring(this.src.lastIndexOf('/') + 1, this.src.lastIndexOf('.'))
+    this.exportRoot = new this.library[jsFileName];
+    this.stage = new this.library.Stage(this.canvas);
+
+    this.makeResponsive(true, 'both', false, 1);
+    AdobeAn.compositionLoaded(this.library.properties.id);
+
+    this.stage.addChild(this.exportRoot);
+    createjs.Ticker.framerate = this.library.properties.fps;
+    createjs.Ticker.addEventListener("tick", this.stage);
+    createjs.Ticker.addEventListener("tick", (evt) => { this.tickHandler(evt) });
+  }
+
+
+  loadAnimation() {
+    this.startLoading();
     if (!createjs.Sound.initializeDefaultPlugins()) {
       return;
     }
 
     this.canvas = this.el.querySelector(".video-canvas");
     this.anim_container = this.el.querySelector(".canvas-container");
-    this.dom_overlay_container = this.el.querySelector(".dom_overlay_container");
     this.comp = AdobeAn.getComposition(this.composition);
 
     this.canvas.style.width = "100%";
@@ -84,7 +124,6 @@ export class AppAnimation {
     this.loader.addEventListener("fileload", (evt) => { this.handleFileLoad(evt) });
     this.loader.addEventListener("progress", this.handleQueueProgress(this));
     //TODO :can't figure out https://github.com/CreateJS/SoundJS/issues/283
-    console.log("comp", this);
 
     this.loader.loadManifest(
       this.library.properties.manifest,
@@ -93,109 +132,90 @@ export class AppAnimation {
     );
   }
 
-  doneLoading() {
-    this.isBusy = false;
-    this.dataLoaded = true;
-    this.paused = false;
+  playButtonAction() {
+    if (!this.dataLoaded) {
+      this.loadAnimation();
+    } else {
+      this.playPauseAnimation();
+    }
   }
 
-  handleFileLoad(evt) {
+  playPauseAnimation() {
+    let newState = !createjs.Ticker.paused;
+    if (newState) {
+      this.pauseAnimation();
+    }
+    else {
+      this.playAnimation();
+    }
+  }
+  @Method()
+  playAnimation() {
+    if (this.loader != null) {
+      this.loader.close();
+    }
+    if (createjs && createjs.Ticker) {
+      let newState = false;
+      let st = this.sound;
+      if (st) {
+        st.paused = newState;
+      }
+      createjs.Ticker.paused = newState;
+      createjs.Ticker.addEventListener("tick", this.stage);
+      this.paused = newState;
+    }
+  }
+  @Method()
+  pauseAnimation() {
+    if (this.loader != null) {
+      this.loader.close();
+    }
+    if (createjs && createjs.Ticker) {
+      let newState = true;
+      let st = this.sound;
+      if (st) {
+        st.paused = newState;
+      }
+      createjs.Ticker.paused = newState;
+      createjs.Ticker.removeEventListener("tick", this.stage);
+      this.paused = newState;
+    }
+  }
 
-    var images = this.comp.getImages();
-    if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }
-    // if (evt.item.type == "image") {
-    //   if (!window["createJSImages"]) window["createJSImages"] = {};
-    //   if (!window["images"]) window["images"] = {};
-    //   window["createJSImages"][evt.item.id] = evt.result;
-    //   window["images"][evt.item.id] = evt.result;
+  componentDidUnload() {
+    this.pauseAnimation();
+    // if (this.stage && this.stage.children) {
+    //   let stage = this.stage.children[0];
+    //   let timeline = stage["timeline"];
+    //   this.stage.clear();
+    //   stage.removeAllChildren()
+    //   stage.removeAllEventListeners()
+    //   stage.canvas = null
+    //   stage._eventListeners = null;
     // }
   }
 
-  handleQueueProgress(that) {
-
-    return (progress) => {
-      this.formattedProgress = progress.loaded
-        ? (progress.loaded * 100).toFixed(0)
-        : "0";
-      //this.stage.update();
-      if (progress.loaded == 1) {
-        this.doneLoading();
-      }
-    };
+  @Method()
+  destroyAnimation() {
+    console.log('destroy animation');
+    this.pauseAnimation();
+    // if (this.stage && this.stage.children) {
+    //   let stage = this.stage.children[0];
+    //   let timeline = stage["timeline"];
+    //   this.stage.clear();
+    //   stage.removeAllChildren();
+    //   stage.removeAllEventListeners();
+    //   stage.canvas = null
+    //   stage._eventListeners = null;
+    // }
   }
 
-  // handleComplete(that) {
-  //   this.paused = false;
-  //   return function () {
-  //     that.stage = new createjs.Stage("canvas1");
-  //     that.stage.addChild(new lib[that.animation]());
-
-  //     createjs.Ticker.timingMode = createjs.Ticker.RAF_SYNCHED;
-  //     createjs.Ticker.setFPS(lib.properties.fps);
-  //     createjs.Ticker.addEventListener("tick", that.tickHandler(that));
-  //     createjs.Ticker.setPaused(false);
-  //     that.resizeAnimation(that);
-
-  //     let st = null;
-  //     // let st = that.stage.getChildAt(0).soundTrack ? that.stage.getChildAt(0).soundTrack : that.stage.getChildAt(0).children[0].soundTrack;
-  //     if (that.stage.getChildAt(0) && that.stage.getChildAt(0).soundTrack) {
-  //       st = that.stage.getChildAt(0).soundTrack;
-  //     } else {
-  //       if (
-  //         that.stage.getChildAt(0) &&
-  //         that.stage.getChildAt(0).children[0] &&
-  //         that.stage.getChildAt(0).children[0].soundTrack
-  //       ) {
-  //         st = that.stage.getChildAt(0).children[0].soundTrack;
-  //       }
-  //     }
-  //     if (!st) {
-  //       st = createjs.Sound._instances[0];
-  //     }
-  //   };
-  // }
-  handleComplete(evt) {
-    var ss = this.comp.getSpriteSheet();
-    var queue = evt.target;
-    //var lib = this.comp.getLibrary();
-    var ssMetadata = this.library.ssMetadata;
-    for (var i = 0; i < ssMetadata.length; i++) {
-      ss[ssMetadata[i].name] = new createjs.SpriteSheet({ "images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames })
-    }
-    //console.log("const ", lib);
-    //this.exportRoot = new lib.lesson1();
-    var jsFileName = this.src.substring(this.src.lastIndexOf('/') + 1, this.src.lastIndexOf('.'))
-    this.exportRoot = new this.library[jsFileName];
-    this.stage = new this.library.Stage(this.canvas);
-
-    this.makeResponsive(true, 'both', false, 1);
-    AdobeAn.compositionLoaded(this.library.properties.id);
-    this.fnStartAnimation();
-  }
-
-  fnStartAnimation() {
-    this.paused = false;
-    this.stage.addChild(this.exportRoot);
-    createjs.Ticker.framerate = this.library.properties.fps;
-    //createjs.Ticker.setFPS(lib.properties.fps);
-    createjs.Ticker.addEventListener("tick", this.stage);
-    createjs.Ticker.addEventListener("tick", (evt) => { this.tickHandler(evt) });
-    //this.makeResponsive(true, 'both', false, 1);
-  }
-
-  handleTick(event) {
-    // Actions carried out each tick (aka frame)
-    if (!event.paused) {
-      console.log("paused or not", event.paused)
-      console.log("paused or not", event)
-      // Actions carried out when the Ticker is not paused.
-    }
-  }
   makeResponsive(isResp, respDim, isScale, scaleType) {
     window.addEventListener('resize', () => this.resizeCanvas(isResp, respDim, isScale, scaleType));
     this.resizeCanvas(isResp, respDim, isScale, scaleType);
 
   }
+
   resizeCanvas(isResp, respDim, isScale, scaleType) {
     //var lib = this.comp.getLibrary();
     var lastW, lastH, lastS = 1;
@@ -239,52 +259,6 @@ export class AppAnimation {
     this.stage.update();
     this.stage.tickOnUpdate = true;
   }
-  resizeAnimation(that) {
-    if (!this.dataLoaded) {
-      return;
-    }
-    var newWidth = this.canvas.offsetWidth;
-    // document.getElementById("canvas1").style.height = newWidth + "px";
-    // document.getElementById("canvas1").style.width = newWidth + "px";
-    that.sizeOfCanvas = newWidth;
-    if (that.stage) {
-      that.stage.width = newWidth;
-      that.stage.height = newWidth;
-    }
-  }
-
-
-  // tickHandler(event) {
-  //   var newCircle = false;
-
-  //   if (!this.paused && !event.paused) {
-  //     this.stage.update();
-  //   }
-  //   let stage = this.stage.children[0];
-  //   this.timeline = stage["timeline"];
-
-  //   if (this.timeline.position % 10 == 0) {
-  //     this.currentProgressWidth = parseFloat(
-  //       (this.timeline.position /
-  //         this.timeline.duration *
-  //         this.sizeOfCanvas).toFixed(0)
-  //     );
-  //     console.log(this.currentProgressWidth);
-  //   }
-
-  //   if (this.timeline.position == 0) newCircle = false;
-  //   if (this.timeline.duration - this.timeline.position == 1 && !newCircle) {
-  //     //to pause at the end of movie
-  //     newCircle = true;
-
-  //     createjs.Ticker.setPaused(true);
-  //     let st = this.sound;
-  //     if (st) {
-  //       st.paused = true;
-  //     }
-  //   }
-
-  // }
 
   tickHandler(event) {
     if (!event.paused) {
@@ -300,29 +274,11 @@ export class AppAnimation {
     }
   }
 
-  playPauseAnimation() {
-    if (this.loader != null) {
-      this.loader.close();
-    }
-    if (createjs && createjs.Ticker) {
-      let newState = !createjs.Ticker.paused;
-      let st = this.sound;
-      if (st) {
-        st.paused = newState;
-      }
-
-      createjs.Ticker.paused = newState;
-      if (newState) {
-        createjs.Ticker.removeEventListener("tick", this.stage);
-      }
-      else {
-        createjs.Ticker.addEventListener("tick", this.stage);
-      }
-      this.paused = newState;
-    }
-  }
-
   rewindAnimationTo(newPosition, soundPosition) {
+    let st = this.sound;
+    if (st) {
+      st.paused = true;
+    }
 
     let stage = this.stage.children[0];
     let timeline = stage["timeline"];
@@ -335,36 +291,31 @@ export class AppAnimation {
       newPosition = timeline.duration - 10;
     }
 
-    let st = this.sound;
-    if (st) {
-      st.paused = true;
-    }
     //this.sound.setPosition(soundPosition);
     this.sound.position = soundPosition;
     if (this.paused) {
-
       stage.gotoAndStop(newPosition);
       this.stage.update();
       if (st && !st.getPaused()) {
         st.paused = true;
       }
     } else {
-
       stage.gotoAndPlay(newPosition);
       st.paused = false;
-
     }
   }
 
   rewindAnimation(event) {
     event.stopPropagation();
-
+    console.log("rewindAnimation", event);
     let stage = this.stage.children[0];
     let timeline = stage["timeline"];
     let newPosition = Math.round(
       event.offsetX / this.sizeOfCanvas * timeline.duration
     );
     var soundPosition = this.sound.position + 5000;
+    console.log("video", newPosition / 1000);
+    console.log("sound", soundPosition / 1000);
     this.rewindAnimationTo(newPosition, soundPosition);
   }
 
@@ -377,9 +328,6 @@ export class AppAnimation {
     var soundPosition = this.sound.position - 5000;
     this.rewindAnimationTo(newPosition, soundPosition);
   }
-  componentDidUpdate() {
-
-  }
 
   fastForward5Sec() {
     let fps = this.library.properties.fps;
@@ -389,83 +337,6 @@ export class AppAnimation {
     let newPosition = timeline.position + fps * 5;
     var soundPosition = this.sound.position + 5000;
     this.rewindAnimationTo(newPosition, soundPosition);
-  }
-  playButtonAction() {
-    if (!this.dataLoaded) {
-      this.loadAnimation();
-    } else {
-      this.playPauseAnimation();
-    }
-  }
-  componentDidUnload() {
-    this.canvasPauseAnimation();
-    if (this.stage && this.stage.children) {
-      let stage = this.stage.children[0];
-      let timeline = stage["timeline"];
-      this.stage.clear();
-      stage.removeAllChildren()
-      stage.removeAllEventListeners()
-      stage.canvas = null
-      stage._eventListeners = null;
-    }
-  }
-
-  @Method()
-  destroyAnimation() {
-    console.log('destroy animation');
-    this.canvasPauseAnimation();
-    if (this.stage && this.stage.children) {
-      let stage = this.stage.children[0];
-      let timeline = stage["timeline"];
-      this.stage.clear();
-      stage.removeAllChildren();
-      stage.removeAllEventListeners();
-      stage.canvas = null
-      stage._eventListeners = null;
-    }
-  }
-
-  @Method()
-  canvasPlayAnimation() {
-    if (!this.dataLoaded) {
-      this.loadAnimation();
-    } else {
-      if (createjs && createjs.Ticker) {
-        let newState = false;
-        let st = this.sound;
-        if (st) {
-          st.paused = newState;
-        }
-        createjs.Ticker.paused = newState;
-        if (newState) {
-          createjs.Ticker.addEventListener("tick", this.stage);
-        }
-        this.paused = newState;
-      }
-    }
-
-  }
-  @Method()
-  canvasPauseAnimation() {
-    if (this.loader != null) {
-      this.loader.close();
-    }
-    if (createjs && createjs.Ticker) {
-      let newState = true;
-      let st = this.sound;
-      if (st) {
-        st.paused = newState;
-      }
-
-      createjs.Ticker.paused = newState;
-      if (newState) {
-        createjs.Ticker.removeEventListener("tick", this.stage);
-      }
-      else {
-        createjs.Ticker.addEventListener("tick", this.stage);
-      }
-      this.paused = newState;
-    }
   }
   muteVolume() {
     let st = this.sound;
@@ -499,8 +370,6 @@ export class AppAnimation {
               onClick={() => this.playButtonAction()}
               class="video-canvas"
             />
-              <div id="dom_overlay_container" class="dom_overlay_container">
-              </div>
             </div>
           ) : (
               ""
@@ -531,7 +400,7 @@ export class AppAnimation {
             <div class="loading-container">
               <div class="uil-ring-css">
                 <div />
-                <a>Loading {this.formattedProgress}%</a>
+                <a>Loading {this.animationVideoProgress}%</a>
               </div>
             </div>
           ) : (
@@ -542,7 +411,7 @@ export class AppAnimation {
           <div class="navControls">
             <div
               class="progressBar"
-              onClick={() => this.rewindAnimation.bind(this)}
+              onClick={(ev) => this.rewindAnimation(ev)}
             >
               <div
                 class="currentProgress"
