@@ -18,7 +18,7 @@
               </ion-item>
             </ion-item-group>
           </ion-menu-toggle>
-          <ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
             <ion-item-group>
               <ion-item-divider color="light" [routerDirection]="'root'">
                 <ion-icon slot="start" name="contact"></ion-icon>
@@ -29,6 +29,10 @@
               </ion-item>
               <ion-item [routerLink]="['profile']" *ngIf="isUserAuthenticate$|async">
                 <ion-icon name="person"></ion-icon>Profile
+              </ion-item>
+              <ion-item>
+                <ion-label>Class Room Mode</ion-label>
+                <ion-toggle (ionChange)="classRoomModeChange(classRoomMode.checked)" [checked]="classRoomMode$|async" #classRoomMode></ion-toggle>
               </ion-item>
             </ion-item-group>
           </ion-menu-toggle>

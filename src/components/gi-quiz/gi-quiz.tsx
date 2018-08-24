@@ -1,6 +1,5 @@
-import { Component, Element, State } from '@stencil/core';
+import { Component, Element, State, Prop } from '@stencil/core';
 import { tap } from 'rxjs/operators';
-
 
 @Component({
     tag: 'gi-quiz',
@@ -15,11 +14,14 @@ export class GiQuiz {
 
     @State()
     questions: Array<any> = [];
-    
+
+    @Prop({ connect: 'ion-toast-controller' })
+    toastCtrl: HTMLIonToastControllerElement;
+
     componentDidLoad() {
         let node = this.el.parentElement;
-        while (node.parentElement && !this.dataSvc){
-            if (node.nodeName == "GI-DATA-PROVIDER"){
+        while (node.parentElement && !this.dataSvc) {
+            if (node.nodeName == "GI-DATA-PROVIDER") {
                 this.dataSvc = node as HTMLGiDataProviderElement;
             } else {
                 node = node.parentElement;
@@ -31,16 +33,35 @@ export class GiQuiz {
         data$.subscribe();
     }
 
-    selectOption(evt, question, option){
+    selectOption(evt, question, option) {
         evt.target.parentElement.childNodes.forEach(e => e.classList.remove("selected"));
         evt.target.classList.add("selected");
         console.log(question, option);
-        this.dataSvc.saveData({ questionId : question.questionId, question: question.question, answer: option.option});
+        this.dataSvc.saveData(
+            {
+                questionId: question.questionId,
+                question: question.question,
+                answer: option.option
+            })
+            .subscribe(x => {
+                this.presentToast('Success');
+            }, error => {
+                evt.target.classList.remove("selected");
+                this.presentToast('There is an error');
+            });
+
+    }
+    async presentToast(message: string) {
+        const toast = await this.toastCtrl.create({
+            message: message,
+            duration: 2000
+        });
+        await toast.present();
     }
 
     render() {
         return (
-            this.questions.map(q => 
+            this.questions.map(q =>
                 <div class={'question'}>
                     <h3>{q.question}</h3>
                     <ul>

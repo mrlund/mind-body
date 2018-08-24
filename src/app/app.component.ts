@@ -15,6 +15,7 @@ import { Observable, of } from "rxjs"
 export class AppComponent {
   public appPages$;
   isUserAuthenticate$: Observable<boolean>;
+  classRoomMode$: Observable<boolean>;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -23,6 +24,7 @@ export class AppComponent {
   ) {
     this.appPages$ = this.store.select(fromRootStore.getTableOfContents);
     this.isUserAuthenticate$ = this.store.select(fromRootStore.getUserAuthenticated);
+    this.classRoomMode$ = this.store.select(fromRootStore.getClassRoomMode);
     // this.isUserAuthenticate$.subscribe(status => {
     //   if (status) {
     //     this.store.dispatch(new fromRootStore.GetTableOfContent());
@@ -33,6 +35,10 @@ export class AppComponent {
     // });
 
     this.initializeApp();
+  }
+
+  classRoomModeChange(val) {
+    this.store.dispatch(new fromRootStore.SetClassRoomMode(val))
   }
 
   initializeApp() {

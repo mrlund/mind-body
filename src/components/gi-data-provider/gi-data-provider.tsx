@@ -10,8 +10,11 @@ import { Observable, from, of } from 'rxjs/';
 export class GIDataProvider {
     @Prop() pageContentUrl: string;
 
+    @Prop() baseContentUrl: string;
+
     @Prop() baseServerUrl: string;
 
+    @Prop() isClassroomModeOn: string;
 
     @State()
     private data;
@@ -31,13 +34,22 @@ export class GIDataProvider {
             share()
         );
     }
+
+    // @Method()
+    // classRoomModeChanged(val) {
+    //     console.log('provider', val);
+    //     this.innerHtmlData = this.innerHtmlData.replace(/class-mode="([^"]+)"/g, 'class-mode="' + val + '"');
+    //     console.log(this.innerHtmlData)
+    // }
+
     loadPageContent() {
         console.log("fetchingcontent", this.pageContentUrl + ".html");
         fetch(this.pageContentUrl + ".html", { method: 'get' })
             .then((response) => {
                 response.text().then((text) => {
                     if (text && text.length) {
-                        text = text.replace(/BASE_URL/g, this.baseServerUrl);
+                        text = text.replace(/BASE_URL/g, this.baseContentUrl);
+                        text = text.replace(/CLASSROOM_MODE/g, this.isClassroomModeOn);
                         this.innerHtmlData = text;
                     }
                 })
@@ -69,27 +81,46 @@ export class GIDataProvider {
 
     @Method()
     saveData(data: any) {
-        console.log("Saving ", data);
-        let token = localStorage.getItem("token");
+        let token = this.getToken();
         if (token) {
             let postData = {
-                page: this.pageContentUrl,
-                data: data
+                ResponseType: 1,
+                ResponseId: 1,
+                ResponseName: "demo",
+                CourseClassId: 1,
+                Question: data.question,
+                Response: data.answer,
+                ExtraResponseData: "",
+                CourseId: 1,
+                CourseModuleId: 1,
+                SessionId: 1,
+                PageId: 1
             };
-            return from(fetch(this.baseServerUrl, {
-                method: 'POST',
+            return from(fetch(this.baseServerUrl + "/api/student/quiz-response", {
+                method: 'PUT',
                 body: JSON.stringify(postData),
                 headers: {
                     'Content-Type': 'application/json'
                 }
             })).pipe(
-                switchMap(x => x.json())
+                switchMap(x => { console.log(x); return x.json(); })
             );
         } else {
             console.log("No token, cant save");
         }
     }
 
+    getToken(): String {
+        let tokenStr = window.localStorage["currentUser"];
+        if (tokenStr) {
+            let token = JSON.parse(tokenStr);
+            token = JSON.parse(token);
+            if (new Date(token["expiration"]).getTime() > new Date().getTime()) {
+                return token.token;
+            }
+        }
+        return null;
+    }
     render() {
         return (
             <div innerHTML={this.innerHtmlData}></div>

@@ -12,13 +12,12 @@ declare var AdobeAn;
 export class AppAnimation {
   @Prop() src: string;
   @Prop() composition: string;
-  @Prop() isClassroomModeOn: boolean = false;
+  @Prop() classMode: boolean;
   @State() paused: boolean = true;
   @State() sizeOfCanvas: any;
   @State() dataLoaded: boolean = false;
   @State() currentProgressWidth: any = 0;
   @Element() el: HTMLElement;
-
   canvas: any;
   anim_container: any;
   comp: any;
@@ -34,11 +33,13 @@ export class AppAnimation {
   loader: any;
 
   componentWillLoad() {
+    console.log(this.classMode);
     const script = document.createElement("script");
     this.firstFramePath = this.src.replace(".js", ".png");
     script.src = this.src;
     //script.async = true;
     document.body.appendChild(script);
+
     this.rergisterSoundControls();
   }
 
@@ -200,7 +201,11 @@ export class AppAnimation {
     //   stage._eventListeners = null;
     // }
   }
-
+  @Method()
+  classRoomModeChanged(val) {
+    console.log('provider', val);
+    this.classMode = val;
+  }
   @Method()
   destroyAnimation() {
     console.log('destroy animation');
@@ -374,11 +379,10 @@ export class AppAnimation {
     return (
       <div class="cavase-main-container">
         <div class="canvas-container" id="canvas-container">
-          {!this.isClassroomModeOn ? (
+          {!this.classMode ? (
             <div><canvas
-
-              onClick={() => this.playButtonAction()}
               class="video-canvas"
+              onClick={() => this.playButtonAction()}
             />
             </div>
           ) : (
@@ -389,7 +393,7 @@ export class AppAnimation {
           ) : (
               ""
             )}
-          {this.isClassroomModeOn ? (
+          {this.classMode ? (
             <img
               class="overlay-img"
               src="/assets/img/play-button-disabled-overlay.png"
@@ -397,7 +401,7 @@ export class AppAnimation {
           ) : (
               ""
             )}
-          {!this.isClassroomModeOn && this.paused ? (
+          {!this.classMode && this.paused ? (
             <img
               class="overlay-img"
               onClick={() => this.playButtonAction()}

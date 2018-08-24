@@ -21,6 +21,7 @@ export const LOGOUT_USER_FAIL = '[AUTH] Logout User Fail';
 export const FORGOT_PASSWORD_REQUEST = '[AUTH] Forgot Password Request';
 export const FORGOT_PASSWORD_REQUEST_SUCCESS = '[AUTH] Forgot Password Request Success';
 export const FORGOT_PASSWORD_REQUEST_FAIL = '[AUTH] Forgot Password Request Fail';
+export const SET_CLASSROOM_MODE = '[AUTH] Set Class Room Mode'
 
 export class LoginUser implements Action {
     readonly type = LOGIN_USER;
@@ -89,6 +90,11 @@ export class ForgotPasswordRequestFail implements Action {
     constructor(public payload: any) { }
 }
 
+export class SetClassRoomMode implements Action {
+    readonly type = SET_CLASSROOM_MODE;
+    constructor(public payload: boolean) { }
+}
+
 
 export type AuthActions =
     LoginUser
@@ -105,4 +111,5 @@ export type AuthActions =
     | LogoutUserFail
     | ForgotPasswordRequest
     | ForgotPasswordRequestSuccess
-    | ForgotPasswordRequestFail;
+    | ForgotPasswordRequestFail
+    | SetClassRoomMode;

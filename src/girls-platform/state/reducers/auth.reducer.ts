@@ -14,6 +14,7 @@ export interface AuthState {
     forgotPasswordLoading: boolean;
     forgotPasswordComplete: boolean;
     forgotPasswordError: any;
+    classRoomMode: boolean;
 }
 
 export const initialState: AuthState = {
@@ -27,7 +28,8 @@ export const initialState: AuthState = {
     isUserAuthenticated: false,
     forgotPasswordLoading: false,
     forgotPasswordComplete: false,
-    forgotPasswordError: null
+    forgotPasswordError: null,
+    classRoomMode: false
 };
 
 export function reducer(
@@ -118,6 +120,13 @@ export function reducer(
             };
         }
 
+        case fromAuthAction.SET_CLASSROOM_MODE: {
+            return {
+                ...state,
+                classRoomMode: action.payload
+            };
+        }
+
         default:
             return state;
     }
@@ -139,5 +148,7 @@ export const getUserAuthenticated = (state: AuthState) => state.isUserAuthentica
 export const getForgotPasswordLoading = (state: AuthState) => state.forgotPasswordLoading;
 export const getForgotPasswordComplete = (state: AuthState) => state.forgotPasswordComplete;
 export const getForgotPasswordError = (state: AuthState) => state.forgotPasswordError;
+
+export const getClassRoomMode = (state: AuthState) => state.classRoomMode;
 
 

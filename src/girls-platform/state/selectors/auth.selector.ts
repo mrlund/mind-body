@@ -61,4 +61,9 @@ export const getForgotPasswordError = createSelector(
     fromAuth.getForgotPasswordError
 );
 
+export const getClassRoomMode = createSelector(
+    getAuthSelectorState,
+    fromAuth.getClassRoomMode
+);
+
 
