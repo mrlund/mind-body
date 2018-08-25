@@ -29,7 +29,7 @@ export const initialState: AuthState = {
     forgotPasswordLoading: false,
     forgotPasswordComplete: false,
     forgotPasswordError: null,
-    classRoomMode: false
+    classRoomMode: true
 };
 
 export function reducer(

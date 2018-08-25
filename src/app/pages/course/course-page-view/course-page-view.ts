@@ -28,7 +28,7 @@ export class CoursePageView {
         private cd: ChangeDetectorRef,
         private route: ActivatedRoute
     ) {
-        this.baseServerUrl=environment.apiUrl;
+        this.baseServerUrl = environment.apiUrl;
         let pageRef = {
             courseModuleUrlPart: route.snapshot.params.courseModuleUrlPart,
             sessionUrlPart: route.snapshot.params.sessionUrlPart,
@@ -44,23 +44,15 @@ export class CoursePageView {
         this.pageModel$ = this.store.select(fromRootStore.getPageContents);
         this.classRoomMode$ = this.store.select(fromRootStore.getClassRoomMode);
         this.classRoomMode$.pipe(takeWhile(() => this.alive)).subscribe((val) => {
-            // this.callWebComponentMethod('gi-data-provider', 'classRoomModeChanged', val);
-            this.callWebComponentMethod('gi-animation', 'classRoomModeChanged', val);
+            this.callWebComponentsMethod('gi-animation', 'classRoomModeChanged', val);
+            this.callWebComponentsMethod('gi-youtube', 'classRoomModeChanged', val);
         })
-        // this.pageModel$.pipe(takeWhile(() => this.alive)).subscribe((x) => {
-        //     if (x && x.page) {
-        //         this.baseUrl = "/assets/content/" + x.page.pageReference.courseModuleUrlPart + "/" + x.page.pageReference.sessionUrlPart;
-        //         this.pageContentUrl = this.baseUrl + "/" + x.page.pageReference.pageUrlPart;
-        //         console.log("baseUrl", this.baseUrl);
-        //         console.log("pageConentUrl", this.pageContentUrl);
-        //     }
-        // });
+
     }
 
     ionViewDidLeave() {
         this.alive = false;
-        console.log('ionViewDidLeave');
-        this.callWebComponentMethod('gi-animation', 'destroyAnimation');
+        this.callWebComponentsMethod('gi-animation', 'destroyAnimation');
     }
     public safeHtml(html) {
         if (html && html.length) {
@@ -77,13 +69,15 @@ export class CoursePageView {
                 .then(() => (controller as any)[methodName].apply(controller, args));
         }
     }
-    callWebComponentsMethod(elementName: string, methodName: string, ...args: any[]) {
-        const controllers = document.querySelectorAll(elementName) as NodeListOf<HTMLStencilElement>;
-        console.log(controllers);
-        for (var i = 0; i < controllers.length; i++) {
-            if (controllers[i]) {
-                return controllers[i].componentOnReady()
-                    .then(() => (controllers[i] as any)[methodName].apply(controllers[i], args));
+    async callWebComponentsMethod(elementName: string, methodName: string, ...args: any[]) {
+        const components = document.querySelectorAll(elementName) as NodeListOf<HTMLStencilElement>;
+        var componentArray = Array.from(components);
+        for (var i = 0; i < componentArray.length; i++) {
+
+            console.log("webcomp call", componentArray[i]);
+            if (componentArray[i]) {
+                await componentArray[i].componentOnReady();
+                await (componentArray[i] as any)[methodName].apply(componentArray[i], args);
             }
         }
     }

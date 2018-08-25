@@ -12,7 +12,8 @@ declare var AdobeAn;
 export class AppAnimation {
   @Prop() src: string;
   @Prop() composition: string;
-  @Prop() classMode: boolean;
+  @Prop() initialClassMode: boolean;
+  @State() classMode: boolean;
   @State() paused: boolean = true;
   @State() sizeOfCanvas: any;
   @State() dataLoaded: boolean = false;
@@ -33,7 +34,9 @@ export class AppAnimation {
   loader: any;
 
   componentWillLoad() {
-    console.log(this.classMode);
+    // if (!this.isScriptLoaded(this.src)) {
+    console.log("script not loaded", this.src);
+    this.classMode = this.initialClassMode;
     const script = document.createElement("script");
     this.firstFramePath = this.src.replace(".js", ".png");
     script.src = this.src;
@@ -41,6 +44,20 @@ export class AppAnimation {
     document.body.appendChild(script);
 
     this.rergisterSoundControls();
+    // }
+    // else {
+    //   console.log("script loaded", this.src);
+    // }
+  }
+
+  isScriptLoaded(url) {
+    var scripts = document.getElementsByTagName('script');
+    console.log(scripts);
+    for (var i = scripts.length; i--;) {
+
+      if (scripts[i].getAttribute('src') == url) return true;
+    }
+    return false;
   }
 
   rergisterSoundControls() {
@@ -203,12 +220,11 @@ export class AppAnimation {
   }
   @Method()
   classRoomModeChanged(val) {
-    console.log('provider', val);
     this.classMode = val;
   }
+
   @Method()
   destroyAnimation() {
-    console.log('destroy animation');
     this.pauseAnimation();
     // if (this.stage && this.stage.children) {
     //   let stage = this.stage.children[0];

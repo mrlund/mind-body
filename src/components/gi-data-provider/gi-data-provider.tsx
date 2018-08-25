@@ -43,13 +43,12 @@ export class GIDataProvider {
     // }
 
     loadPageContent() {
-        console.log("fetchingcontent", this.pageContentUrl + ".html");
         fetch(this.pageContentUrl + ".html", { method: 'get' })
             .then((response) => {
                 response.text().then((text) => {
                     if (text && text.length) {
                         text = text.replace(/BASE_URL/g, this.baseContentUrl);
-                        text = text.replace(/CLASSROOM_MODE/g, this.isClassroomModeOn);
+                        text = text.replace(/INITIAL_CLASSROOM_MODE/g, this.isClassroomModeOn);
                         this.innerHtmlData = text;
                     }
                 })
@@ -80,7 +79,7 @@ export class GIDataProvider {
     }
 
     @Method()
-    saveData(data: any) {
+    saveData(data: any, api: string) {
         let token = this.getToken();
         if (token) {
             let postData = {
@@ -96,7 +95,7 @@ export class GIDataProvider {
                 SessionId: 1,
                 PageId: 1
             };
-            return from(fetch(this.baseServerUrl + "/api/student/quiz-response", {
+            return from(fetch(this.baseServerUrl + api, {
                 method: 'PUT',
                 body: JSON.stringify(postData),
                 headers: {

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -43,6 +43,7 @@ import { GreatWallComponent } from './great-wall/great-wall.component';
       }
     ])
   ],
-  declarations: [HomePage, MyMoodComponent, MyHealthComponent, MyGoalsComponent, FindHelpComponent, GreatWallComponent]
+  declarations: [HomePage, MyMoodComponent, MyHealthComponent, MyGoalsComponent, FindHelpComponent, GreatWallComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class HomePageModule {}
+export class HomePageModule { }

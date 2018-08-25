@@ -1,8 +1,9 @@
 {
     "quiz": [
         {
-            "questionId":"101",
+            "questionId": "101",
             "question": "I understand this",
+            "responseType": 1,
             "options": [
                 {
                     "option": "Yes",
@@ -17,8 +18,9 @@
             ]
         },
         {
-            "questionId":"102",
+            "questionId": "102",
             "question": "I really understand this",
+            "responseType": 1,
             "options": [
                 {
                     "option": "Yes"
@@ -31,6 +33,6 @@
                     "option": "Maybe"
                 }
             ]
-        }        
+        }
     ]
 }
