@@ -6,6 +6,9 @@ import * as fromRouterReducer from "./router.reducer";
 import * as fromTOC from "./table-of-content.reducer";
 import * as fromPageContent from "./page-content.reducer";
 import * as fromAuth from "./auth.reducer";
+import * as fromMood from "./mood.reducer";
+import * as fromGww from "./gww.reducer";
+import * as fromGoal from "./goal.reducer";
 
 export interface State {
   routerReducer: fromRouter.RouterReducerState<
@@ -13,13 +16,19 @@ export interface State {
   >;
   toc: fromTOC.TOCState;
   pageContent: fromPageContent.PageContentState,
-  auth: fromAuth.AuthState
+  auth: fromAuth.AuthState,
+  mood: fromMood.MoodState,
+  gww: fromGww.GwwState,
+  goal: fromGoal.GoalState
 }
 export const reducers: ActionReducerMap<State> = {
   routerReducer: fromRouter.routerReducer,
   toc: fromTOC.reducer,
   pageContent: fromPageContent.reducer,
-  auth: fromAuth.reducer
+  auth: fromAuth.reducer,
+  mood: fromMood.reducer,
+  gww: fromGww.reducer,
+  goal: fromGoal.reducer
 };
 
 export const getRouterState = createFeatureSelector<
@@ -35,6 +44,12 @@ export const getTOCState = createFeatureSelector<fromTOC.TOCState>("toc");
 export const getPageContentState = createFeatureSelector<fromPageContent.PageContentState>("pageContent");
 
 export const getAuthState = createFeatureSelector<fromAuth.AuthState>("auth");
+
+export const getMoodState = createFeatureSelector<fromMood.MoodState>("mood");
+
+export const getGwwState = createFeatureSelector<fromGww.GwwState>("gww");
+
+export const getGoalState = createFeatureSelector<fromGoal.GoalState>("goal");
 
 export class CustomSerializer
   implements fromRouter.RouterStateSerializer<

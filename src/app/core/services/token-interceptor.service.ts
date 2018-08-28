@@ -36,13 +36,15 @@ export class TokenInterceptorService implements HttpInterceptor {
     const authService = this.injector.get(AuthService);
 
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    currentUser=JSON.parse(currentUser);
     if (!request.url.startsWith('/assets')) {
-      if (request.url == "/user/login" || "/user/register") {
+      if (request.url == "/user/login" || request.url == "/user/register") {
         request = request.clone({
           url: `${environment.apiUrl}/api${request.url}`
         });
       }
       else {
+
         request = request.clone({
           url: `${environment.apiUrl}/api${request.url}`,
           setHeaders: {

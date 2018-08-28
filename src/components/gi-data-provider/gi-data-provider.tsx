@@ -1,8 +1,6 @@
 import { Component, Prop, State, Method } from '@stencil/core';
 import { map, tap, mergeMap, share, switchMap, filter } from 'rxjs/operators';
-import { Observable, from, of } from 'rxjs/';
-
-
+import { Observable, from, of } from 'rxjs';
 @Component({
     tag: 'gi-data-provider',
     styleUrl: 'gi-data-provider.css'
@@ -21,9 +19,19 @@ export class GIDataProvider {
     @State()
     private innerHtmlData;
 
+    @State()
+    private idInfo;
+
+    @Method()
+    getIdInfo(obj) {
+        console.log(obj);
+        this.idInfo = obj;
+    }
+
     data$: Observable<any>;
 
     constructor() {
+
     }
     componentDidLoad() {
         this.loadPageContent();
@@ -81,25 +89,28 @@ export class GIDataProvider {
     @Method()
     saveData(data: any, api: string) {
         let token = this.getToken();
+        console.log(token);
+        console.log(data);
         if (token) {
             let postData = {
-                ResponseType: 1,
+                ResponseType: data.responseType,
                 ResponseId: 1,
                 ResponseName: "demo",
                 CourseClassId: 1,
                 Question: data.question,
                 Response: data.answer,
                 ExtraResponseData: "",
-                CourseId: 1,
-                CourseModuleId: 1,
-                SessionId: 1,
-                PageId: 1
+                CourseId: this.idInfo.CourseId,
+                CourseModuleId: this.idInfo.CourseId,
+                SessionId: this.idInfo.CourseId,
+                PageId: this.idInfo.CourseId
             };
             return from(fetch(this.baseServerUrl + api, {
-                method: 'PUT',
+                method: 'POST',
                 body: JSON.stringify(postData),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 }
             })).pipe(
                 switchMap(x => { console.log(x); return x.json(); })

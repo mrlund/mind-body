@@ -15,8 +15,8 @@ export class GiQuiz {
     @State()
     questions: Array<any> = [];
 
-    @Prop({ connect: 'ion-toast-controller' })
-    toastCtrl: HTMLIonToastControllerElement;
+    // @Prop({ connect: 'ion-toast-controller' })
+    // toastCtrl: HTMLIonToastControllerElement;
 
     componentDidLoad() {
         let node = this.el.parentElement;
@@ -41,23 +41,24 @@ export class GiQuiz {
             {
                 questionId: question.questionId,
                 question: question.question,
-                answer: option.option
-            })
+                answer: option.option,
+                responseType: question.responseType
+            }, "/api/student/quiz-response")
             .subscribe(x => {
-                this.presentToast('Success');
+                // this.presentToast('Success');
             }, error => {
                 evt.target.classList.remove("selected");
-                this.presentToast('There is an error');
+                //  this.presentToast('There is an error');
             });
 
     }
-    async presentToast(message: string) {
-        const toast = await this.toastCtrl.create({
-            message: message,
-            duration: 2000
-        });
-        await toast.present();
-    }
+    // async presentToast(message: string) {
+    //     const toast = await this.toastCtrl.create({
+    //         message: message,
+    //         duration: 2000
+    //     });
+    //     await toast.present();
+    // }
 
     render() {
         return (

@@ -52,7 +52,8 @@ export class SignupPage extends BaseFormComponent implements OnInit, OnDestroy {
     this.signupForm = this.fb.group({
       Email: ["", Validators.compose([Validators.required, Validators.email])],
       Password: ["", Validators.required],
-      ConfirmPassword: ["", Validators.required]
+      ConfirmPassword: ["", Validators.required],
+      Name: ["", Validators.required]
     });
   }
   onSignup() {

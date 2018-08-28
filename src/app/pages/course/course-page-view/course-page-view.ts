@@ -1,9 +1,10 @@
-import { Component, Input, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { tap, takeWhile } from 'rxjs/operators';
 import { Observable, pipe } from 'rxjs/';
 import { Store } from '@ngrx/store';
 import * as fromRootStore from "../../../../girls-platform/state/";
+import { JsonContentProvider } from "../../../../girls-platform/services/JsonContentProvider";
 import { ActivatedRoute } from "@angular/router";
 import { environment } from "@env/environment";
 @Component({
@@ -26,7 +27,8 @@ export class CoursePageView {
         private sanitizer: DomSanitizer,
         private store: Store<fromRootStore.State>,
         private cd: ChangeDetectorRef,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private jsonContentProvider: JsonContentProvider,
     ) {
         this.baseServerUrl = environment.apiUrl;
         let pageRef = {
@@ -42,6 +44,11 @@ export class CoursePageView {
         this.store.dispatch(new fromRootStore.GetNextAndPrevPage(pageRef));
 
         this.pageModel$ = this.store.select(fromRootStore.getPageContents);
+        this.pageModel$.pipe(takeWhile(() => this.alive)).subscribe((x) => {
+            //TODO: on refresh not calling getIdInfo function
+            var data = this.jsonContentProvider.getIdFromPage(pageRef);
+            this.callWebComponentMethod('gi-data-provider', 'getIdInfo', data);
+        })
         this.classRoomMode$ = this.store.select(fromRootStore.getClassRoomMode);
         this.classRoomMode$.pipe(takeWhile(() => this.alive)).subscribe((val) => {
             this.callWebComponentsMethod('gi-animation', 'classRoomModeChanged', val);

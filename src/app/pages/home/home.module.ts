@@ -10,6 +10,10 @@ import { MyHealthComponent } from './my-health/my-health.component';
 import { MyGoalsComponent } from './my-goals/my-goals.component';
 import { FindHelpComponent } from './find-help/find-help.component';
 import { GreatWallComponent } from './great-wall/great-wall.component';
+import { GreatWallItemComponent } from './great-wall/great-wall-item/great-wall-item.component';
+import { CommentListPage } from './great-wall/comment-list/comment-list.page';
+import { GoalFormPage } from './my-goals/goal-form/goal-form.page';
+import { GoalItemComponent } from './my-goals/goal-item/goal-item.component';
 
 @NgModule({
   imports: [
@@ -43,7 +47,8 @@ import { GreatWallComponent } from './great-wall/great-wall.component';
       }
     ])
   ],
-  declarations: [HomePage, MyMoodComponent, MyHealthComponent, MyGoalsComponent, FindHelpComponent, GreatWallComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  declarations: [HomePage, CommentListPage, GoalFormPage, MyMoodComponent, MyHealthComponent, MyGoalsComponent, FindHelpComponent, GreatWallComponent, GreatWallItemComponent, GoalItemComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  entryComponents: [CommentListPage, GoalFormPage]
 })
 export class HomePageModule { }

@@ -18,6 +18,17 @@
   <div [formGroup]="signupForm">
     <ion-list padding>
       <ion-item>
+        <ion-label position="stacked" color="primary">Full Name</ion-label>
+        <ion-input formControlName="Name" name="name" type="text" required>
+        </ion-input>
+      </ion-item>
+      <ion-text padding>
+        <small *ngIf="signupForm.get('Name').hasError('required') && signupForm.get('Name').touched" padding-left>
+        Name is required
+        </small>
+        <small *ngFor="let error of serverErrors('Name',signupForm,submitted)">{{error.params}}</small>
+      </ion-text>
+      <ion-item>
         <ion-label position="stacked" color="primary">Email</ion-label>
         <ion-input formControlName="Email" name="username" type="text" required>
         </ion-input>

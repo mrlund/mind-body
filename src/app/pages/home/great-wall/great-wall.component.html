@@ -9,13 +9,14 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <div style="padding:20px;">
-    <h1>THE GREAT WHITE WALL</h1>
-    <h3>creates a safe space that allows girls to express their feelings and monitor their feelings within a community of support.
-      </h3>
-    <br/>
-    <gi-youtube src="https://www.youtube.com/embed/m0Tw0u_wEJY"></gi-youtube>
-    <!--<iframe width="560" height="315" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
-  </div>
+<ion-content class="great-wall-content">
+  <ion-grid fixed>
+    <ion-row justify-content-center>
+      <ion-col size-xl="6" size-xs="12" size-sm="10" size-md="8">
+        <div class="class-feed" *ngFor="let item of posts$ | async">
+          <gi-great-wall-item [post]="item"></gi-great-wall-item>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+    <ion-title>Add New Goal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label>Select Category</ion-label>
+    <ion-select  okText="Okay" cancelText="Dismiss" [(ngModel)]="category">
+      <ion-select-option value="Emotional">Emotional</ion-select-option>
+      <ion-select-option value="Interpersonal">Interpersonal</ion-select-option>
+      <ion-select-option value="Learning">Learning</ion-select-option>
+      <ion-select-option value="Financial">Financial</ion-select-option>
+      <ion-select-option value="Physical">Physical</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <br/>
+  <ion-button expand="block" round color="primary" (click)="postGoal()" [disabled]="!(isAuthorized$|async)">POST
+    <ion-spinner name="bubbles" *ngIf="loading$|async"></ion-spinner>
+  </ion-button>
+  <a *ngIf="!(isAuthorized$|async)" routerLink="/login"> Login to post your mood</a>
+
+</ion-content>

@@ -1,0 +1,51 @@
+<ion-grid *ngIf="post">
+  <ion-row>
+    <ion-col size="2">
+      <ion-avatar class="header-avatar">
+        <img src="/assets/img/avatar.png" />
+      </ion-avatar>
+    </ion-col>
+    <ion-col size="6" align-self-center>
+      <b>{{post.Name}}</b>
+      <br/><small> {{post.Created|date}}</small>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<div>
+  <h2>{{post.PostText}}</h2>
+</div>
+<div class="footer">
+  <div *ngIf="post.Comments.length" text-right><small (click)="presentModal(post.Comments)">{{post.Comments.length}} Comments</small></div>
+  <hr/>
+  <ion-grid>
+    <ion-row justify-content-between>
+      <ion-col size="4">
+        <small>
+          <ion-icon name="chatbubbles"></ion-icon> Comment
+        </small>
+      </ion-col>
+      <ion-col size="4">
+        <small>
+          <ion-icon name="share"></ion-icon> Share</small>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <hr/>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="2" align-self-center>
+        <ion-avatar class="footer-avatar">
+          <img src="/assets/img/avatar.png" />
+        </ion-avatar>
+      </ion-col>
+      <ion-col>
+        <ion-input placeholder="Write a comment" [(ngModel)]="comment"></ion-input>
+      </ion-col>
+      <ion-col size="2" align-self-center>
+        <ion-button (click)="postComment()" [disabled]="!comment">
+          <ion-icon name="send"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

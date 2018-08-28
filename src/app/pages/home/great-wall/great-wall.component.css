@@ -1,0 +1,10 @@
+ion-content{
+    background-color:#f5f5f5;
+   
+}
+ion-content .class-feed{
+       background-color: #fff;
+       padding: 10px 10px 0px 10px;
+       margin-bottom: 10px;
+   }
+

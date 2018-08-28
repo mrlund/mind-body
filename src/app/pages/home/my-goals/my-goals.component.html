@@ -1,19 +1,29 @@
 <ion-header>
   <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-back-button text="Back" defaultHref="/home"></ion-back-button>
-        </ion-buttons>
-      
+    <ion-buttons slot="start">
+      <ion-back-button text="Back" defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button text="Add" (click)="openAddPage()">ADD</ion-button>
+    </ion-buttons>
     <ion-title>
       MY GOALS
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>  
-  <div style="padding:20px;">
-    <h1>MY GOALS</h1>
-    <h3>A mini-app to allow thoughtful long term planning towards impportant personal goals </h3>
-    <br/>
-    <img src="assets/img/Demo3.png">
-  </div>
+<ion-content>
+  <ion-grid fixed>
+    <ion-row justify-content-center>
+      <ion-col size-xl="6" size-xs="12" size-sm="10" size-md="8">
+        <ng-container *ngIf="(goals$ | async).length>0;else noDataFound">
+          <div class="goals" *ngFor="let item of goals$ | async">
+            <gi-goal-item [goal]="item"></gi-goal-item>
+          </div>
+        </ng-container>
+        <ng-template  #noDataFound>
+          <h3 text-center>NO GOALS</h3>
+        </ng-template >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

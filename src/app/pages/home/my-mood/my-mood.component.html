@@ -3,18 +3,38 @@
     <ion-buttons slot="start">
       <ion-back-button text="Back" defaultHref="/home"></ion-back-button>
     </ion-buttons>
-  
+
     <ion-title>
       MY MOOD
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-    <div style="padding:20px;">
-        <h1>MY MOOD</h1>
-        <h3>A mini-app to track, record and create awareness about moods and the effects they have on your mental and physical well being</h3>
-        <br/>
-        <img src="assets/img/Demo1.png">
-      </div>
-    
+  <ion-grid fixed>
+    <ion-row justify-content-center>
+      <ion-col size-xl="6" size-xs="12" size-sm="10" size-md="8">
+        <div style="padding:20px;">
+          <!--<h1>MY MOOD</h1>
+    <h3>A mini-app to track, record and create awareness about moods and the effects they have on your mental and physical well
+      being
+    </h3>-->
+
+          <h3>CHOOSE YOUR MOOD</h3>
+          <br/>
+          <gi-mood [level]="moodLevel" (moodChange)="moodChanged($event)"></gi-mood>
+          <ion-item>
+            <ion-range min="1" max="10" step="1" snaps="true" pin="true" [(ngModel)]="moodLevel">
+              <ion-icon size="small" slot="start" name="sad"></ion-icon>
+              <ion-icon slot="end" name="happy"></ion-icon>
+            </ion-range>
+          </ion-item>
+
+          <ion-button expand="block" round color="primary" (click)="postFeed()" [disabled]="!(isAuthorized$|async)">POST
+            <ion-spinner name="bubbles" *ngIf="loading$|async"></ion-spinner>
+          </ion-button>
+          <a *ngIf="!(isAuthorized$|async)" routerLink="/login"> Login to post your mood</a>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
