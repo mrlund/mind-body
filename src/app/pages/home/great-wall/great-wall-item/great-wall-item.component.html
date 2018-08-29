@@ -9,6 +9,10 @@
       <b>{{post.Name}}</b>
       <br/><small> {{post.Created|date}}</small>
     </ion-col>
+    <ion-col  offset="2">
+      <ion-icon name="lock" *ngIf="!post.IsPublic"></ion-icon>
+      <ion-icon name="globe" *ngIf="post.IsPublic"></ion-icon>
+    </ion-col>
   </ion-row>
 </ion-grid>
 <div>

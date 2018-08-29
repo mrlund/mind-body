@@ -1,0 +1,59 @@
+
+/* Hide the browser's default radio button */
+ion-content .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+ion-content .mood-box {
+    height:80px;
+    border:1px solid var(--ion-color-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:var(--ion-color-primary);
+}
+
+/* On mouse-over, add a grey background color */
+ion-content .container:hover input ~ .mood-box {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+ion-content .container input:checked ~ .mood-box {
+    background-color:var(--ion-color-primary);
+    color:#fff;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+ion-content .mood-box:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+ion-content .container input:checked ~ .mood-box:after {
+    display: block;
+}
+ion-content .mood-image{
+    display: block;
+    max-width: 230px;
+    max-height: 130px;
+    width: auto;
+    height: auto;
+    padding: 10px;
+
+}
+
+ion-content .mood-image-container .mood-box{
+    height: auto !important;
+     border:1px solid #ccc;
+}
+
+ion-content .mood-image-container .container input:checked ~ .mood-box {
+    border:2px solid var(--ion-color-primary) !important;
+    background-color: #fff !important;
+}

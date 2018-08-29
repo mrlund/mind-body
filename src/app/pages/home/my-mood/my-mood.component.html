@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button text="Back" defaultHref="/home"></ion-back-button>
+      <ion-button (click)="backStep()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
     </ion-buttons>
 
     <ion-title>
@@ -10,18 +12,381 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <!--Post will be: Mood: {{mood}} and Level: {{moodLevel}} and {{picture}}-->
   <ion-grid fixed>
     <ion-row justify-content-center>
       <ion-col size-xl="6" size-xs="12" size-sm="10" size-md="8">
-        <div style="padding:20px;">
-          <!--<h1>MY MOOD</h1>
-    <h3>A mini-app to track, record and create awareness about moods and the effects they have on your mental and physical well
-      being
-    </h3>-->
+        <div>
+          <div class="steps-wrapper">
+            <div class="step-wrapper" *ngIf="currentStep==1">
+              <div>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="4">
+                      <label class="container">
+                        <input type="radio" checked="checked" value="Anger" name="radio" [(ngModel)]="mood" />
+                      <div class="mood-box">
+                         Anger
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="radio" value="Fear" [(ngModel)]="mood" />
+                      <div class="mood-box">
+                         Fear
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="radio" value="Disgust" [(ngModel)]="mood"/>
+                      <div class="mood-box">
+                         Disgust
+                      </div>
+                      </label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="radio" value="Happiness" [(ngModel)]="mood"/>
+                      <div class="mood-box">
+                         Happiness
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="radio"  value="Sadness" [(ngModel)]="mood"/>
+                      <div class="mood-box">
+                         Sadness
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="radio" value="Surprise" [(ngModel)]="mood"/>
+                      <div class="mood-box">
+                         Surprise
+                      </div>
+                      </label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="radio" value="Neutral" [(ngModel)]="mood"/>
+                      <div class="mood-box">
+                         Neutral
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="radio" value="Anxiety" [(ngModel)]="mood"/>
+                      <div class="mood-box">
+                         Anxiety
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="radio" value="Love" [(ngModel)]="mood"/>
+                      <div class="mood-box">
+                         Love
+                      </div>
+                      </label>
+                    </ion-col>
 
-          <h3>CHOOSE YOUR MOOD</h3>
-          <br/>
-          <gi-mood [level]="moodLevel" (moodChange)="moodChanged($event)"></gi-mood>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="radio" value="Depression" [(ngModel)]="mood"/>
+                      <div class="mood-box">
+                         Depression
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="radio" value="Contempt" [(ngModel)]="mood"/>
+                      <div class="mood-box">
+                         Contempt
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="radio" value="Pride" [(ngModel)]="mood"/>
+                      <div class="mood-box">
+                         Pride
+                      </div>
+                      </label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="radio" value="Shame" [(ngModel)]="mood"/>
+                      <div class="mood-box">
+                         Shame
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="radio" value="Envy" [(ngModel)]="mood"/>
+                      <div class="mood-box">
+                         Envy
+                      </div>
+                      </label>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </div>
+              <br/>
+              <ion-button (click)="nextStep()" expand="block">Next</ion-button>
+            </div>
+            <div class="step-wrapper" *ngIf="currentStep==2">
+              <div>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="4">
+                      <label class="container">
+                        <input type="radio" checked="checked" value="1" name="level" [(ngModel)]="moodLevel" />
+                          <div class="mood-box">
+                            1
+                          </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="level" value="2" [(ngModel)]="moodLevel" />
+                      <div class="mood-box">
+                         2
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="level" value="3" [(ngModel)]="moodLevel"/>
+                      <div class="mood-box">
+                         3
+                      </div>
+                      </label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="level" value="4" [(ngModel)]="moodLevel"/>
+                      <div class="mood-box">
+                         4
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="level"  value="5" [(ngModel)]="moodLevel"/>
+                      <div class="mood-box">
+                         5
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="level" value="6" [(ngModel)]="moodLevel"/>
+                      <div class="mood-box">
+                         6
+                      </div>
+                      </label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="level" value="7" [(ngModel)]="moodLevel"/>
+                      <div class="mood-box">
+                         7
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="level" value="8" [(ngModel)]="moodLevel"/>
+                      <div class="mood-box">
+                         8
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="level" value="9" [(ngModel)]="moodLevel"/>
+                      <div class="mood-box">
+                         9
+                      </div>
+                      </label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="level" value="10" [(ngModel)]="moodLevel"/>
+                      <div class="mood-box">
+                         10
+                      </div>
+                      </label>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </div>
+              <br/>
+              <ion-button (click)="nextStep()" expand="block">Next</ion-button>
+            </div>
+            <div class="step-wrapper" *ngIf="currentStep==3">
+              <div class="mood-image-container">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="4">
+                      <label class="container">
+                        <input type="radio" checked="checked" value="anger.jpg" name="picture" [(ngModel)]="picture" />
+                      <div class="mood-box">
+                         <img class="mood-image" src="/assets/img/mood/anger.jpg">
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="picture" value="fear.jpg" [(ngModel)]="picture" />
+                      <div class="mood-box">
+                           <img class="mood-image" src="/assets/img/mood/fear.jpg">
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="picture" value="disgust.jpg" [(ngModel)]="picture"/>
+                      <div class="mood-box">
+                         <img class="mood-image" src="/assets/img/mood/disgust.jpg">
+                      </div>
+                      </label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="picture" value="happiness.jpg" [(ngModel)]="picture"/>
+                      <div class="mood-box">
+                        <img class="mood-image" src="/assets/img/mood/happiness.jpg">
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="picture"  value="sadness.jpg" [(ngModel)]="picture"/>
+                      <div class="mood-box">
+                           <img class="mood-image" src="/assets/img/mood/sadness.jpg">
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="picture" value="surprise.jpg" [(ngModel)]="picture"/>
+                      <div class="mood-box">
+                          <img class="mood-image" src="/assets/img/mood/surprise.jpg">
+                      </div>
+                      </label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="picture" value="neutral.jpg" [(ngModel)]="picture"/>
+                      <div class="mood-box">
+                         <img class="mood-image" src="/assets/img/mood/neutral.jpg">
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="picture" value="anxiety.jpg" [(ngModel)]="picture"/>
+                      <div class="mood-box">
+                         <img class="mood-image" src="/assets/img/mood/anxiety.jpg">
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="picture" value="love.jpg" [(ngModel)]="picture"/>
+                      <div class="mood-box">
+                         <img class="mood-image" src="/assets/img/mood/love.jpg">
+                      </div>
+                      </label>
+                    </ion-col>
+
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="picture" value="depression.jpg" [(ngModel)]="picture"/>
+                      <div class="mood-box">
+                         <img class="mood-image" src="/assets/img/mood/depression.jpg">
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="picture" value="contempt.jpg" [(ngModel)]="picture"/>
+                      <div class="mood-box">
+                         <img class="mood-image" src="/assets/img/mood/contempt.jpg">
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="picture" value="pride.jpg" [(ngModel)]="picture"/>
+                      <div class="mood-box">
+                         <img class="mood-image" src="/assets/img/mood/pride.jpg">
+                      </div>
+                      </label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="picture" value="/assets/img/mood/shame.jpg" [(ngModel)]="picture"/>
+                      <div class="mood-box">
+                         <img class="mood-image" src="/assets/img/mood/shame.jpg">
+                      </div>
+                      </label>
+                    </ion-col>
+                    <ion-col size="4">
+                      <label class="container">
+                      <input type="radio" name="picture" value="/assets/img/mood/envy.jpg" [(ngModel)]="picture"/>
+                      <div class="mood-box">
+                         <img class="mood-image" src="/assets/img/mood/envy.jpg">
+                      </div>
+                      </label>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <ion-item >
+                  <ion-label>Public</ion-label>
+                  <ion-checkbox slot="start" [(ngModel)]="isPublic"></ion-checkbox>
+                </ion-item>
+              </div>
+              <br/>
+              <ion-button expand="block" round color="primary" (click)="postFeed()" [disabled]="!(isAuthorized$|async)">
+                <ion-spinner name="bubbles" *ngIf="loading$|async"></ion-spinner> POST
+              </ion-button>
+              <a *ngIf="!(isAuthorized$|async)" routerLink="/login"> Login to post your mood</a>
+            </div>
+          </div>
+
+
+          <!--<gi-mood [level]="moodLevel" (moodChange)="moodChanged($event)"></gi-mood>
           <ion-item>
             <ion-range min="1" max="10" step="1" snaps="true" pin="true" [(ngModel)]="moodLevel">
               <ion-icon size="small" slot="start" name="sad"></ion-icon>
@@ -32,7 +397,7 @@
           <ion-button expand="block" round color="primary" (click)="postFeed()" [disabled]="!(isAuthorized$|async)">POST
             <ion-spinner name="bubbles" *ngIf="loading$|async"></ion-spinner>
           </ion-button>
-          <a *ngIf="!(isAuthorized$|async)" routerLink="/login"> Login to post your mood</a>
+          <a *ngIf="!(isAuthorized$|async)" routerLink="/login"> Login to post your mood</a>-->
         </div>
       </ion-col>
     </ion-row>

@@ -22,10 +22,21 @@
             <ion-item-group>
               <ion-item-divider color="light">
                 <ion-item>
-                  <ion-label>ClassRoom Mode</ion-label>
+                  <ion-label>Classroom Mode</ion-label>
                   <ion-toggle (ionChange)="classRoomModeChange(classRoomMode.checked)" [checked]="classRoomMode$|async" #classRoomMode></ion-toggle>
                 </ion-item>
               </ion-item-divider>
+            </ion-item-group>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of (appPages$ | async).courseModules">
+            <ion-item-group>
+              <ion-item-divider color="light" [routerDirection]="'root'" [routerLink]="['course', p.urlName, p.sessions[0]?.urlName, p.sessions[0]?.pages[0]?.urlName]">
+                <ion-icon slot="start" name="paper"></ion-icon>
+                <ion-label>&nbsp;{{p.id}}: {{p.name}}</ion-label>
+              </ion-item-divider>
+              <ion-item *ngFor="let s of p.sessions" [routerLink]="['course', p.urlName, s.urlName, s.pages[0]?.urlName]">
+                <ion-icon name="ios-arrow-forward"></ion-icon> {{s.name}}</ion-item>
             </ion-item-group>
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false">
@@ -44,16 +55,6 @@
                 <ion-label>ClassRoom Mode</ion-label>
                 <ion-toggle (ionChange)="classRoomModeChange(classRoomMode.checked)" [checked]="classRoomMode$|async" #classRoomMode></ion-toggle>
               </ion-item>-->
-            </ion-item-group>
-          </ion-menu-toggle>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of (appPages$ | async).courseModules">
-            <ion-item-group>
-              <ion-item-divider color="light" [routerDirection]="'root'" [routerLink]="['course', p.urlName, p.sessions[0]?.urlName, p.sessions[0]?.pages[0]?.urlName]">
-                <ion-icon slot="start" name="paper"></ion-icon>
-                <ion-label>&nbsp;{{p.id}}: {{p.name}}</ion-label>
-              </ion-item-divider>
-              <ion-item *ngFor="let s of p.sessions" [routerLink]="['course', p.urlName, s.urlName, s.pages[0]?.urlName]">
-                <ion-icon name="ios-arrow-forward"></ion-icon> {{s.name}}</ion-item>
             </ion-item-group>
           </ion-menu-toggle>
         </ion-list>
