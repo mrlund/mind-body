@@ -18,7 +18,7 @@ ion-content .mood-box {
 
 /* On mouse-over, add a grey background color */
 ion-content .container:hover input ~ .mood-box {
-    background-color: #ccc;
+    background-color: #f5f5f5;
 }
 
 /* When the radio button is checked, add a blue background */
@@ -54,6 +54,7 @@ ion-content .mood-image-container .mood-box{
 }
 
 ion-content .mood-image-container .container input:checked ~ .mood-box {
-    border:2px solid var(--ion-color-primary) !important;
+    border-width:2px !important;
+    border-color: var(--ion-color-primary) !important;
     background-color: #fff !important;
 }
