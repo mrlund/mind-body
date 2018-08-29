@@ -24,7 +24,7 @@ export class AuthService {
   login(model: any) {
     return this.http.post<any>(`/user/login`, model).pipe(
       map((user: any) => {
-        if (user && user.token) {
+        if (user && user.Token) {
           this.jwtService.saveToken(JSON.stringify(user));
           this.isAuthenticatedSubject.next(true);
           this._authenticated = true;
@@ -66,7 +66,7 @@ export class AuthService {
       .post<any>(`/user/register`, model)
       .pipe(
         map((user: any) => {
-          if (user && user.token) {
+          if (user && user.Token) {
             this.jwtService.saveToken(JSON.stringify(user));
           }
           return user;

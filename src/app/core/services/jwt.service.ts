@@ -10,8 +10,8 @@ export class JwtService {
     if (tokenStr) {
       let token = JSON.parse(tokenStr);
       token = JSON.parse(token);
-      if (new Date(token["expiration"]).getTime() > new Date().getTime()) {
-        return token.token;
+      if (new Date(token["Expiration"]).getTime() > new Date().getTime()) {
+        return token.Token;
       }
     }
     return null;
