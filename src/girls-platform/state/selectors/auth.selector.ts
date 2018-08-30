@@ -66,4 +66,16 @@ export const getClassRoomMode = createSelector(
     fromAuth.getClassRoomMode
 );
 
+export const getLoginWithGoogleLoading = createSelector(
+    getAuthSelectorState,
+    fromAuth.getLoginWithGoogleLoading
+);
+export const getLoginWithGoogleComplete = createSelector(
+    getAuthSelectorState,
+    fromAuth.getLoginWithGoogleComplete
+);
+export const getLoginWithGoogleError = createSelector(
+    getAuthSelectorState,
+    fromAuth.getLoginWithGoogleError
+);
 

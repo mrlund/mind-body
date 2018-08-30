@@ -53,6 +53,43 @@ export class AuthEffects {
             })
         );
 
+
+    // @Effect()
+    // loginWithGoogle$: Observable<Action> = this.actions$
+    //     .ofType(AuthActions.LOGIN_WITH_GOOGLE)
+    //     .pipe(
+    //         switchMap(payload => {
+    //             return this.authService
+    //                 .loginWithGoogle()
+    //                 .pipe(
+    //                     map(user => new AuthActions.LoginWithGoogleSuccess({ user: user, returnUrl: "" })),
+    //                     catchError(error =>
+    //                         of(new AuthActions.LoginWithGoogleFail(error))
+    //                     )
+    //                 );
+    //         })
+    //     );
+    @Effect({ dispatch: false })
+    loginWithGoogleSuccess$ = this.actions$
+        .ofType(AuthActions.LOGIN_WITH_GOOGLE_SUCCESS)
+        .pipe(
+            map((action: AuthActions.LoginWithGoogleSuccess) => action.payload),
+            mergeMap(payload => {
+                return [
+                    this.presentToast("Login Success"),
+                    this.router.navigateByUrl(payload.returnUrl)
+                ]
+            })
+        );
+    @Effect({ dispatch: false })
+    loginWithGoogleFail$ = this.actions$
+        .ofType(AuthActions.LOGIN_WITH_GOOGLE_FAIL)
+        .pipe(
+            map(payload => {
+                this.presentToast("Sorry,an error occured while login");
+            })
+        );
+
     @Effect()
     checkUserAuthenticated$: Observable<Action> = this.actions$
         .ofType(AuthActions.CHECK_USER_AUTHENTICATED)

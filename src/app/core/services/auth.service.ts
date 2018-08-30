@@ -34,6 +34,23 @@ export class AuthService {
     ).pipe(catchError(this.handleError));
   }
 
+  loginWithGoogle() {
+    return this.http.get('/user/externallogins?returnUrl=https://mind-body.azurewebsites.net/&provider=Google')
+      .subscribe((user) => {
+        console.log(user);
+        debugger;
+      }, (error) => {
+        console.log(error);
+      }
+      );
+    // return this.http.get('/user/externallogins?returnUrl=https://mind-body.azurewebsites.net/&provider=Google')
+    //   .pipe(
+    //     map((user: any) => {
+    //       console.log(user);
+    //       debugger;
+    //     })
+    //   ).pipe(catchError(this.handleError));
+  }
   logout() {
     this.jwtService.destroyToken();
     this._authenticated = false;

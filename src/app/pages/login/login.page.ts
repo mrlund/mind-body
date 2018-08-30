@@ -10,6 +10,7 @@ import { Observable } from "rxjs";
 
 import { takeWhile, filter } from "rxjs/operators";
 import { BaseFormComponent } from "@app/shared/components/base-form/base-form.component";
+import { AuthService } from "@app/core/services/auth.service";
 @Component({
   selector: 'gi-login',
   templateUrl: './login.page.html',
@@ -27,6 +28,7 @@ export class LoginPage extends BaseFormComponent implements OnInit, OnDestroy {
     public router: Router,
     public fb: FormBuilder,
     private cd: ChangeDetectorRef,
+    private authService: AuthService,
     private store: Store<fromRootStore.State>,
   ) {
     super();
@@ -63,6 +65,9 @@ export class LoginPage extends BaseFormComponent implements OnInit, OnDestroy {
       this.submitted = true;
       this.store.dispatch(new fromRootStore.LoginUser({ model: this.loginForm.value, returnUrl: "/home" }));
     }
+  }
+  onLoginWithGoogle() {
+    this.authService.loginWithGoogle();
   }
   onForgotPasword() {
     this.router.navigateByUrl('/forgot-password');

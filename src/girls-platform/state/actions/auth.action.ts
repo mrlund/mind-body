@@ -6,6 +6,10 @@ export const LOGIN_USER = '[AUTH] Login User ';
 export const LOGIN_USER_SUCCESS = '[AUTH] Login User Success';
 export const LOGIN_USER_FAIL = '[AUTH] Login User Fail';
 
+export const LOGIN_WITH_GOOGLE = '[AUTH] Login With Google ';
+export const LOGIN_WITH_GOOGLE_SUCCESS = '[AUTH] Login With Google Success';
+export const LOGIN_WITH_GOOGLE_FAIL = '[AUTH] Login With Google Fail';
+
 export const SIGNUP_USER = '[AUTH] Signup User ';
 export const SIGNUP_USER_SUCCESS = '[AUTH] Signup User Success';
 export const SIGNUP_USER_FAIL = '[AUTH] Signup User Fail';
@@ -35,6 +39,20 @@ export class LoginUserSuccess implements Action {
 
 export class LoginUserFail implements Action {
     readonly type = LOGIN_USER_FAIL;
+    constructor(public payload: any) { }
+}
+
+export class LoginWithGoogle implements Action {
+    readonly type = LOGIN_WITH_GOOGLE;
+}
+
+export class LoginWithGoogleSuccess implements Action {
+    readonly type = LOGIN_WITH_GOOGLE_SUCCESS;
+    constructor(public payload: { user: any, returnUrl: string }) { }
+}
+
+export class LoginWithGoogleFail implements Action {
+    readonly type = LOGIN_WITH_GOOGLE_FAIL;
     constructor(public payload: any) { }
 }
 
@@ -100,6 +118,9 @@ export type AuthActions =
     LoginUser
     | LoginUserSuccess
     | LoginUserFail
+    | LoginWithGoogle
+    | LoginWithGoogleSuccess
+    | LoginWithGoogleFail
     | SignupUser
     | SignupUserSuccess
     | SignupUserFail

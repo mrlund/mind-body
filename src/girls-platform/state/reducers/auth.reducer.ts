@@ -6,6 +6,9 @@ export interface AuthState {
     loginUserLoading: boolean;
     loginUserComplete: boolean;
     loginUserError: any;
+    loginWithGoogleLoading: boolean;
+    loginWithGoogleComplete: boolean;
+    loginWithGoogleError: any;
     loggedinUser: any;
     signupUserLoading: boolean;
     signupUserComplete: boolean;
@@ -21,6 +24,9 @@ export const initialState: AuthState = {
     loginUserLoading: false,
     loginUserComplete: false,
     loginUserError: null,
+    loginWithGoogleLoading: false,
+    loginWithGoogleComplete: false,
+    loginWithGoogleError: null,
     loggedinUser: null,
     signupUserLoading: false,
     signupUserComplete: false,
@@ -58,6 +64,29 @@ export function reducer(
                 ...state,
                 loginUserLoading: false,
                 loginUserError: action.payload
+            };
+        }
+
+        case fromAuthAction.LOGIN_WITH_GOOGLE: {
+            return {
+                ...state,
+                loginWithGoogleLoading: true
+            };
+        }
+        case fromAuthAction.LOGIN_WITH_GOOGLE_SUCCESS: {
+            return {
+                ...state,
+                loginWithGoogleLoading: false,
+                loginWithGoogleComplete: true,
+                isUserAuthenticated: true
+            };
+        }
+
+        case fromAuthAction.LOGIN_WITH_GOOGLE_FAIL: {
+            return {
+                ...state,
+                loginWithGoogleLoading: false,
+                loginWithGoogleError: action.payload
             };
         }
 
@@ -127,6 +156,7 @@ export function reducer(
             };
         }
 
+
         default:
             return state;
     }
@@ -137,6 +167,9 @@ export const getLoginUserComplete = (state: AuthState) => state.loginUserComplet
 export const getLoginUserError = (state: AuthState) => state.loginUserError;
 export const getLoggedinUser = (state: AuthState) => state.loggedinUser;
 
+export const getLoginWithGoogleLoading = (state: AuthState) => state.loginWithGoogleLoading;
+export const getLoginWithGoogleComplete = (state: AuthState) => state.loginWithGoogleComplete;
+export const getLoginWithGoogleError = (state: AuthState) => state.loginWithGoogleError;
 
 export const getSignupUserLoading = (state: AuthState) => state.signupUserLoading;
 export const getSignupUserComplete = (state: AuthState) => state.signupUserComplete;
