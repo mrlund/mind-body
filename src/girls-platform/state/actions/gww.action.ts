@@ -39,6 +39,8 @@ export class PostCommentFail implements Action {
     constructor(public payload: any) { }
 }
 
+
+
 export type GwwActions =
     GetAllPosts |
     GetAllPostsSuccess |

@@ -1,6 +1,14 @@
-<div class="goal-item" *ngIf="goal" padding>
+<div class="goal-item" *ngIf="data" padding>
   <!--<div *ngFor="let item of getData() | keyvalue">
     <b>{{item.key}}</b>: <b>{{item.value}}</b>
   </div>-->
-  <b>Category</b> : {{getData()?.Category}}
+  <div *ngIf="data?.Name"><b>Name</b> : {{data?.Name}}</div>
+  <div *ngIf="data?.Description"><b>Description</b> : {{data?.Description}}</div>
+  <div *ngIf="data?.Category"><b>Category</b> : {{data?.Category}}</div>
+  <div *ngIf="data?.Percentage"><b>Progress</b> : {{data?.Percentage}}</div>
+  <div *ngIf="data?.GoalText"><b>Goal Text</b> : {{data?.GoalText}}</div>
+  <hr/>
+  <div text-center>
+    <ion-button size="small" (click)="openProgressModal()">Progress</ion-button>
+  </div>
 </div>

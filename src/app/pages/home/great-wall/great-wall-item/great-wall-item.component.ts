@@ -4,6 +4,7 @@ import * as fromRootStore from "@platform/state";
 import { Store } from '@ngrx/store';
 import { CommentListPage } from "../comment-list/comment-list.page";
 import { ModalController } from '@ionic/angular';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'gi-great-wall-item',
   templateUrl: './great-wall-item.component.html',
@@ -13,7 +14,7 @@ import { ModalController } from '@ionic/angular';
 export class GreatWallItemComponent implements OnInit {
   @Input() post: any;
   comment: string;
-  constructor(private store: Store<fromRootStore.State>, private modalController: ModalController) { }
+  constructor(private sanitizer: DomSanitizer, private store: Store<fromRootStore.State>, private modalController: ModalController) { }
 
   ngOnInit() {
   }
@@ -35,5 +36,11 @@ export class GreatWallItemComponent implements OnInit {
       }
     };
     this.store.dispatch(new fromRootStore.PostComment(obj))
+  }
+  public safeHtml(html) {
+    console.log(html)
+    if (html && html.length) {
+      return this.sanitizer.bypassSecurityTrustHtml(html);
+    }
   }
 }

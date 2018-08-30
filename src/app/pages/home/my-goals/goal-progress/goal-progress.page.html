@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+    <ion-title>Progress</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div [formGroup]="progressForm">
+    <ion-item>
+      <ion-label>Info</ion-label>
+      <ion-input formControlName="GoalText"></ion-input>
+    </ion-item>
+    <small class="error" *ngIf="progressForm.get('GoalText').hasError('required') && progressForm.get('GoalText').touched" padding-left>
+        Goal Text is required
+    </small>
+    <ion-item>
+      <ion-label position="stacked">Progress</ion-label>
+      <ion-range min="0" max="100" step="1" snaps="true" pin="true" formControlName="Progress">
+        <ion-icon size="small" slot="start" name="pulse"></ion-icon>
+        <ion-icon name="pulse" size="small"></ion-icon>
+      </ion-range>
+      {{progressForm.get('Progress').value}}
+    </ion-item>
+    <small class="error" *ngIf="progressForm.get('Progress').hasError('min') && submitted" padding-left>
+       Min Progress value should be 1
+    </small>
+    <ion-item>
+      <ion-label>Share to Great White Wall</ion-label>
+      <ion-checkbox slot="start" formControlName="IsPublic"></ion-checkbox>
+    </ion-item>
+    <br/>
+    <ion-button expand="block" round color="primary" (click)="postToFeed()" [disabled]="!(isAuthorized$|async) || progressForm.invalid">
+      <ion-spinner name="bubbles" *ngIf="loading$|async"></ion-spinner> POST
+    </ion-button>
+    <a *ngIf="!(isAuthorized$|async)" routerLink="/login"> Login to post your mood</a>
+
+  </div>
+</ion-content>

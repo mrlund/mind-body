@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
@@ -14,10 +14,12 @@ import { GreatWallItemComponent } from './great-wall/great-wall-item/great-wall-
 import { CommentListPage } from './great-wall/comment-list/comment-list.page';
 import { GoalFormPage } from './my-goals/goal-form/goal-form.page';
 import { GoalItemComponent } from './my-goals/goal-item/goal-item.component';
+import { GoalProgressPage } from './my-goals/goal-progress/goal-progress.page';
 
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild([
@@ -47,8 +49,8 @@ import { GoalItemComponent } from './my-goals/goal-item/goal-item.component';
       }
     ])
   ],
-  declarations: [HomePage, CommentListPage, GoalFormPage, MyMoodComponent, MyHealthComponent, MyGoalsComponent, FindHelpComponent, GreatWallComponent, GreatWallItemComponent, GoalItemComponent],
+  declarations: [HomePage, CommentListPage, GoalFormPage, MyMoodComponent, MyHealthComponent, MyGoalsComponent, FindHelpComponent, GreatWallComponent, GreatWallItemComponent, GoalItemComponent,GoalProgressPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [CommentListPage, GoalFormPage]
+  entryComponents: [CommentListPage, GoalFormPage, GoalProgressPage]
 })
 export class HomePageModule { }

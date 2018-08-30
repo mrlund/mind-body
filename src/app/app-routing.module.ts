@@ -23,7 +23,8 @@ const routes: Routes = [
     path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule',
     // canActivate: [AuthGuardService] 
   },
-  { path: 'forgot-password', loadChildren: './pages/forgot-password/forgot-password.module#ForgotPasswordPageModule' },
+  { path: 'forgot-password', loadChildren: './pages/forgot-password/forgot-password.module#ForgotPasswordPageModule' }
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

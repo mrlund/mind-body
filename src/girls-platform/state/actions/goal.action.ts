@@ -10,6 +10,10 @@ export const POST_GOAL = '[MOOD] Post Goal';
 export const POST_GOAL_SUCCESS = '[MOOD] Post Goal Success';
 export const POST_GOAL_FAIL = '[MOOD] Post Goal Fail';
 
+export const POST_GOAL_PROGRESS = '[MOOD] Post Goal Progress';
+export const POST_GOAL_PROGRESS_SUCCESS = '[MOOD] Post Goal Progress Success';
+export const POST_GOAL_PROGRESS_FAIL = '[MOOD] Post Goal Progress Fail';
+
 export const RESET_GOAL_FORM = '[MOOD] Reset Goal Form';
 
 
@@ -43,14 +47,33 @@ export class PostGoalFail implements Action {
     constructor(public payload: any) { }
 }
 
+
+export class PostGoalProgress implements Action {
+    readonly type = POST_GOAL_PROGRESS;
+    constructor(public payload: any) { }
+}
+
+export class PostGoalProgressSuccess implements Action {
+    readonly type = POST_GOAL_PROGRESS_SUCCESS;
+    constructor(public payload: any) { }
+}
+
+export class PostGoalProgressFail implements Action {
+    readonly type = POST_GOAL_PROGRESS_FAIL;
+    constructor(public payload: any) { }
+}
+
 export class ResetGoalForm implements Action {
     readonly type = RESET_GOAL_FORM;
 }
 
 export type GoalActions =
-    |PostGoal
+    | PostGoal
     | PostGoalSuccess
     | PostGoalFail
+    | PostGoalProgress
+    | PostGoalProgressSuccess
+    | PostGoalProgressFail
     | GetAllGoals
     | GetAllGoalsFail
     | GetAllGoalsSuccess

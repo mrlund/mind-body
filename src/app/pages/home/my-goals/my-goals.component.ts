@@ -9,14 +9,14 @@ import { ModalController } from '@ionic/angular';
   selector: 'gi-my-goals',
   templateUrl: './my-goals.component.html',
   styleUrls: ['./my-goals.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
+//TODO:Goals not updated after it is added if OnPush enabled
 export class MyGoalsComponent implements OnInit {
   goals$: Observable<any[]>;
   loading$: Observable<boolean>;
   isAuthorized$: Observable<boolean>;
   constructor(private store: Store<fromRootStore.State>, private modalController: ModalController) {
-    this.store.dispatch(new fromRootStore.GetAllPosts());
+    //    this.store.dispatch(new fromRootStore.GetAllPosts());
     this.goals$ = this.store.select(fromRootStore.getAllGoals);
     this.loading$ = this.store.select(fromRootStore.getAllGoalsLoading);
     this.isAuthorized$ = this.store.select(fromRootStore.getUserAuthenticated);

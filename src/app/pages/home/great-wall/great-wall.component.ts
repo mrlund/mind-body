@@ -18,7 +18,6 @@ export class GreatWallComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new fromRootStore.GetAllPosts());
     this.posts$ = this.store.select(fromRootStore.getAllPosts);
-    this.posts$.subscribe(x => console.log(x));
     this.loading$ = this.store.select(fromRootStore.getPostLoadLoading);
     this.isAuthorized$ = this.store.select(fromRootStore.getUserAuthenticated);
   }

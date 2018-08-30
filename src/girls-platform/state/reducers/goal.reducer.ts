@@ -5,6 +5,9 @@ export interface GoalState {
     postGoalLoading: boolean;
     postGoalComplete: boolean;
     postGoalError: any;
+    postGoalProgressLoading: boolean;
+    postGoalProgressComplete: boolean;
+    postGoalProgressError: any;
     getGoalsLoading: boolean;
     getGoalsComplete: boolean;
     getGoalsError: any;
@@ -15,6 +18,9 @@ export const initialState: GoalState = {
     postGoalLoading: false,
     postGoalComplete: false,
     postGoalError: null,
+    postGoalProgressLoading: false,
+    postGoalProgressComplete: false,
+    postGoalProgressError: null,
     getGoalsLoading: false,
     getGoalsComplete: false,
     getGoalsError: null,
@@ -55,11 +61,12 @@ export function reducer(state: GoalState = initialState, action: fromGoal.GoalAc
             };
         }
         case fromGoal.POST_GOAL_SUCCESS: {
+            state.goals.unshift(action.payload);
             return {
                 ...state,
                 postGoalLoading: false,
                 postGoalComplete: true,
-                goals: [...state.goals, action.payload]
+                goals: state.goals
             };
         }
         case fromGoal.POST_GOAL_FAIL: {
@@ -70,12 +77,47 @@ export function reducer(state: GoalState = initialState, action: fromGoal.GoalAc
                 postGoalError: action.payload
             };
         }
+
+        case fromGoal.POST_GOAL_PROGRESS: {
+            return {
+                ...state,
+                postGoalProgressLoading: true
+            };
+        }
+        case fromGoal.POST_GOAL_PROGRESS_SUCCESS: {
+            var goals = state.goals.map(goal => {
+                if (
+                    goal.StudentAppDataId === action.payload.StudentAppDataId
+                ) {
+                    return action.payload
+                }
+                return goal;
+            });
+
+            return {
+                ...state,
+                postGoalProgressLoading: false,
+                postGoalProgressComplete: true,
+                goals: goals
+            };
+        }
+        case fromGoal.POST_GOAL_PROGRESS_FAIL: {
+            return {
+                ...state,
+                postGoalProgressLoading: false,
+                postGoalProgressComplete: false,
+                postGoalProgressError: action.payload
+            };
+        }
         case fromGoal.RESET_GOAL_FORM: {
             return {
                 ...state,
                 postGoalLoading: false,
                 postGoalComplete: false,
-                postGoalError: null
+                postGoalError: null,
+                postGoalProgressLoading: false,
+                postGoalProgressComplete: false,
+                postGoalProgressError: null
             };
         }
         default:
@@ -93,3 +135,10 @@ export const getAllGoals = (state: GoalState) => state.goals;
 export const getGoalsLoading = (state: GoalState) => state.getGoalsLoading;
 export const getGoalsComplete = (state: GoalState) => state.getGoalsComplete;
 export const getGoalsError = (state: GoalState) => state.getGoalsError;
+
+export const getPostGoalProgressLoading = (state: GoalState) => state.postGoalProgressLoading;
+export const getPostGoalProgressComplete = (state: GoalState) => state.postGoalProgressComplete;
+export const getPostGoalProgressError = (state: GoalState) => state.postGoalProgressError;
+
+
+

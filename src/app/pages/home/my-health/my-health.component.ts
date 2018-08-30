@@ -13,6 +13,7 @@ export class MyHealthComponent implements OnInit {
   loading$: Observable<boolean>;
   isAuthorized$: Observable<boolean>;
   error$: Observable<any>;
+  isPublic: boolean=true;
   constructor(private store: Store<fromRootStore.State>) {
     this.loading$ = this.store.select(fromRootStore.getPostMoodLoading);
     this.error$ = this.store.select(fromRootStore.getPostMoodError);
@@ -23,7 +24,8 @@ export class MyHealthComponent implements OnInit {
     var model = {
       CourseClassId: 1,
       PostText: "Heart rate " + this.heartRate + " bpm",
-      ExternalResourceUrl: ""
+      ExternalResourceUrl: "",
+      IsPublic: this.isPublic
     }
     console.log(model);
     this.store.dispatch(new fromRootStore.PostMood(model));

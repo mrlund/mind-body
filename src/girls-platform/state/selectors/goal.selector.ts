@@ -45,3 +45,21 @@ export const getPostGoalError = createSelector(
     fromRoot.getGoalState,
     fromGoal.getPostGoalError
 );
+
+
+export const getPostGoalProgressLoading = createSelector(
+    fromRoot.getGoalState,
+    fromGoal.getPostGoalProgressLoading
+);
+
+export const getPostGoalProgressComplete = createSelector(
+    fromRoot.getGoalState,
+    fromGoal.getPostGoalProgressComplete
+);
+
+export const getPostGoalProgressError = createSelector(
+    fromRoot.getGoalState,
+    fromGoal.getPostGoalProgressError
+);
+
+

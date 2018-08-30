@@ -23,6 +23,14 @@ export class GoalService {
     ).pipe(catchError(this.handleError));
   }
 
+  postGoalProgress(model: any) {
+    return this.http.post<any>(
+      `/goal/progress`,
+      JSON.stringify(model),
+      { headers: new HttpHeaders({ "Content-Type": "application/json" }) }
+    ).pipe(catchError(this.handleError));
+  }
+  
   private handleError(error: any) {
     if (error.error.status == 401) {
       return throwError(error);

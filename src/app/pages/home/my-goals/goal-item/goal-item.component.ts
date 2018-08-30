@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
-
+import { GoalProgressPage } from "../goal-progress/goal-progress.page";
+import { ModalController } from '@ionic/angular';
 @Component({
   selector: 'gi-goal-item',
   templateUrl: './goal-item.component.html',
@@ -8,18 +9,23 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 })
 export class GoalItemComponent implements OnInit {
   data: any;
-  // @Input('goal') set Goal(goal: any) {
-  //   this.data = JSON.parse(goal.AppJsonData);
-  //   console.log(this.data)
-  // }
-  @Input() goal: any
-  constructor() { }
+  id: number;
+  @Input('goal') set Goal(goal: any) {
+    this.data = JSON.parse(goal.AppJsonData);
+    this.id = goal.StudentAppDataId
+  }
+  constructor(private modalController: ModalController) { }
 
   ngOnInit() {
   }
 
-  getData() {
-    return JSON.parse(this.goal.AppJsonData);
+  async openProgressModal(comments: any[]) {
+    const modal = await this.modalController.create({
+      component: GoalProgressPage,
+      componentProps: { goal: this.data, id: this.id }
+    });
+    return await modal.present();
   }
+
 
 }

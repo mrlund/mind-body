@@ -40,7 +40,7 @@ export class MyMoodComponent implements OnInit {
     //<gi-mood-image src="${this.picture}"></gi-mood-image>
     var model = {
       CourseClassId: 1,
-      PostText: `Mood- ${this.mood} and Level: ${this.moodLevel} `,
+      PostText: `Mood- ${this.mood} and Level: ${this.moodLevel} <gi-mood-image src="${this.picture}"></gi-mood-image>`,
       ExternalResourceUrl: "",
       IsPublic: this.isPublic
     }

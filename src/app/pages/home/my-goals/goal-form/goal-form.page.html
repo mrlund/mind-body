@@ -8,18 +8,36 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-item>
-    <ion-label>Select Category</ion-label>
-    <ion-select  okText="Okay" cancelText="Dismiss" [(ngModel)]="category">
-      <ion-select-option value="Emotional">Emotional</ion-select-option>
-      <ion-select-option value="Interpersonal">Interpersonal</ion-select-option>
-      <ion-select-option value="Learning">Learning</ion-select-option>
-      <ion-select-option value="Financial">Financial</ion-select-option>
-      <ion-select-option value="Physical">Physical</ion-select-option>
-    </ion-select>
-  </ion-item>
+  <div [formGroup]="goalForm">
+    <ion-item>
+      <ion-label>Name *</ion-label>
+      <ion-input formControlName="Name"></ion-input>
+    </ion-item>
+    <ion-text padding>
+      <small class="error" *ngIf="goalForm.get('Name').hasError('required') && goalForm.get('Name').touched" padding-left>
+        Name is required
+        </small>
+    </ion-text>
+    <ion-item>
+      <ion-textarea formControlName="Description" rows="6" cols="20" placeholder="Enter goal description here..."></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Select Category *</ion-label>
+      <ion-select okText="Okay" cancelText="Dismiss" formControlName="Category">
+        <ion-select-option value="Emotional">Emotional</ion-select-option>
+        <ion-select-option value="Interpersonal">Interpersonal</ion-select-option>
+        <ion-select-option value="Learning">Learning</ion-select-option>
+        <ion-select-option value="Financial">Financial</ion-select-option>
+        <ion-select-option value="Physical">Physical</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <small class="error" *ngIf="goalForm.get('Category').hasError('required') && goalForm.get('Category').touched" padding-left>
+        Category is required
+    </small>
+  </div>
   <br/>
-  <ion-button expand="block" round color="primary" (click)="postGoal()" [disabled]="!(isAuthorized$|async)">POST
+  <ion-button expand="block" round color="primary" (click)="postGoal()" [disabled]="!(isAuthorized$|async) ||goalForm.invalid ">POST
     <ion-spinner name="bubbles" *ngIf="loading$|async"></ion-spinner>
   </ion-button>
   <a *ngIf="!(isAuthorized$|async)" routerLink="/login"> Login to post your mood</a>

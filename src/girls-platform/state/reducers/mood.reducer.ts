@@ -35,6 +35,13 @@ export function reducer(state: MoodState = initialState, action: fromMood.MoodAc
                 postMoodComplete: false,
                 postMoodError: action.payload
             };
+        case fromMood.RESET_CLASS_FEED:
+            return {
+                ...state,
+                postMoodLoading: false,
+                postMoodComplete: false,
+                postMoodError: null
+            };
         default:
             return state;
     }

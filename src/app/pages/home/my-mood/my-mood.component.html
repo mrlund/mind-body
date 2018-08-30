@@ -7,7 +7,14 @@
     </ion-buttons>
 
     <ion-title>
-      MY MOOD
+      <ng-container *ngIf="currentStep === 1;else second">Feeling </ng-container>
+      <ng-template #second>
+        <ng-container *ngIf="currentStep === 2;else third">Intensity </ng-container>
+      </ng-template>
+      <ng-template #third>
+        <ng-container *ngIf="currentStep === 3;else fourth">Location</ng-container>
+      </ng-template>
+      <ng-template #fourth>My Mood</ng-template>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -251,7 +258,7 @@
                   <ion-row>
                     <ion-col size="4">
                       <label class="container">
-                        <input type="radio" checked="checked" value="anger.jpg" name="picture" [(ngModel)]="picture" />
+                        <input type="radio" checked="checked" value="/assets/img/mood/anger.jpg" name="picture" [(ngModel)]="picture" />
                       <div class="mood-box">
                          <img class="mood-image" src="/assets/img/mood/anger.jpg">
                       </div>
@@ -259,7 +266,7 @@
                     </ion-col>
                     <ion-col size="4">
                       <label class="container">
-                      <input type="radio" name="picture" value="fear.jpg" [(ngModel)]="picture" />
+                      <input type="radio" name="picture" value="/assets/img/mood/fear.jpg" [(ngModel)]="picture" />
                       <div class="mood-box">
                            <img class="mood-image" src="/assets/img/mood/fear.jpg">
                       </div>
@@ -267,7 +274,7 @@
                     </ion-col>
                     <ion-col size="4">
                       <label class="container">
-                      <input type="radio" name="picture" value="disgust.jpg" [(ngModel)]="picture"/>
+                      <input type="radio" name="picture" value="/assets/img/mood/disgust.jpg" [(ngModel)]="picture"/>
                       <div class="mood-box">
                          <img class="mood-image" src="/assets/img/mood/disgust.jpg">
                       </div>
@@ -277,7 +284,7 @@
                   <ion-row>
                     <ion-col size="4">
                       <label class="container">
-                      <input type="radio" name="picture" value="happiness.jpg" [(ngModel)]="picture"/>
+                      <input type="radio" name="picture" value="/assets/img/mood/happiness.jpg" [(ngModel)]="picture"/>
                       <div class="mood-box">
                         <img class="mood-image" src="/assets/img/mood/happiness.jpg">
                       </div>
@@ -285,7 +292,7 @@
                     </ion-col>
                     <ion-col size="4">
                       <label class="container">
-                      <input type="radio" name="picture"  value="sadness.jpg" [(ngModel)]="picture"/>
+                      <input type="radio" name="picture"  value="/assets/img/mood/sadness.jpg" [(ngModel)]="picture"/>
                       <div class="mood-box">
                            <img class="mood-image" src="/assets/img/mood/sadness.jpg">
                       </div>
@@ -293,7 +300,7 @@
                     </ion-col>
                     <ion-col size="4">
                       <label class="container">
-                      <input type="radio" name="picture" value="surprise.jpg" [(ngModel)]="picture"/>
+                      <input type="radio" name="picture" value="/assets/img/mood/surprise.jpg" [(ngModel)]="picture"/>
                       <div class="mood-box">
                           <img class="mood-image" src="/assets/img/mood/surprise.jpg">
                       </div>
@@ -303,7 +310,7 @@
                   <ion-row>
                     <ion-col size="4">
                       <label class="container">
-                      <input type="radio" name="picture" value="neutral.jpg" [(ngModel)]="picture"/>
+                      <input type="radio" name="picture" value="/assets/img/mood/neutral.jpg" [(ngModel)]="picture"/>
                       <div class="mood-box">
                          <img class="mood-image" src="/assets/img/mood/neutral.jpg">
                       </div>
@@ -311,7 +318,7 @@
                     </ion-col>
                     <ion-col size="4">
                       <label class="container">
-                      <input type="radio" name="picture" value="anxiety.jpg" [(ngModel)]="picture"/>
+                      <input type="radio" name="picture" value="/assets/img/mood/anxiety.jpg" [(ngModel)]="picture"/>
                       <div class="mood-box">
                          <img class="mood-image" src="/assets/img/mood/anxiety.jpg">
                       </div>
@@ -319,7 +326,7 @@
                     </ion-col>
                     <ion-col size="4">
                       <label class="container">
-                      <input type="radio" name="picture" value="love.jpg" [(ngModel)]="picture"/>
+                      <input type="radio" name="picture" value="/assets/img/mood/love.jpg" [(ngModel)]="picture"/>
                       <div class="mood-box">
                          <img class="mood-image" src="/assets/img/mood/love.jpg">
                       </div>
@@ -330,7 +337,7 @@
                   <ion-row>
                     <ion-col size="4">
                       <label class="container">
-                      <input type="radio" name="picture" value="depression.jpg" [(ngModel)]="picture"/>
+                      <input type="radio" name="picture" value="/assets/img/mood/depression.jpg" [(ngModel)]="picture"/>
                       <div class="mood-box">
                          <img class="mood-image" src="/assets/img/mood/depression.jpg">
                       </div>
@@ -338,7 +345,7 @@
                     </ion-col>
                     <ion-col size="4">
                       <label class="container">
-                      <input type="radio" name="picture" value="contempt.jpg" [(ngModel)]="picture"/>
+                      <input type="radio" name="picture" value="/assets/img/mood/contempt.jpg" [(ngModel)]="picture"/>
                       <div class="mood-box">
                          <img class="mood-image" src="/assets/img/mood/contempt.jpg">
                       </div>
@@ -346,7 +353,7 @@
                     </ion-col>
                     <ion-col size="4">
                       <label class="container">
-                      <input type="radio" name="picture" value="pride.jpg" [(ngModel)]="picture"/>
+                      <input type="radio" name="picture" value="/assets/img/mood/pride.jpg" [(ngModel)]="picture"/>
                       <div class="mood-box">
                          <img class="mood-image" src="/assets/img/mood/pride.jpg">
                       </div>
@@ -372,8 +379,8 @@
                     </ion-col>
                   </ion-row>
                 </ion-grid>
-                <ion-item >
-                  <ion-label>Public</ion-label>
+                <ion-item>
+                  <ion-label>Share to Greate White Wall</ion-label>
                   <ion-checkbox slot="start" [(ngModel)]="isPublic"></ion-checkbox>
                 </ion-item>
               </div>

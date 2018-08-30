@@ -25,11 +25,14 @@
             </ion-range>
             {{heartRate}}
           </ion-item>
+          <ion-item>
+            <ion-label>Share to Greate White Wall</ion-label>
+            <ion-checkbox slot="start" [(ngModel)]="isPublic"></ion-checkbox>
+          </ion-item>
           <ion-button expand="block" round color="primary" (click)="postFeed()" [disabled]="!(isAuthorized$|async)">POST
             <ion-spinner name="bubbles" *ngIf="loading$|async"></ion-spinner>
           </ion-button>
           <a *ngIf="!(isAuthorized$|async)" routerLink="/login"> Login to post your mood</a>
-
         </div>
       </ion-col>
     </ion-row>

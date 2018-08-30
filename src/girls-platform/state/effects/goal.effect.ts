@@ -66,6 +66,37 @@ export class GoalEffects {
             })
         );
 
+    @Effect()
+    postGoalProgress$: Observable<Action> = this.actions$
+        .ofType(GoalActions.POST_GOAL_PROGRESS)
+        .pipe(
+            map((action: GoalActions.PostGoalProgress) => action.payload),
+            mergeMap(payload =>
+                this.goalService.postGoalProgress(payload).pipe(
+                    map(data => new GoalActions.PostGoalProgressSuccess(data)),
+                    catchError(error =>
+                        of(new GoalActions.PostGoalProgressFail(error))
+                    )
+                )
+            ));
+
+    @Effect({ dispatch: false })
+    postGoalProgressSuccess$ = this.actions$
+        .ofType(GoalActions.POST_GOAL_PROGRESS_SUCCESS)
+        .pipe(
+            map(payload =>
+                this.presentToast("Goal Progress submitted successfully."),
+            )
+        );
+    @Effect({ dispatch: false })
+    postGoalProgressFail$ = this.actions$
+        .ofType(GoalActions.POST_GOAL_PROGRESS_FAIL)
+        .pipe(
+            map(payload => {
+                this.presentToast("Sorry,an error occured while submitting goal progress");
+            })
+        );
+
     async presentToast(message: string) {
         const toast = await this.toastController.create({
             message: message,
