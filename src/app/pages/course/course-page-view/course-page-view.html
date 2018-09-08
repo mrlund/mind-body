@@ -1,13 +1,19 @@
 <ion-content>
-  <div class="course-page-view-container">
-    <ng-container *ngIf="(pageModel$|async) as pageModel">
-      <ng-container *ngIf="pageModel && pageModel.page">
-        <!--{{pageModel?.page?.name}}-->
-        <gi-data-provider *ngIf="pageContentUrl" [baseServerUrl]="baseServerUrl" [pageContentUrl]="pageContentUrl" [baseContentUrl]="baseUrl"
-          [isClassroomModeOn]="classRoomMode$|async">
-          <!--<div [innerHTML]="safeHtml(pageModel?.page?.htmlContent)"></div>-->
-        </gi-data-provider>
-      </ng-container>
-    </ng-container>
-  </div>
+  <ion-grid fixed>
+    <ion-row justify-content-center>
+      <ion-col size-xl="8" size-xs="12" size-sm="10" size-md="8">
+        <div class="course-page-view-container">
+          <ng-container *ngIf="(pageModel$|async) as pageModel">
+            <ng-container *ngIf="pageModel && pageModel.page">
+              <!--{{pageModel?.page?.name}}-->
+              <gi-data-provider *ngIf="pageContentUrl" [baseServerUrl]="baseServerUrl" [pageContentUrl]="pageContentUrl" [baseContentUrl]="baseUrl"
+                [isClassroomModeOn]="classRoomMode$|async">
+                <!--<div [innerHTML]="safeHtml(pageModel?.page?.htmlContent)"></div>-->
+              </gi-data-provider>
+            </ng-container>
+          </ng-container>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
