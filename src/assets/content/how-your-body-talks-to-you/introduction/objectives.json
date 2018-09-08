@@ -1,8 +1,13 @@
 {
-    "greeting": "Hello!",
     "roadmap": [
-        {"name": "Introduction"},
-        {"name": "Learning"},
-        {"name": "Summary"}
+        {"name": "How Your Mind and Body Work Together"},
+        {"name": "The Science Behind the Mind Body Connection"},
+        {"name": "Self Worth"},
+        {"name": "The Unconscious Mind"},
+        {"name": "Re-Setting Your Day: Intro to Daily Practice"},
+        {"name": "Silence and Visualization as Daily Practice"},
+        {"name": "Affirmations and Exercise as Daily Practice"},
+        {"name": "Reading and Journaling As Daily Practice"},
+        {"name": "Time to Take Action!"}
     ]
 }

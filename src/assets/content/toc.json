@@ -1,1 +1,320 @@
-{"id":1,"name":"G3: Mind and Body","courseModules":[{"id":1,"name":"Welcome to Mind/Body","urlName":"welcome-to-mind-body","sessions":[{"id":1,"name":"Introduction","urlName":"introduction","pages":[{"id":1,"name":"Introduction","urlName":"introduction"},{"id":2,"name":"Modules","urlName":"modules"},{"id":3,"name":"How will we work?","urlName":"how-will-we-work"},{"id":4,"name":"What is Expected?","urlName":"what-is-expected"}]}]},{"id":2,"name":"How Your Body Talks To You","urlName":"how-your-body-talks-to-you","sessions":[{"id":1,"name":"Introduction","urlName":"introduction","pages":[{"id":1,"name":"Introduction","urlName":"introduction"},{"id":2,"name":"Objectives","urlName":"objectives"},{"id":3,"name":"What do you know?","urlName":"what-do-you-know"},{"id":4,"name":"What do you think?","urlName":"what-do-you-think"}]},{"id":2,"name":"How Your Mind and Body Work Together","urlName":"how-mind-and-body-work-together","pages":[{"id":1,"name":"Introduction","urlName":"introduction"},{"id":2,"name":"Objectives","urlName":"objectives"},{"id":3,"name":"Video: Physical-Mental Connection","urlName":"video-physical-mental"},{"id":4,"name":"Activity: How Emotions Feel","urlName":"how-emotions-feel"},{"id":5,"name":"Summary","urlName":"summary"}]},{"id":3,"name":"The Science Behind the Mind Body Connection","urlName":"science-behind-mind-body","pages":[{"id":1,"name":"Introduction","urlName":"introduction"},{"id":2,"name":"Objectives","urlName":"objectives"},{"id":3,"name":"Neuropeptides","urlName":"neuropeptides"},{"id":4,"name":"Noradrenaline, Serotonin and Dopamine","urlName":"noradrenaline-serotonin-dopamine"},{"id":5,"name":"Summary","urlName":"summary"}]},{"id":4,"name":"Self Worth","urlName":"self-worth","pages":[{"id":1,"name":"Introduction","urlName":"introduction"}]},{"id":5,"name":"Re-Setting Your Day: Intro to Daily Practice","urlName":"resetting-your-day","pages":[{"id":1,"name":"Introduction","urlName":"introduction"}]},{"id":6,"name":"Silence and Visualization as Daily Practice","urlName":"silence-and-visualization","pages":[{"id":1,"name":"Introduction","urlName":"introduction"}]},{"id":7,"name":"Affirmations and Exercise as Daily Practice","urlName":"affirmations-and-exercise","pages":[{"id":1,"name":"Introduction","urlName":"introduction"}]},{"id":8,"name":"Reading and Journaling As Daily Practice","urlName":"reading-and-journalization","pages":[{"id":1,"name":"Introduction","urlName":"introduction"}]},{"id":9,"name":"The Unconscious Mind","urlName":"the-unconscious-mind","pages":[{"id":1,"name":"Introduction","urlName":"introduction"}]},{"id":10,"name":"Time to Take Action!","urlName":"time-to-take-action","pages":[{"id":1,"name":"Introduction","urlName":"introduction"}]},{"id":11,"name":"Time to Take Action! Pt. 2","urlName":"time-to-take-action-2","pages":[{"id":1,"name":"Introduction","urlName":"introduction"}]},{"id":12,"name":"Conclusion","urlName":"conclusion","pages":[{"id":1,"name":"Objectives","urlName":"objectives"},{"id":2,"name":"What did you learn?","urlName":"what-did-you-learn"},{"id":3,"name":"What do you think?","urlName":"what-do-you-think"}]}]},{"id":3,"name":"Feelings and Emotions","urlName":"feelings-and-emotions","sessions":[]},{"id":4,"name":"Stress","urlName":"feelings-and-emotions","sessions":[]},{"id":5,"name":"The Physical Body","urlName":"the-physical-body","sessions":[]},{"id":6,"name":"Energy","urlName":"energy","sessions":[]},{"id":7,"name":"Cultural Competence","urlName":"cultural-competence","sessions":[]},{"id":8,"name":"Mental Health Conditions","urlName":"mental-health-conditions","sessions":[]},{"id":9,"name":"Strategies for Prevention and Stress Reduction","urlName":"strategies-prevention-stress-reduction","sessions":[]}]}
+{
+    "id": 1,
+    "name": "G3: Mind and Body",
+    "courseModules": [
+        {
+            "id": 1,
+            "number": 0,
+            "name": "Welcome to Mind/Body",
+            "urlName": "welcome-to-mind-body",
+            "sessions": [
+                {
+                    "id": 1,
+                    "number": 0,
+                    "name": "Introduction",
+                    "urlName": "introduction",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Modules",
+                            "urlName": "modules"
+                        },
+                        {
+                            "id": 3,
+                            "name": "How will we work?",
+                            "urlName": "how-will-we-work"
+                        },
+                        {
+                            "id": 4,
+                            "name": "What is Expected?",
+                            "urlName": "what-is-expected"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "number": 1,
+            "name": "How Your Body Talks To You",
+            "urlName": "how-your-body-talks-to-you",
+            "sessions": [
+                {
+                    "id": 1,
+                    "number": 0,
+                    "name": "Introduction",
+                    "urlName": "introduction",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 3,
+                            "name": "What do you know?",
+                            "urlName": "what-do-you-know"
+                        },
+                        {
+                            "id": 4,
+                            "name": "What do you think?",
+                            "urlName": "what-do-you-think"
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "number": 1,
+                    "name": "How Your Mind and Body Work Together",
+                    "urlName": "how-mind-and-body-work-together",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 3,
+                            "name": "Video: Physical-Mental Connection",
+                            "urlName": "video-physical-mental"
+                        },
+                        {
+                            "id": 4,
+                            "name": "Activity: How Emotions Feel",
+                            "urlName": "how-emotions-feel"
+                        },
+                        {
+                            "id": 5,
+                            "name": "Summary",
+                            "urlName": "summary"
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "number": 2,
+                    "name": "The Science Behind the Mind Body Connection",
+                    "urlName": "science-behind-mind-body",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 3,
+                            "name": "Neuropeptides",
+                            "urlName": "neuropeptides"
+                        },
+                        {
+                            "id": 4,
+                            "name": "Noradrenaline, Serotonin and Dopamine",
+                            "urlName": "noradrenaline-serotonin-dopamine"
+                        },
+                        {
+                            "id": 5,
+                            "name": "Summary",
+                            "urlName": "summary"
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "number": 3,
+                    "name": "Self Worth",
+                    "urlName": "self-worth",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "number": 4,
+                    "name": "Re-Setting Your Day: Intro to Daily Practice",
+                    "urlName": "resetting-your-day",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "number": 5,
+                    "name": "Silence and Visualization as Daily Practice",
+                    "urlName": "silence-and-visualization",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "number": 6,
+                    "name": "Affirmations and Exercise as Daily Practice",
+                    "urlName": "affirmations-and-exercise",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "number": 7,
+                    "name": "Reading and Journaling As Daily Practice",
+                    "urlName": "reading-and-journalization",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "number": 8,
+                    "name": "The Unconscious Mind",
+                    "urlName": "the-unconscious-mind",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "number": 9,
+                    "name": "Time to Take Action!",
+                    "urlName": "time-to-take-action",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        }
+                    ]
+                },
+                {
+                    "id": 11,
+                    "number": 10,
+                    "name": "Time to Take Action! Pt. 2",
+                    "urlName": "time-to-take-action-2",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        }
+                    ]
+                },
+                {
+                    "id": 12,
+                    "number": 11,
+                    "name": "Conclusion",
+                    "urlName": "conclusion",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 2,
+                            "name": "What did you learn?",
+                            "urlName": "what-did-you-learn"
+                        },
+                        {
+                            "id": 3,
+                            "name": "What do you think?",
+                            "urlName": "what-do-you-think"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "number": 2,
+            "name": "Feelings and Emotions",
+            "urlName": "feelings-and-emotions",
+            "sessions": []
+        },
+        {
+            "id": 4,
+            "number": 3,
+            "name": "Stress",
+            "urlName": "feelings-and-emotions",
+            "sessions": []
+        },
+        {
+            "id": 5,
+            "number": 4,
+            "name": "The Physical Body",
+            "urlName": "the-physical-body",
+            "sessions": []
+        },
+        {
+            "id": 6,
+            "number": 5,
+            "name": "Energy",
+            "urlName": "energy",
+            "sessions": []
+        },
+        {
+            "id": 7,
+            "number": 6,
+            "name": "Cultural Competence",
+            "urlName": "cultural-competence",
+            "sessions": []
+        },
+        {
+            "id": 8,
+            "number": 7,
+            "name": "Mental Health Conditions",
+            "urlName": "mental-health-conditions",
+            "sessions": []
+        },
+        {
+            "id": 9,
+            "number": 8,
+            "name": "Strategies for Prevention and Stress Reduction",
+            "urlName": "strategies-prevention-stress-reduction",
+            "sessions": []
+        }
+    ]
+}
