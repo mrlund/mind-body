@@ -24,6 +24,11 @@ ion-header  ion-toolbar {
 
 }
 
+@media only screen and (min-width: 760px) {
+    ion-header{
+        display: none;
+    }
+}
 @media only screen and (max-width: 600px) {
     ion-card {
         font-size: 1.2em;
@@ -38,4 +43,5 @@ ion-header  ion-toolbar {
             font-size: 3em; 
         }
     }
+  
 }
