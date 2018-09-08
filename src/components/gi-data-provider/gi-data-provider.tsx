@@ -24,7 +24,6 @@ export class GIDataProvider {
 
     @Method()
     getIdInfo(obj) {
-        console.log(obj);
         this.idInfo = obj;
     }
 
@@ -62,7 +61,6 @@ export class GIDataProvider {
                 })
             }).catch((err) => {
                 this.innerHtmlData = "<p>Error while loading video</p>";
-                console.log(err);
             });
     }
 
@@ -89,8 +87,6 @@ export class GIDataProvider {
     @Method()
     saveData(data: any, api: string) {
         let token = this.getToken();
-        console.log(token);
-        console.log(data);
         if (token) {
             let postData = {
                 ResponseType: data.responseType,
@@ -113,7 +109,7 @@ export class GIDataProvider {
                     'Authorization': `Bearer ${token}`
                 }
             })).pipe(
-                switchMap(x => { console.log(x); return x.json(); })
+                switchMap(x => {  return x.json(); })
             );
         } else {
             console.log("No token, cant save");

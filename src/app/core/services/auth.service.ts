@@ -33,8 +33,10 @@ export class AuthService {
       })
     ).pipe(catchError(this.handleError));
   }
-
+  externalProviderWindow = null;
   loginWithGoogle() {
+    //window.location.href="https://www.google.com/api/user/externallogins?returnUrl=https://mind-body.azurewebsites.net/&provider=Google";
+
     return this.http.get('/user/externallogins?returnUrl=https://mind-body.azurewebsites.net/&provider=Google')
       .subscribe((user) => {
         console.log(user);

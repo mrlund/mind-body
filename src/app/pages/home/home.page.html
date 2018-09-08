@@ -7,73 +7,57 @@
       <span>Mind & Body</span>
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button><img class="gi-logo" src="/assets/gi-transp.png" /></ion-button>
+      <ion-button><img class="gi-logo" src="/assets/img/logo-primary.png" /></ion-button>
     </ion-buttons>    
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="home-page" padding>
   <ion-grid>
     <ion-row>
-      <ion-col>
+      <ion-col size="6">
         <ion-card (click)="goToDetail('my-mood')" text-center>
           <ion-card-content>
-            <h2>
-              <ion-icon name="happy"></ion-icon>
-            </h2>
-            My Mood
+            <img src="/assets/img/myMood.svg" height="150px" /> My Mood
           </ion-card-content>
         </ion-card>
       </ion-col>
-      <ion-col>
-        <ion-card (click)="goToDetail('great-wall')" text-center no-wrap>
+      <ion-col size="6">
+        <ion-card text-center [routerLink]="['/course','welcome-to-mind-body', 'introduction', 'introduction']">
           <ion-card-content>
-            <h2>
-              <ion-icon name="easel"></ion-icon>
-            </h2>
-            Great White Wall
+            <img src="/assets/img/Lessons.svg" height="150px" /> Lessons
           </ion-card-content>
         </ion-card>
       </ion-col>
-      <ion-col>
-        <ion-card (click)="goToDetail('my-goals')" text-center>
-          <ion-card-content>
-            <h2>
-              <ion-icon name="ribbon"></ion-icon>
-            </h2>
-            My Goals
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      </ion-row>
-      <ion-row>
-      <ion-col>
-        <ion-card (click)="goToDetail('my-health')" text-center>
-          <ion-card-content>
-            <h2>
-              <ion-icon name="fitness"></ion-icon>
-            </h2>
-            My Health
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col>
-        <ion-card text-center>
-          <ion-card-content>
-            <h2>
-              <ion-icon name="school"></ion-icon>
-            </h2>
-            Lessons
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
         <ion-card (click)="goToDetail('find-help')" text-center>
           <ion-card-content>
-            <h2>
-              <ion-icon name="medkit"></ion-icon>
-            </h2>
-            Find Help
+            <img src="/assets/img/findHelp.svg" height="150px" /> Find Help
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card (click)="goToDetail('my-health')" text-center>
+          <ion-card-content>
+            <img src="/assets/img/myHealth.svg" height="150px" /> My Health
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card (click)="goToDetail('my-goals')" text-center>
+          <ion-card-content>
+            <img src="/assets/img/myGoals.svg" height="150px" /> My Goals
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card (click)="goToDetail('great-wall')" text-center no-wrap>
+          <ion-card-content>
+            <img src="/assets/img/bigWhiteWall.svg" height="150px" /> Great White Wall
           </ion-card-content>
         </ion-card>
       </ion-col>

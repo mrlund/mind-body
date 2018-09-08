@@ -1,3 +1,9 @@
 ion-content .goal-item{
 padding: 20px;
 }
+
+
+ion-toolbar{
+    --ion-color-base:rgba(245,245,245) !important;
+    --ion-color-contrast:var(--ion-color-primary) !important;
+  }

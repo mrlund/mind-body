@@ -81,7 +81,7 @@ export class CoursePageView {
         var componentArray = Array.from(components);
         for (var i = 0; i < componentArray.length; i++) {
 
-            console.log("webcomp call", componentArray[i]);
+          //  console.log("webcomp call", componentArray[i]);
             if (componentArray[i]) {
                 await componentArray[i].componentOnReady();
                 await (componentArray[i] as any)[methodName].apply(componentArray[i], args);

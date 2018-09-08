@@ -12,10 +12,12 @@ export class JsonContentProvider implements ICourseContentProvider {
     getNextAndPrevPage(page: IPageReference): Observable<IPageModel> {
         if (this.toc) {
             let pages = this.toc.courseModules.find(x => x.id == page.courseModuleId || x.urlName == page.courseModuleUrlPart).sessions.find(x => x.id == page.sessionId || x.urlName == page.sessionUrlPart).pages;
+            let totalPages = pages.length;
             let index = pages.findIndex(x => x.id == page.pageId || x.urlName == page.pageUrlPart);
             let model = { prevPage: this.safeGetIndex(pages, index - 1), page: this.safeGetIndex(pages, index), nextPage: this.safeGetIndex(pages, index + 1) };
             let path = this.getPathToPage(page);
             model.page.pageReference = { courseModuleUrlPart: path.urlName, sessionUrlPart: path.sessions[0].urlName, pageUrlPart: path.sessions[0].pages[0].urlName };
+            model.page.totalPages = totalPages;
             return of(model);
         }
         //TODO: Prevent double fetch of ToC through switch/debounce or cache
@@ -39,7 +41,9 @@ export class JsonContentProvider implements ICourseContentProvider {
             // Object.assign(root.sessions[0].pages, [root.sessions[0].pages.find(x=>x.id == page.pageId || x.urlName == page.pageUrlPart)]);
             let root = JSON.parse(JSON.stringify(this.toc.courseModules.find(x => x.id == page.courseModuleId || x.urlName == page.courseModuleUrlPart)));
             root.sessions = [root.sessions.find(x => x.id == page.sessionId || x.urlName == page.sessionUrlPart)];
+
             root.sessions[0].pages = [root.sessions[0].pages.find(x => x.id == page.pageId || x.urlName == page.pageUrlPart)];
+
             return root;
         }
         //TODO: Prevent double fetch of ToC through switch/debounce or cache
@@ -72,8 +76,8 @@ export class JsonContentProvider implements ICourseContentProvider {
 
         //TODO Implement better loading, including dynamic data and component rendering
         let path = this.getPathToPage(page);
-
         if (!page.courseModuleUrlPart) {
+            debugger
             page.courseModuleUrlPart = path.urlName;
             page.sessionUrlPart = path.sessions[0].urlName;
             page.pageUrlPart = path.sessions[0].pages[0].urlName;

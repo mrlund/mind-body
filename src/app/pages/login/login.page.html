@@ -9,53 +9,64 @@
 </ion-header>
 
 <ion-content>
-  <div class="login-logo">
-    <img src="assets/img/G3-Girls.jpg" alt="GI logo">
-  </div>
-  <ion-text color="danger" *ngFor="let error of formErrors(loginForm,submitted)">
-    <strong>{{error.error}}</strong>: {{error.params}}
-  </ion-text>
-  <form [formGroup]="loginForm">
-    <ion-list padding>
-      <ion-item>
-        <ion-label position="stacked" color="primary">Email</ion-label>
-        <ion-input formControlName="Email" name="username" type="text" spellcheck="false" autocapitalize="off" required>
-        </ion-input>
-      </ion-item>
+  <ion-grid fixed>
+    <ion-row justify-content-center>
+      <ion-col size-xl="6" size-xs="12" size-sm="10" size-md="8">
+        <div class="login-logo">
+          <img src="assets/img/G3-Girls.jpg" alt="GI logo">
+        </div>
+        <ion-text color="danger" *ngFor="let error of formErrors(loginForm,submitted)">
+          <strong>{{error.error}}</strong>: {{error.params}}
+        </ion-text>
+        <form [formGroup]="loginForm" class="login-form">
+          <ion-list padding>
+            <ion-item>
+              <ion-label position="stacked" color="primary">Email</ion-label>
+              <ion-input formControlName="Email" name="username" type="text" spellcheck="false" autocapitalize="off" required>
+              </ion-input>
+            </ion-item>
 
-      <ion-text padding>
-        <small *ngIf="loginForm.get('Email').hasError('required') && loginForm.get('Email').touched" padding-left>
+            <ion-text padding>
+              <small *ngIf="loginForm.get('Email').hasError('required') && loginForm.get('Email').touched" padding-left>
           Email is required
         </small>
-        <small *ngFor="let error of serverErrors('Email',loginForm,submitted)">{{error.params}}</small>
+              <small *ngFor="let error of serverErrors('Email',loginForm,submitted)">{{error.params}}</small>
 
-      </ion-text>
+            </ion-text>
 
-      <ion-item>
-        <ion-label position="stacked" color="primary">Password</ion-label>
-        <ion-input formControlName="Password" name="password" type="password" required>
-        </ion-input>
-      </ion-item>
+            <ion-item>
+              <ion-label position="stacked" color="primary">Password</ion-label>
+              <ion-input formControlName="Password" name="password" type="password" required>
+              </ion-input>
+            </ion-item>
 
-      <ion-text padding>
-        <small *ngIf="loginForm.get('Password').hasError('required') && loginForm.get('Password').touched" padding-left>
+            <ion-text padding>
+              <small *ngIf="loginForm.get('Password').hasError('required') && loginForm.get('Password').touched" padding-left>
           Password is required
         </small>
-        <small *ngFor="let error of serverErrors('Password',loginForm,submitted)">{{error.params}}</small>
-      </ion-text>
-      <div>
-        <ion-button expand="block" (click)="onLogin()" [disabled]="isLoading$|async">Login
-          <ion-spinner name="bubbles" *ngIf="isLoading$|async"></ion-spinner>
-        </ion-button>
-        <a (click)="onForgotPasword()" color="light" expand="block">Forgot password?</a>
-      </div>
-      <ion-button expand="block" (click)="onLoginWithGoogle()">Login with Google
-      </ion-button>
-    </ion-list>
+              <small *ngFor="let error of serverErrors('Password',loginForm,submitted)">{{error.params}}</small>
+            </ion-text>
+            <div style="text-align: right">
+              <a (click)="onForgotPasword()" color="light" expand="block">Forgot password?</a>
+            </div>
+            <div>
+              <ion-button expand="block" (click)="onLogin()" [disabled]="isLoading$|async">Login
+                <ion-spinner name="bubbles" *ngIf="isLoading$|async"></ion-spinner>
+              </ion-button>
+            </div>
+            <div style="text-align: center" padding>
+              -- OR --
+            </div>
+            <ion-button expand="block" (click)="onLoginWithGoogle()">Login with Google
+            </ion-button>
+            <ion-item class="footer-signup">
+              Not registered yet? <a (click)="onSignup()" color="light" expand="block">Signup</a>
+            </ion-item>
+          </ion-list>
 
-    <ion-item class="footer-signup">
-      Not registered yet? <a (click)="onSignup()" color="light" expand="block">Signup</a>
-    </ion-item>
-  </form>
 
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

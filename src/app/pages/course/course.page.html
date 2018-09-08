@@ -11,8 +11,8 @@
 <ion-content>
   <ion-router-outlet></ion-router-outlet>
 </ion-content>
-<ion-footer>
-  <ion-toolbar>
+<ion-footer class="course-page-footer" style="padding-top: 20px;text-transform: uppercase">
+  <ion-toolbar style="padding: 0px;">
     <ng-container *ngIf="(pageModel$|async) as pageModel">
       <gi-course-page-footer [pageModel]="pageModel" *ngIf="pageModel && pageModel?.page"></gi-course-page-footer>
     </ng-container>

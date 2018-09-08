@@ -2,6 +2,7 @@
   <div class="course-page-view-container">
     <ng-container *ngIf="(pageModel$|async) as pageModel">
       <ng-container *ngIf="pageModel && pageModel.page">
+        <!--{{pageModel?.page?.name}}-->
         <gi-data-provider *ngIf="pageContentUrl" [baseServerUrl]="baseServerUrl" [pageContentUrl]="pageContentUrl" [baseContentUrl]="baseUrl"
           [isClassroomModeOn]="classRoomMode$|async">
           <!--<div [innerHTML]="safeHtml(pageModel?.page?.htmlContent)"></div>-->

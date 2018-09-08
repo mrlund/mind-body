@@ -1,13 +1,24 @@
-<ion-app>
+<ion-app class="gi-app">
+  <div class="header-bar">
+    <div class="header-text-container">
+      <h2>EDUCATION</h2>
+      <div class="mind-body-header">
+        <h2>MIND & BODY</h2>
+      </div>
+    </div>
+    <div class="header-logo-container" [routerLink]="['home']">
+      <img class="header-logo" src="/assets/img/logo-primary.png">
+    </div>
+  </div>
   <ion-split-pane>
     <ion-menu>
-      <ion-header>
+      <!--<ion-header>
         <ion-toolbar>
           <ion-title [routerLink]="['home']">
             <ion-icon name="home"></ion-icon> Home
           </ion-title>
         </ion-toolbar>
-      </ion-header>
+      </ion-header>-->
       <ion-content>
         <ion-list>
           <ion-menu-toggle>
@@ -29,28 +40,50 @@
             </ion-item-group>
           </ion-menu-toggle>
 
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of (appPages$ | async).courseModules">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages?.courseModules; let i = index">
             <ion-item-group>
-              <ion-item-divider color="light" [routerDirection]="'root'" [routerLink]="['course', p.urlName, p.sessions[0]?.urlName, p.sessions[0]?.pages[0]?.urlName]">
-                <ion-icon slot="start" name="paper"></ion-icon>
-                <ion-label>&nbsp;{{p.id}}: {{p.name}}</ion-label>
+              <ion-item-divider auto-hide="false" color="light" (click)="toggleSection(i)">
+                <ion-label auto-hide="false">&nbsp;{{p.name}}</ion-label>
               </ion-item-divider>
-              <ion-item *ngFor="let s of p.sessions" [routerLink]="['course', p.urlName, s.urlName, s.pages[0]?.urlName]">
-                <ion-icon name="ios-arrow-forward"></ion-icon> {{s.name}}</ion-item>
+              <ul class="timeline" *ngIf="p.open">
+                <li *ngFor="let s of p.sessions" [routerDirection]="'root'" [routerLink]="['course', p.urlName, s.urlName, s.pages[0]?.urlName]"
+                  [class.active]="pageUrlName==p.urlName && sessionUrlName==s.urlName">
+                  <div class="direction-r">
+                    <div class="flag-wrapper">
+                      <span class="flag">{{s.name}}</span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
             </ion-item-group>
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false">
             <ion-item-group>
-              <ion-item-divider color="light" [routerDirection]="'root'">
-                <ion-icon slot="start" name="contact"></ion-icon>
-                <ion-label>Account</ion-label>
+              <ion-item-divider color="light" [routerDirection]="'root'" #accoutPanel>
+                <ion-label>ACCOUNT</ion-label>
               </ion-item-divider>
-              <ion-item [routerLink]="['login']" *ngIf="!(isUserAuthenticate$|async)">
-                <ion-icon name="log-in"></ion-icon>Login
+              <ul class="timeline">
+                <li [routerLink]="['login']" *ngIf="!(isUserAuthenticate$|async)" [class.active]="url=='login'">
+                  <div class="direction-r">
+                    <div class="flag-wrapper">
+                      <span class="flag">Login</span>
+                    </div>
+                  </div>
+                </li>
+                <li [routerLink]="['profile']" *ngIf="isUserAuthenticate$|async" [class.active]="url=='profile'">
+                  <div class="direction-r">
+                    <div class="flag-wrapper">
+                      <span class="flag">Profile</span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <!--<ion-item [routerLink]="['login']" *ngIf="!(isUserAuthenticate$|async)" [class.active]="url='login'">
+                Login
               </ion-item>
-              <ion-item [routerLink]="['profile']" *ngIf="isUserAuthenticate$|async">
-                <ion-icon name="person"></ion-icon>Profile
-              </ion-item>
+              <ion-item [routerLink]="['profile']" *ngIf="isUserAuthenticate$|async" [class.active]="url='profile'">
+                Profile
+              </ion-item>-->
               <!--<ion-item>
                 <ion-label>ClassRoom Mode</ion-label>
                 <ion-toggle (ionChange)="classRoomModeChange(classRoomMode.checked)" [checked]="classRoomMode$|async" #classRoomMode></ion-toggle>

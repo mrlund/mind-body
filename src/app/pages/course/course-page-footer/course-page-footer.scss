@@ -1,1 +1,21 @@
 ion-title { text-align: center; }
+ion-footer{
+    
+}
+ion-toolbar{
+    .main-container-div{
+        display: flex;justify-content: space-around;align-items: center;
+    }
+    .navigation-part{
+        display: flex;align-items: center;justify-content: center;flex:1;
+    }
+    .title-part{
+        white-space: nowrap;overflow: hidden;text-overflow: ellipsis;flex:2;
+    }
+
+}
+:root{
+    --ion-toolbar-background-color: rgba(245,245,245,0.7) !important;
+    --ion-toolbar-text-color: #E5053A !important;
+    --ion-color-ios-primary: #f5f5f5 !important;
+    }

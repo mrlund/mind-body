@@ -16,3 +16,12 @@ page-login {
        text-align: center;
   }
 }
+  ion-toolbar{
+    --ion-color-base:rgba(245,245,245,0.7) !important;
+    --ion-color-contrast:var(--ion-color-primary) !important;
+  }
+
+  ion-content{
+    --ion-background-color:rgba(245,245,245,0.8);
+   
+  }

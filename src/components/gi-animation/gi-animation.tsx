@@ -449,13 +449,13 @@ export class AppAnimation {
               />
             </div>
             <div class="button-panel">
-              <ion-button color="primary" onClick={() => this.rewind5Sec()}>
+              <ion-button color="transperant" onClick={() => this.rewind5Sec()}>
                 {" "}
                 <ion-icon name="rewind" />{" "}
               </ion-button>
 
               <ion-button
-                color="primary"
+                color="transperant"
                 onClick={() => this.playButtonAction()}
               >
                 {" "}
@@ -466,7 +466,7 @@ export class AppAnimation {
                   )}
               </ion-button>
               <ion-button
-                color="primary"
+               color="transperant"
                 onClick={() => this.fastForward5Sec()}
               >
                 {" "}

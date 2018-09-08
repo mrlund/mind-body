@@ -1,0 +1,20 @@
+ion-content{
+        background-color: rgba(245, 245, 245, 0.5);
+    ion-footer.course-page-footer{
+        padding-top: 10px;
+    }
+}
+   
+
+
+
+@media screen and (min-width: 760px) {
+    ion-content{
+    ion-footer.course-page-footer{
+        padding-top: 20px;
+       }
+    }
+    ion-header{
+        display: none;
+    }
+}
