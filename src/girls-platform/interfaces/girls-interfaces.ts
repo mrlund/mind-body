@@ -2,6 +2,7 @@ import { Observable } from "rxjs";
 
 export interface ICoursePart {
     id: number,
+    number: number,
     name: string,
     urlName: string
 }

@@ -1,7 +1,8 @@
 const fs = require('fs-extra')
 
 const contentObj = fs.readJsonSync('./src/assets/content/toc.json');
-let i = 1, ii = 1, iii = 1;
+let m = 1, s = 1, p = 1;
+let mNum = 0, sNum = 0;
 
 let resetIds = false;
 if (process.argv.length > 2 && process.argv[2] == "reset-id")
@@ -10,21 +11,42 @@ if (process.argv.length > 2 && process.argv[2] == "reset-id")
     resetIds = true;
 }
 
-
+let newContentObj = {
+    id: contentObj.id,
+    name: contentObj.name,
+    courseModules : []
+};
 contentObj.courseModules.forEach(module => {
-    module.id = i++;
+    let newModule = {
+        id: m++,
+        number: mNum++,
+        name: module.name,
+        urlName: module.urlName,
+        sessions : []
+    }
     module.sessions.forEach(session => {
-        session.id = ii++;
+        let newSession = {
+            id: s++,
+            number: sNum++,
+            name: session.name,
+            urlName: session.urlName,
+            pages: []
+        };
         session.pages.forEach(page => {
-            page.id = iii++;
+            page.id = p++;
+            newSession.pages.push(page);
         });
         if(resetIds){
-            iii = 1;
+            p = 1;
         }
+        newModule.sessions.push(newSession)
     });
     if(resetIds){
-        ii = 1;
+        s = 1;
+        sNum = 0;
     }
+    newContentObj.courseModules.push(newModule);
 });
 
-fs.writeJSONSync('./src/assets/content/toc.json', contentObj);
+fs.writeJSONSync('./src/assets/content/toc.json', newContentObj);
+//fs.writeJSONSync('./src/assets/content/toc-reoder.json', newContentObj);
