@@ -27,7 +27,7 @@ export class GiPostToFeed {
     }
 
     submitPost() {
-        let formData = new FormData(this.el.querySelector("form"));
+        let formData = new FormData(this.el.querySelector("form")) as any;
         var data = {};
         formData.forEach(function (value, key) {
             data[key] = value;
