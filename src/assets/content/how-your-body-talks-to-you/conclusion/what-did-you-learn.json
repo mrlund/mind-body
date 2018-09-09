@@ -1,0 +1,106 @@
+{
+    "quiz": [
+        {
+            "questionId": "101",
+            "question": "How do your thoughts effect your body?",
+            "responseType": 1,
+            "options": [
+                {
+                    "option": "Yes",
+                    "isCorrect": true
+                },
+                {
+                    "option": "No"
+                },
+                {
+                    "option": "Maybe"
+                }
+            ]
+        },
+        {
+            "questionId": "102",
+            "question": "What are referred to as molecules of emotions?",
+            "responseType": 1,
+            "options": [
+                {
+                    "option": "Yes"
+                },
+                {
+                    "option": "No",
+                    "isCorrect": true
+                },
+                {
+                    "option": "Maybe"
+                }
+            ]
+        },
+        {
+            "questionId": "102",
+            "question": "Which emotion is most likely to cause high blood pressure?",
+            "responseType": 1,
+            "options": [
+                {
+                    "option": "Yes"
+                },
+                {
+                    "option": "No",
+                    "isCorrect": true
+                },
+                {
+                    "option": "Maybe"
+                }
+            ]
+        },
+        {
+            "questionId": "102",
+            "question": "What part of your mind is referred to as the habit mind?",
+            "responseType": 1,
+            "options": [
+                {
+                    "option": "Yes"
+                },
+                {
+                    "option": "No",
+                    "isCorrect": true
+                },
+                {
+                    "option": "Maybe"
+                }
+            ]
+        },
+        {
+            "questionId": "102",
+            "question": "Name two practices that can help you improve your mental well-being",
+            "responseType": 1,
+            "options": [
+                {
+                    "option": "Yes"
+                },
+                {
+                    "option": "No",
+                    "isCorrect": true
+                },
+                {
+                    "option": "Maybe"
+                }
+            ]
+        },
+        {
+            "questionId": "102",
+            "question": "Does your mental wellbeing improve your physical wellbeing?",
+            "responseType": 1,
+            "options": [
+                {
+                    "option": "Yes"
+                },
+                {
+                    "option": "No",
+                    "isCorrect": true
+                },
+                {
+                    "option": "Maybe"
+                }
+            ]
+        }
+    ]
+}

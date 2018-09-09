@@ -8,7 +8,7 @@ export interface TOCState {
 }
 
 export const initialState: TOCState = {
-    contents: { id: 0, urlName:"", name: "", courseModules: new Array<ICourseModule>() }
+    contents: { id: 0,number:0, urlName:"", name: "", courseModules: new Array<ICourseModule>() }
 };
 export function reducer(state: TOCState = initialState, action: fromTOC.TableOfContentActions) {
     switch (action.type) {

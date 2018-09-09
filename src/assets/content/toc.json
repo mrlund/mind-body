@@ -148,6 +148,31 @@
                             "id": 1,
                             "name": "Introduction",
                             "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 3,
+                            "name": "Self-Esteem Introductory",
+                            "urlName": "self-esteem-introductory"
+                        },
+                        {
+                            "id": 4,
+                            "name": "Activity: Self Confidence Worksheet",
+                            "urlName": "self-confidence-activity"
+                        },
+                        {
+                            "id": 5,
+                            "name": "Activity: Self Esteem Worksheet",
+                            "urlName": "self-esteem-activity"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Summary",
+                            "urlName": "summary"
                         }
                     ]
                 },
@@ -161,6 +186,26 @@
                             "id": 1,
                             "name": "Introduction",
                             "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 3,
+                            "name": "How to win the day",
+                            "urlName": "how-to-win-the-day"
+                        },
+                        {
+                            "id": 4,
+                            "name": "Activity: Miracle Morning",
+                            "urlName": "miracle-morning"
+                        },
+                        {
+                            "id": 5,
+                            "name": "Summary",
+                            "urlName": "summary"
                         }
                     ]
                 },
@@ -174,6 +219,31 @@
                             "id": 1,
                             "name": "Introduction",
                             "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 3,
+                            "name": "Review Silence and Visualization",
+                            "urlName": "review-silence-and-visualization"
+                        },
+                        {
+                            "id": 4,
+                            "name": "Activity: Relax to Relieve",
+                            "urlName": "relax-to-relieve"
+                        },
+                        {
+                            "id": 5,
+                            "name": "Action: Create Pinterest Board",
+                            "urlName": "pinterest-board"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Summary",
+                            "urlName": "summary"
                         }
                     ]
                 },
@@ -187,6 +257,36 @@
                             "id": 1,
                             "name": "Introduction",
                             "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 3,
+                            "name": "Review Affirmations and Exercise ",
+                            "urlName": "review-affirmations-and-exercise"
+                        },
+                        {
+                            "id": 4,
+                            "name": "Activity: Benefits of Affirmations",
+                            "urlName": "benefits-of-affirmations"
+                        },
+                        {
+                            "id": 5,
+                            "name": "Action 1: Create Silent Clubbing Spotify Playlist",
+                            "urlName": "silent-clubbing-spotify-playlist"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Action 2: Create daily affirmations",
+                            "urlName": "daily-affirmations"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Summary",
+                            "urlName": "summary"
                         }
                     ]
                 },
@@ -200,6 +300,36 @@
                             "id": 1,
                             "name": "Introduction",
                             "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 3,
+                            "name": "Review Reading and Scibing",
+                            "urlName": "review-reading-and-scribing"
+                        },
+                        {
+                            "id": 4,
+                            "name": "Activity: Benefits of Journaling",
+                            "urlName": "benefits-of-journaling"
+                        },
+                        {
+                            "id": 5,
+                            "name": "Action 1: Crete online journal",
+                            "urlName": "create-online-journal"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Action 2: Crete online reading",
+                            "urlName": "create-online-reading"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Summary",
+                            "urlName": "summary"
                         }
                     ]
                 },
@@ -213,6 +343,36 @@
                             "id": 1,
                             "name": "Introduction",
                             "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 3,
+                            "name": "Inner Working of Unconscious Mind",
+                            "urlName": "inner-working-of-the-unconsious-mind"
+                        },
+                        {
+                            "id": 4,
+                            "name": "Conscious Subconscious Mind",
+                            "urlName": "conscious-unconscious-mind"
+                        },
+                        {
+                            "id": 5,
+                            "name": "Activity: Harness Your Unconscious Mind",
+                            "urlName": "harness-your-unconscious-mind"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Activity: How to post your video to vimeo",
+                            "urlName": "how-to-post-your-video-to-vimeo"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Summary",
+                            "urlName": "summary"
                         }
                     ]
                 },

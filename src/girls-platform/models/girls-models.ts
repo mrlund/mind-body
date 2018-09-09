@@ -6,6 +6,7 @@ export class Page implements IPage {
     id: number;
     name: string;
     urlName: string;
+    number: number
 }
 
 export class Session implements ISession {
@@ -13,6 +14,7 @@ export class Session implements ISession {
     id: number;
     name: string;
     urlName: string;
+    number: number;
 }
 
 export class CourseModule implements ICourseModule {
@@ -20,6 +22,7 @@ export class CourseModule implements ICourseModule {
     id: number;
     name: string;
     urlName: string;
+    number: number;
 }
 
 export class Course implements ICourse {
@@ -27,6 +30,7 @@ export class Course implements ICourse {
     id: number;
     name: string;
     urlName: string;
+    number: number;
 }
 
 export class PageReference implements IPageReference {
