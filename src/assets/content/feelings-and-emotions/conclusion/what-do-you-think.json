@@ -1,0 +1,58 @@
+{
+    "quiz": [
+        {
+            "questionId": "101",
+            "question": "People who know me would say I handle my emotions in a healthy way.",
+            "responseType": 2,
+            "options": []
+        },
+        {
+            "questionId": "102",
+            "question": "I avoid using alcohol, other drugs, and addictive behaviors to deal with my emotions.",
+            "responseType": 2,
+            "options": []
+        },
+        {
+            "questionId": "102",
+            "question": "I am satisfied with the way I handle my emotions and how that affects my relationships.",
+            "responseType": 2,
+            "options": []
+        },
+        {
+            "questionId": "102",
+            "question": "I have a solid and healthy sense of confidence in myself.",
+            "responseType": 2,
+            "options": []
+        },
+        {
+            "questionId": "102",
+            "question": "I know the early warning signs of depression and anxiety and would feel comfortable seeking help from a trusted someone when needed.",
+            "responseType": 2,
+            "options": []
+        },
+        {
+            "questionId": "102",
+            "question": "I am able to share all of my emotions (including sadness, happiness, fear, and worry) with people I trust.",
+            "responseType": 2,
+            "options": []
+        },
+        {
+            "questionId": "102",
+            "question": "I am able to communicate my emotions in a positive way without being irritable, critical, or angry.",
+            "responseType": 2,
+            "options": []
+        },
+        {
+            "questionId": "102",
+            "question": "When someone I care about is upset, I am comfortable listening and really being present to them.",
+            "responseType": 2,
+            "options": []
+        },
+        {
+            "questionId": "102",
+            "question": "When I am feeling emotionally overwhelmed, I turn to others for support and help.",
+            "responseType": 2,
+            "options": []
+        }
+    ]
+}

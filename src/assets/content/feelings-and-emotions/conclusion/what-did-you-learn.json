@@ -1,0 +1,112 @@
+{
+    "quiz": [
+        {
+            "questionId": "201",
+            "question": "What are the three options for dealing with emotions?",
+            "responseType": 1,
+            "options": [
+                {
+                    "option": "Repress",
+                    "isCorrect": true
+                },
+                {
+                    "option": "explode"
+                },
+                {
+                    "option": "express"
+                }
+            ]
+        },
+        {
+            "questionId": "202",
+            "question": "Name the primary emotions.",
+            "responseType": 1,
+            "options": [
+                {
+                    "option": "Sadness"
+                },
+                {
+                    "option": "anger",
+                    "isCorrect": true
+                },
+                {
+                    "option": "fear"
+                },
+                {
+                    "option": "happiness"
+                }
+            ]
+        },
+        {
+            "questionId": "203",
+            "question": "List the techniques for managing emotions.",
+            "responseType": 1,
+            "options": [
+                {
+                    "option": "Yes"
+                },
+                {
+                    "option": "No",
+                    "isCorrect": true
+                },
+                {
+                    "option": "Maybe"
+                }
+            ]
+        },
+        {
+            "questionId": "204",
+            "question": "How should you deal with emotional upset?",
+            "responseType": 1,
+            "options": [
+                {
+                    "option": "Blame others."
+                },
+                {
+                    "option": "Pause to collect yourself.",
+                    "isCorrect": true
+                },
+                {
+                    "option": "Throw something."
+                },
+                {
+                    "option": "Act on your emotion."
+                }
+            ]
+        },
+        {
+            "questionId": "205",
+            "question": "Name two characteristics of high emotional IQ.",
+            "responseType": 1,
+            "options": [
+                {
+                    "option": "Yes"
+                },
+                {
+                    "option": "No",
+                    "isCorrect": true
+                },
+                {
+                    "option": "Maybe"
+                }
+            ]
+        },
+        {
+            "questionId": "206",
+            "question": "What parts of the brain are activated by emotional upset?",
+            "responseType": 1,
+            "options": [
+                {
+                    "option": "Yes"
+                },
+                {
+                    "option": "No",
+                    "isCorrect": true
+                },
+                {
+                    "option": "Maybe"
+                }
+            ]
+        }
+    ]
+}

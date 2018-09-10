@@ -432,7 +432,343 @@
             "number": 2,
             "name": "Feelings and Emotions",
             "urlName": "feelings-and-emotions",
-            "sessions": []
+            "sessions": [
+                {
+                    "id": 1,
+                    "number": 0,
+                    "name": "Introduction",
+                    "urlName": "introduction",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 3,
+                            "name": "What do you know?",
+                            "urlName": "what-do-you-know"
+                        },
+                        {
+                            "id": 4,
+                            "name": "What do you think?",
+                            "urlName": "what-do-you-think"
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "number": 1,
+                    "name": "Identifying Your Feelings and Emotions",
+                    "urlName": "identifying-your-feelings-and-emotions",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 3,
+                            "name": "Activity: Feelings",
+                            "urlName": "feelings"
+                        },
+                        {
+                            "id": 4,
+                            "name": "Activity: Emotional Wheels",
+                            "urlName": "emotional-wheels"
+                        },
+                        {
+                            "id": 5,
+                            "name": "Summary",
+                            "urlName": "summary"
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "number": 2,
+                    "name": "Directing Your Feelings and Emotions",
+                    "urlName": "directing-your-feelings-and-emotions",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 3,
+                            "name": "Activity:Things Are Not Always As They Seem ",
+                            "urlName": "things-are-not-always-as-they-seem"
+                        },
+                        {
+                            "id": 4,
+                            "name": "Summary",
+                            "urlName": "summary"
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "number": 3,
+                    "name": "Your Emotions Are Not Who You Are",
+                    "urlName": "your-emotions-are-not-who-you-are",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 3,
+                            "name": "Managing Emotion Activites",
+                            "urlName": "managing-emotion-activites"
+                        },
+                        {
+                            "id": 4,
+                            "name": "Summary",
+                            "urlName": "summary"
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "number": 4,
+                    "name": "Dealing With Negative Emotion",
+                    "urlName": "dealing-with-negative-emotion",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 3,
+                            "name": "Heat of emotion",
+                            "urlName": "heat-of-emotion"
+                        },
+                        {
+                            "id": 4,
+                            "name": "Reframe the situation",
+                            "urlName": "reframe-the-situation"
+                        },
+                        {
+                            "id": 5,
+                            "name": "Reframing : How does it work?",
+                            "urlName": "reframing-how-it-works"
+                        },
+                        {
+                            "id": 6,
+                            "name": "How can I defuse negative emotions?",
+                            "urlName": "defuse-negative-emotions"
+                        },
+                        {
+                            "id": 7,
+                            "name": "Passive Aggressive",
+                            "urlName": "passive-aggressive"
+                        },
+                        {
+                            "id": 8,
+                            "name": "Passive Aggressive Behaviour",
+                            "urlName": "passive-aggressive-behaviour"
+                        },
+                        {
+                            "id": 9,
+                            "name": "Truth Telling",
+                            "urlName": "truth-telling"
+                        },
+                        {
+                            "id": 10,
+                            "name": "Summary",
+                            "urlName": "summary"
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "number": 4,
+                    "name": "Emotional IQ",
+                    "urlName": "emotional-iq",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 3,
+                            "name": "Emotional IQ",
+                            "urlName": "emotional-iq"
+                        },
+                        {
+                            "id": 4,
+                            "name": "Activity: Emotional Self Awareness",
+                            "urlName": "emotional-self-awareness"
+                        },
+                        {
+                            "id": 5,
+                            "name": "Summary",
+                            "urlName": "summary"
+                        }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "number": 5,
+                    "name": "Dealing With Conflict",
+                    "urlName": "dealing-with-conflict",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 3,
+                            "name": "Non-violent Communication Strategies",
+                            "urlName": "non-violent-communication-strategies"
+                        },
+                        {
+                            "id": 4,
+                            "name": "Activity:American Talking Circle",
+                            "urlName": "american-talking-circle"
+                        },
+                        {
+                            "id": 5,
+                            "name": "Summary",
+                            "urlName": "summary"
+                        }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "number": 6,
+                    "name": "Physical Effects of Emotion",
+                    "urlName": "physical-effects-of-emotion",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 3,
+                            "name": "Physical Effects of Emotion",
+                            "urlName": "physical-effects-of-emotion"
+                        },
+                        {
+                            "id": 4,
+                            "name": "On the Brain: Amygdala, Corpus Callosum and Cingulate Cortex",
+                            "urlName": "on-the-brain-mri"
+                        },
+                        {
+                            "id": 5,
+                            "name": "On the Brain: Amygdala",
+                            "urlName": "on-the-brain-amygdala"
+                        },
+                        {
+                            "id": 6,
+                            "name": "On the Brain: Corpus Callosum",
+                            "urlName": "on-the-brain-corpus-callosum"
+                        },
+                        {
+                            "id": 7,
+                            "name": "On the Brain: Anterior Cingulate Cortex",
+                            "urlName": "anterior-cingulate-cortex"
+                        },
+                        {
+                            "id": 8,
+                            "name": "On the Stomach",
+                            "urlName": "on-the-stomach"
+                        },
+                        {
+                            "id": 9,
+                            "name": "Sign in your body",
+                            "urlName": "sign-in-your-body"
+                        },
+                        {
+                            "id": 8,
+                            "name": "Summary",
+                            "urlName": "summary"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "number": 7,
+                    "name": "Time to Take Action",
+                    "urlName": "time-to-take-action",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "number": 8,
+                    "name": "Conclusion",
+                    "urlName": "conclusion",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 2,
+                            "name": "What did you learn?",
+                            "urlName": "what-did-you-learn"
+                        },
+                        {
+                            "id": 3,
+                            "name": "What do you think?",
+                            "urlName": "what-do-you-think"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "id": 4,
