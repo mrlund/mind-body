@@ -5,6 +5,9 @@ export const UPDATE_USER_INFO = '[USER] Update User Info';
 export const UPDATE_USER_INFO_SUCCESS = '[USER] Update User Info Success';
 export const UPDATE_USER_INFO_FAIL = '[USER] Update User Info Fail';
 
+export const UPLOAD_PROFILE_IMAGE = '[USER] Upload Profile Image';
+export const UPLOAD_PROFILE_IMAGE_SUCCESS = '[USER] Upload Profile Image Success';
+export const UPLOAD_PROFILE_IMAGE_FAIL = '[USER] Upload Profile Image Fail';
 
 export const GET_USER_INFO = '[USER] Get User Info';
 export const GET_USER_INFO_SUCCESS = '[USER] Get User Info Success';
@@ -23,6 +26,21 @@ export class UpdateUserInfoSuccess implements Action {
 
 export class UpdateUserInfoFail implements Action {
     readonly type = UPDATE_USER_INFO_FAIL;
+    constructor(public payload: any) { }
+}
+
+export class UploadProfileImage implements Action {
+    readonly type = UPLOAD_PROFILE_IMAGE;
+    constructor(public payload: any) { }
+}
+
+export class UploadProfileImageSuccess implements Action {
+    readonly type = UPLOAD_PROFILE_IMAGE_SUCCESS;
+    constructor(public payload: any) { }
+}
+
+export class UploadProfileImageFail implements Action {
+    readonly type = UPLOAD_PROFILE_IMAGE_FAIL;
     constructor(public payload: any) { }
 }
 
@@ -47,4 +65,7 @@ export type UserActions =
     | UpdateUserInfoFail
     | GetUserInfo
     | GetUserInfoSuccess
-    | GetUserInfoFail;
+    | GetUserInfoFail
+    | UploadProfileImage
+    | UploadProfileImageSuccess
+    | UploadProfileImageFail;

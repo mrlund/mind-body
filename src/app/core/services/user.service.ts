@@ -22,6 +22,20 @@ export class UserService {
         ).pipe(catchError(this.handleError));
     }
 
+    uploadProfileImage(
+        files: any
+    ) {
+        files = files.files;
+        let formData = new FormData();
+        for (let i = 0; i < files.length; i++) {
+            formData.append("uploads[]", files[i], files[i].name);
+        }
+        return this.http.post(
+            "/profile/mediaitems",
+            formData
+        ).pipe(catchError(this.handleError));
+    }
+
     private handleError(error: any) {
         if (error.error.status == 401) {
             return throwError(error);

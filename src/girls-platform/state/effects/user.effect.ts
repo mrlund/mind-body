@@ -46,6 +46,38 @@ export class UserEffects {
         );
 
     @Effect()
+    uploadUserImage$: Observable<Action> = this.actions$
+        .ofType(UserActions.UPLOAD_PROFILE_IMAGE)
+        .pipe(
+            map((action: UserActions.UploadProfileImage) => action.payload),
+            mergeMap(payload =>
+                this.userService.uploadProfileImage(payload).pipe(
+                    map(data => new UserActions.UploadProfileImageSuccess(data)),
+                    catchError(error =>
+                        of(new UserActions.UploadProfileImageFail(error))
+                    )
+                )
+            ));
+
+    @Effect({ dispatch: false })
+    uploadUserImageSuccess$ = this.actions$
+        .ofType(UserActions.UPLOAD_PROFILE_IMAGE_SUCCESS)
+        .pipe(
+            map(payload => {
+                this.presentToast("Profile Image uploaded sccessfully");
+            })
+        );
+
+    @Effect({ dispatch: false })
+    uploadUserImageFail$ = this.actions$
+        .ofType(UserActions.UPLOAD_PROFILE_IMAGE_FAIL)
+        .pipe(
+            map(payload => {
+                this.presentToast("Sorry,an error occured while uploading image");
+            })
+        );
+
+    @Effect()
     getUserInfo$: Observable<Action> = this.actions$
         .ofType(UserActions.GET_USER_INFO)
         .pipe(

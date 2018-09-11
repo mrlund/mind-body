@@ -5,6 +5,9 @@ export interface UserState {
     updateUserLoading: boolean;
     updateUserComplete: boolean;
     updateUserError: any;
+    uploadUserImageLoading: boolean;
+    uploadUserImageComplete: boolean;
+    uploadUserImageError: any;
     getUserLoading: boolean;
     getUserComplete: boolean;
     getUserError: any;
@@ -15,6 +18,9 @@ export const initialState: UserState = {
     updateUserLoading: false,
     updateUserComplete: false,
     updateUserError: null,
+    uploadUserImageLoading: false,
+    uploadUserImageComplete: false,
+    uploadUserImageError: null,
     getUserLoading: false,
     getUserComplete: false,
     getUserError: null,
@@ -73,6 +79,32 @@ export function reducer(state: UserState = initialState, action: fromUser.UserAc
             };
         }
 
+        case fromUser.UPLOAD_PROFILE_IMAGE: {
+            return {
+                ...state,
+                uploadUserImageLoading: true
+            };
+        }
+
+        case fromUser.UPLOAD_PROFILE_IMAGE_SUCCESS: {
+            var user = { ...state.userInfo, ProfileImageUrl: action.payload[0].FullImageUrl };
+            return {
+                ...state,
+                uploadUserImageLoading: false,
+                uploadUserImageComplete: true,
+                userInfo: user
+            };
+        }
+
+        case fromUser.UPLOAD_PROFILE_IMAGE_FAIL: {
+            return {
+                ...state,
+                uploadUserImageLoading: false,
+                uploadUserImageComplete: false,
+                uploadUserImageError: action.payload
+            };
+        }
+
         default:
             return state;
     }
@@ -88,3 +120,8 @@ export const getUserInfo = (state: UserState) => state.userInfo;
 export const getUpdateUserInfoLoading = (state: UserState) => state.updateUserLoading;
 export const getUpdateUserInfoComplete = (state: UserState) => state.updateUserComplete;
 export const getUpdateUserInfoError = (state: UserState) => state.updateUserError;
+
+
+export const getUploadUserImageLoading = (state: UserState) => state.uploadUserImageLoading;
+export const getUploadUserImageComplete = (state: UserState) => state.uploadUserImageComplete;
+export const getUploadUserImageError = (state: UserState) => state.uploadUserImageError;

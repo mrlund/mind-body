@@ -17,6 +17,15 @@
       <ion-col size-xl="6" size-xs="12" size-sm="10" size-md="8">
         <div [formGroup]="profileForm" class="profile-form">
           <ion-list padding>
+            <input type="file" #fileInput (change)="uploadImage($event)" style="display:none;" accept="image/*" />
+            <div padding>
+              <ion-avatar>
+                <img [src]="profileForm.get('ProfileImageUrl').value==''?'/assets/img/avatar.png':profileForm.get('ProfileImageUrl').value">
+              </ion-avatar>
+              <ion-button (click)="selectFile()">Upload Image
+                <ion-spinner name="bubbles" *ngIf="uploadUserImageLoading$|async"></ion-spinner>
+              </ion-button>
+            </div>
             <ion-item>
               <ion-label position="stacked" color="primary">Full Name *</ion-label>
               <ion-input formControlName="Name" name="name" type="text" required>

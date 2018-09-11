@@ -43,3 +43,19 @@ export const getUpdateUserInfoError = createSelector(
     fromRoot.getUserState,
     fromUser.getUpdateUserInfoError
 );
+
+
+export const getUploadUserImageLoading = createSelector(
+    fromRoot.getUserState,
+    fromUser.getUploadUserImageLoading
+);
+
+export const getUploadUserImageComplete = createSelector(
+    fromRoot.getUserState,
+    fromUser.getUploadUserImageComplete
+);
+
+export const getUploadUserImageError = createSelector(
+    fromRoot.getUserState,
+    fromUser.getUploadUserImageError
+);

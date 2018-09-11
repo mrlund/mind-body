@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import * as fromRootStore from "../../../girls-platform/state/";
 import { NgForm, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -19,8 +19,11 @@ export class ProfilePage extends BaseFormComponent implements OnInit, OnDestroy 
   userInfoError$: Observable<any>;
   updateUserInfoLoading$: Observable<boolean>;
   updateUserInfoError$: Observable<any>;
+  uploadUserImageLoading$: Observable<boolean>;
+  uploadUserImageError$: Observable<any>;
   userInfo$: Observable<any>;
   alive: boolean = true;
+  @ViewChild("fileInput") fileInput: ElementRef;
   constructor(private router: Router,
     private store: Store<fromRootStore.State>,
     private cd: ChangeDetectorRef,
@@ -32,6 +35,8 @@ export class ProfilePage extends BaseFormComponent implements OnInit, OnDestroy 
     this.userInfoError$ = this.store.select(fromRootStore.getUserInfoLoading);
     this.updateUserInfoLoading$ = this.store.select(fromRootStore.getUpdateUserInfoLoading);
     this.updateUserInfoError$ = this.store.select(fromRootStore.getUpdateUserInfoError);
+    this.uploadUserImageLoading$ = this.store.select(fromRootStore.getUploadUserImageLoading);
+    this.uploadUserImageError$ = this.store.select(fromRootStore.getUploadUserImageError);
     this.userInfo$ = this.store.select(fromRootStore.getUserInfo);
     this.userInfo$.pipe(takeWhile(() => this.alive), filter(a => a != null))
       .subscribe(user => {
@@ -47,6 +52,15 @@ export class ProfilePage extends BaseFormComponent implements OnInit, OnDestroy 
         }
       });
 
+  }
+  selectFile() {
+    this.fileInput.nativeElement.click();
+  }
+  uploadImage(event: any) {
+    this.submitted = true;
+    if (event.target.files && event.target.files[0]) {
+      this.store.dispatch(new fromRootStore.UploadProfileImage({ files: event.target.files }))
+    }
   }
   createForm() {
     this.profileForm = this.fb.group({
