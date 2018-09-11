@@ -1,0 +1,37 @@
+gi-data-provider{
+    // hr.line{
+    //     background-color: var(--ion-color-primary);
+    // }
+    h1{
+        text-transform: uppercase;
+    }
+    h3{
+        color: var(--ion-color-primary);
+        padding-top: 20px;
+        font-size: 18px;
+    }
+    .line:after{
+        background-color: var(--ion-color-primary);
+        height: 1px;
+        content: "";
+        display: flex;
+        margin-top: 10px;
+    }
+    .uppercase{
+        text-transform: uppercase;
+    }
+    .primary{
+        color: var(--ion-color-primary);
+    }
+    .roadmap-title:after{
+        background-color: var(--ion-color-primary);
+        height: 1px;
+        content: "";
+        display: flex;
+        margin-top: 10px;
+     }
+     .roadmap-title{
+        color: var(--ion-color-primary);
+        text-transform: uppercase;
+     }
+}

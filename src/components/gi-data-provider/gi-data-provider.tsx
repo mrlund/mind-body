@@ -3,7 +3,7 @@ import { map, tap, mergeMap, share, switchMap, filter } from 'rxjs/operators';
 import { Observable, from, of } from 'rxjs';
 @Component({
     tag: 'gi-data-provider',
-    styleUrl: 'gi-data-provider.css'
+    styleUrl: 'gi-data-provider.scss'
 })
 export class GIDataProvider {
     @Prop() pageContentUrl: string;

@@ -51,17 +51,17 @@ gi-animation{
     flex-direction: column;
     align-items: center;
   .progressBar {
-    flex: 80%;
+    flex: 100%;
     border-radius: 20px;
     position: relative;
     left: 0;
     right: 0;
-    height: 10px;
+    height: 4px;
     background-color: rgba(205,205,205,0.7);
     width: 100%;
     .currentProgress {
       border-radius: 20px;
-      position: relative;
+      position: absolute;
       height: 25px;
        background-color: var(--ion-color-primary);
       transition: width 0.5s;
@@ -124,9 +124,16 @@ ion-button{
 
 @media screen and (min-width: 760px) {
 .navControls {
-  flex-direction: column;
+  flex-direction: row;
  .progressBar{
-    height: 10px;
+    height:24px;
+    flex:75%;
+   width:75%;
     } 
+ }
+ .button-panel{
+   flex:25%;
+   width:25%;
+
  }
 }

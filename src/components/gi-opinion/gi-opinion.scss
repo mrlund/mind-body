@@ -1,0 +1,35 @@
+gi-opinion{
+    h3.question{
+        font-size:18px;
+        color: #000; 
+    }
+    hr{
+        background-color: var(--ion-color-primary);
+    }
+    ul{
+        list-style: none;
+        padding-left: 0px;
+    }
+    ul>li{
+        font-size: 20px;
+        color: var(--ion-color-primary);
+        padding: 10px;
+        display: flex;
+        align-items: center;
+    }
+    ul>li:hover{
+        background-color: #e1e1e1;
+    }
+    li.selected{
+        background-color: #fff;
+        border: 1px solid var(--ion-color-primary);
+    }
+    ion-icon {
+  font-size: 30px;
+}
+.icon-group{
+   min-width: 70px;
+    text-align: right;
+    padding-right: 10px;
+}
+}

@@ -9,6 +9,7 @@ import * as fromAuth from "./auth.reducer";
 import * as fromMood from "./mood.reducer";
 import * as fromGww from "./gww.reducer";
 import * as fromGoal from "./goal.reducer";
+import * as fromUser from "./user.reducer";
 
 export interface State {
   routerReducer: fromRouter.RouterReducerState<
@@ -19,7 +20,8 @@ export interface State {
   auth: fromAuth.AuthState,
   mood: fromMood.MoodState,
   gww: fromGww.GwwState,
-  goal: fromGoal.GoalState
+  goal: fromGoal.GoalState,
+  user: fromUser.UserState
 }
 export const reducers: ActionReducerMap<State> = {
   routerReducer: fromRouter.routerReducer,
@@ -28,7 +30,8 @@ export const reducers: ActionReducerMap<State> = {
   auth: fromAuth.reducer,
   mood: fromMood.reducer,
   gww: fromGww.reducer,
-  goal: fromGoal.reducer
+  goal: fromGoal.reducer,
+  user: fromUser.reducer
 };
 
 export const getRouterState = createFeatureSelector<
@@ -50,6 +53,8 @@ export const getMoodState = createFeatureSelector<fromMood.MoodState>("mood");
 export const getGwwState = createFeatureSelector<fromGww.GwwState>("gww");
 
 export const getGoalState = createFeatureSelector<fromGoal.GoalState>("goal");
+
+export const getUserState = createFeatureSelector<fromUser.UserState>("user");
 
 export class CustomSerializer
   implements fromRouter.RouterStateSerializer<

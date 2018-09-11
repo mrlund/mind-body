@@ -4,3 +4,4 @@ export * from "./auth.selector";
 export * from "./mood.selector";
 export * from "./gww.selector";
 export * from "./goal.selector";
+export * from "./user.selector";

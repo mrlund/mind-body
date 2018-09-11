@@ -11,6 +11,31 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  Proile Details
+<ion-content>
+  <ion-grid fixed>
+    <ion-row justify-content-center>
+      <ion-col size-xl="6" size-xs="12" size-sm="10" size-md="8">
+        <div [formGroup]="profileForm" class="profile-form">
+          <ion-list padding>
+            <ion-item>
+              <ion-label position="stacked" color="primary">Full Name *</ion-label>
+              <ion-input formControlName="Name" name="name" type="text" required>
+              </ion-input>
+            </ion-item>
+            <ion-text padding>
+              <small *ngIf="profileForm.get('Name').hasError('required') && profileForm.get('Name').touched" padding-left>
+              Name is required
+              </small>
+              <small *ngFor="let error of serverErrors('Name',profileForm,submitted)">{{error.params}}</small>
+            </ion-text>
+            <div padding>
+              <ion-button (click)="updateUserInfo()" expand="block" [disabled]="updateUserInfoLoading$|async">Update
+                <ion-spinner name="bubbles" *ngIf="updateUserInfoLoading$|async"></ion-spinner>
+              </ion-button>
+            </div>
+          </ion-list>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

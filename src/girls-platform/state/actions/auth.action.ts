@@ -25,6 +25,7 @@ export const LOGOUT_USER_FAIL = '[AUTH] Logout User Fail';
 export const FORGOT_PASSWORD_REQUEST = '[AUTH] Forgot Password Request';
 export const FORGOT_PASSWORD_REQUEST_SUCCESS = '[AUTH] Forgot Password Request Success';
 export const FORGOT_PASSWORD_REQUEST_FAIL = '[AUTH] Forgot Password Request Fail';
+
 export const SET_CLASSROOM_MODE = '[AUTH] Set Class Room Mode'
 
 export class LoginUser implements Action {
@@ -91,6 +92,8 @@ export class LogoutUserSuccess implements Action {
 export class LogoutUserFail implements Action {
     readonly type = LOGOUT_USER_FAIL;
 }
+
+
 
 
 

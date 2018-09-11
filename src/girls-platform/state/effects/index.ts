@@ -9,8 +9,9 @@ import { MoodEffects } from "./mood.effect";
 import { GwwEffects } from "./gww.effect";
 
 import { GoalEffects } from "./goal.effect";
+import { UserEffects } from "./user.effect";
 
-export const effects: any[] = [TableOfContentEffects, PageContentEffects, AuthEffects, MoodEffects, GwwEffects, GoalEffects];
+export const effects: any[] = [TableOfContentEffects, PageContentEffects, AuthEffects, MoodEffects, GwwEffects, GoalEffects, UserEffects];
 
 export { TableOfContentEffects } from "./table-of-content.effect";
 
@@ -23,3 +24,4 @@ export { MoodEffects } from "./mood.effect";
 export { GwwEffects } from "./gww.effect";
 
 export { GoalEffects } from "./goal.effect";
+export { UserEffects } from "./user.effect";

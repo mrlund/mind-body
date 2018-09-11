@@ -16,6 +16,7 @@ export class AppAnimation {
   @State() classMode: boolean;
   @State() paused: boolean = true;
   @State() sizeOfCanvas: any;
+  @State() sizeofProgressBar: any;
   @State() dataLoaded: boolean = false;
   @State() currentProgressWidth: any = 0;
   @Element() el: HTMLElement;
@@ -28,7 +29,7 @@ export class AppAnimation {
   sound: any;
   firstFramePath: string = "";
 
-  isBusy: boolean = false;
+  @State() isBusy: boolean = false;
   animationVideoProgress: string = "0";
   library: any;
   loader: any;
@@ -74,7 +75,7 @@ export class AppAnimation {
 
   startLoading() {
     this.isBusy = true;
-    this.paused = true;
+    this.paused = false;
   }
 
   doneLoading() {
@@ -282,6 +283,8 @@ export class AppAnimation {
     lastW = iw; lastH = ih; lastS = sRatio;
     var newWidth = this.canvas.offsetWidth;
     this.sizeOfCanvas = newWidth;
+    var progressBar = this.el.querySelector(".progressBar") as HTMLElement
+    this.sizeofProgressBar = progressBar.offsetWidth;
     this.stage.tickOnUpdate = false;
     this.stage.update();
     this.stage.tickOnUpdate = true;
@@ -297,7 +300,7 @@ export class AppAnimation {
         this.currentProgressWidth = parseFloat(
           (this.timeline.position /
             this.timeline.duration *
-            this.sizeOfCanvas).toFixed(0)
+            this.sizeofProgressBar).toFixed(0)
         );
       }
     }
@@ -338,11 +341,10 @@ export class AppAnimation {
 
   rewindAnimation(event) {
     event.stopPropagation();
-    console.log("rewindAnimation", event);
     let stage = this.stage.children[0];
     let timeline = stage["timeline"];
     let newPosition = Math.round(
-      event.offsetX / this.sizeOfCanvas * timeline.duration
+      event.offsetX / this.sizeofProgressBar * timeline.duration
     );
     // var soundPosition = this.sound.position + 5000;
     // console.log("video", newPosition / 1000);
@@ -466,7 +468,7 @@ export class AppAnimation {
                   )}
               </ion-button>
               <ion-button
-               color="transperant"
+                color="transperant"
                 onClick={() => this.fastForward5Sec()}
               >
                 {" "}

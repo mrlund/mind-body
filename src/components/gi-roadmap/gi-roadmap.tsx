@@ -4,7 +4,7 @@ import { tap } from 'rxjs/operators';
 
 @Component({
     tag: 'gi-roadmap',
-    styleUrl: 'gi-roadmap.css'
+    styleUrl: 'gi-roadmap.scss'
 })
 export class GiRoadmap {
 
