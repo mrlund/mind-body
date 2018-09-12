@@ -484,11 +484,21 @@
                         },
                         {
                             "id": 4,
+                            "name": "Feelings: Present",
+                            "urlName": "feelings-present"
+                        },
+                        {
+                            "id": 5,
+                            "name": "Feelings: Discussion",
+                            "urlName": "feelings-discussion"
+                        },
+                        {
+                            "id": 6,
                             "name": "Activity: Emotional Wheels",
                             "urlName": "emotional-wheels"
                         },
                         {
-                            "id": 5,
+                            "id": 7,
                             "name": "Summary",
                             "urlName": "summary"
                         }
@@ -609,8 +619,8 @@
                     ]
                 },
                 {
-                    "id": 5,
-                    "number": 4,
+                    "id": 6,
+                    "number": 5,
                     "name": "Emotional IQ",
                     "urlName": "emotional-iq",
                     "pages": [
@@ -642,8 +652,8 @@
                     ]
                 },
                 {
-                    "id": 6,
-                    "number": 5,
+                    "id": 7,
+                    "number": 6,
                     "name": "Dealing With Conflict",
                     "urlName": "dealing-with-conflict",
                     "pages": [
@@ -675,8 +685,8 @@
                     ]
                 },
                 {
-                    "id": 7,
-                    "number": 6,
+                    "id": 8,
+                    "number": 7,
                     "name": "Physical Effects of Emotion",
                     "urlName": "physical-effects-of-emotion",
                     "pages": [
@@ -726,15 +736,15 @@
                             "urlName": "sign-in-your-body"
                         },
                         {
-                            "id": 8,
+                            "id": 10,
                             "name": "Summary",
                             "urlName": "summary"
                         }
                     ]
                 },
                 {
-                    "id": 8,
-                    "number": 7,
+                    "id": 9,
+                    "number": 8,
                     "name": "Time to Take Action",
                     "urlName": "time-to-take-action",
                     "pages": [
@@ -746,8 +756,8 @@
                     ]
                 },
                 {
-                    "id": 9,
-                    "number": 8,
+                    "id": 10,
+                    "number": 9,
                     "name": "Conclusion",
                     "urlName": "conclusion",
                     "pages": [
@@ -774,7 +784,7 @@
             "id": 4,
             "number": 3,
             "name": "Stress",
-            "urlName": "feelings-and-emotions",
+            "urlName": "stress",
             "sessions": []
         },
         {

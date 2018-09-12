@@ -1,0 +1,40 @@
+{
+    "quiz": [
+        {
+            "questionId": "101",
+            "question": "Which emotions where easy to guess?",
+            "responseType": 3, 
+            "options": []
+        },
+        {
+            "questionId": "101",
+            "question": "Which emotions where hard to guess?",
+            "responseType": 3, 
+            "options": []
+        },
+        {
+            "questionId": "101",
+            "question": "Which emotions where easy to act out?",
+            "responseType": 3, 
+            "options": []
+        },
+        {
+            "questionId": "101",
+            "question": "Which emotions where hard to act out?",
+            "responseType": 3, 
+            "options": []
+        },
+        {
+            "questionId": "101",
+            "question": "What might happen if the way a person acts gives a different message from what that person says?",
+            "responseType": 3, 
+            "options": []
+        },
+        {
+            "questionId": "101",
+            "question": "Since people show emotions differently, how can you be sure of what someone is feeling?",
+            "responseType": 3, 
+            "options": []
+        }
+    ]
+}

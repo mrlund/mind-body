@@ -1,0 +1,25 @@
+{
+    "quiz": [
+        {
+            "questionId": "101",
+            "question": "Which feeling is being expressed?",
+            "responseType": 1,
+            "options": [
+                {"option": "Anger"},
+                {"option": "Fear"},
+                {"option": "Disgust"},
+                {"option": "Hapiness"},
+                {"option": "Sadness"},
+                {"option": "Surprise"},
+                {"option": "Neutral"},
+                {"option": "Anxiety"},
+                {"option": "Love"},
+                {"option": "Despression"},
+                {"option": "Contempt"},
+                {"option": "Pride"},
+                {"option": "Shame"},
+                {"option": "Envy"}
+            ]
+        }
+    ]
+}
