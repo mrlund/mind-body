@@ -1,5 +1,6 @@
 import { Component, Element, State, Prop } from '@stencil/core';
 import { tap } from 'rxjs/operators';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
     tag: 'gi-quiz',
@@ -59,17 +60,39 @@ export class GiQuiz {
     //     });
     //     await toast.present();
     // }
-
+    renderOptions(question) {
+        if (question.responseType == 1) {
+            return (
+                <ul>
+                    {question.options.map(opt =>
+                        <li onClick={(evt) => this.selectOption(evt, question, opt)}>{opt.option}</li>
+                    )}
+                </ul>
+            )
+        } else if (question.responseType == 2) {
+            let options = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            return (
+                <ul>
+                    {options.map(opt =>
+                        <li onClick={(evt) => this.selectOption(evt, question, opt)}>{opt}</li>
+                    )}
+                </ul>
+            )
+        } else {
+            return (
+                <div>
+                    <input type="text" />
+                    <input type="button" value="Suggest" />
+                </div>
+            )
+        }
+    }
     render() {
         return (
             this.questions.map(q =>
                 <div class={'question'}>
                     <h3>{q.question}</h3>
-                    <ul>
-                        {q.options.map(opt =>
-                            <li onClick={(evt) => this.selectOption(evt, q, opt)}>{opt.option}</li>
-                        )}
-                    </ul>
+                    {this.renderOptions(q)}
                 </div>
             )
         );
