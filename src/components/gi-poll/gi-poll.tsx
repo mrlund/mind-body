@@ -1,11 +1,11 @@
-import { Component, Element, State, Prop } from '@stencil/core';
+import { Component, Element, State, Prop, Listen } from '@stencil/core';
 import { tap } from 'rxjs/operators';
 
 @Component({
-    tag: 'gi-quiz',
-    styleUrl: 'gi-quiz.css'
+    tag: 'gi-poll',
+    styleUrl: 'gi-poll.css'
 })
-export class GiQuiz {
+export class GiPoll {
 
     @Element()
     el: HTMLElement;
@@ -15,6 +15,12 @@ export class GiQuiz {
     @State()
     questions: Array<any> = [];
 
+
+    //Any child component can liste for server events like
+    @Listen('body:receivedSignalREvent')
+    gotServerUpdate(evt){
+        console.log(evt.detail);
+    }
     // @Prop({ connect: 'ion-toast-controller' })
     // toastCtrl: HTMLIonToastControllerElement;
 
@@ -36,21 +42,14 @@ export class GiQuiz {
     selectOption(evt, question, option) {
         evt.target.parentElement.childNodes.forEach(e => e.classList.remove("selected"));
         evt.target.classList.add("selected");
-        console.log(question, option);
-        this.dataSvc.saveData(
+        //console.log(question, option);
+        this.dataSvc.callSignalR(
             {
                 questionId: question.questionId,
                 question: question.question,
                 answer: option.option,
                 responseType: question.responseType
-            }, "/api/student/quiz-response")
-            .subscribe(x => {
-                // this.presentToast('Success');
-            }, error => {
-                evt.target.classList.remove("selected");
-                //  this.presentToast('There is an error');
-            });
-
+            }, "send");
     }
     // async presentToast(message: string) {
     //     const toast = await this.toastCtrl.create({
