@@ -44,7 +44,8 @@
     "@stencil/sass": "^0.1.0",
     "core-js": "^2.5.3",
     "rxjs": "6.3.2",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26",
+    "@aspnet/signalr": "1.1.0-preview2-35157"
   },
   "devDependencies": {
     "@angular/cli": "6.2.1",

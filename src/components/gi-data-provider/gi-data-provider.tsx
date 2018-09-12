@@ -1,6 +1,8 @@
 import { Component, Prop, State, Method, Event, EventEmitter } from '@stencil/core';
 import { map, tap, mergeMap, share, switchMap, filter } from 'rxjs/operators';
 import { Observable, from, of } from 'rxjs';
+
+
 @Component({
     tag: 'gi-data-provider',
     styleUrl: 'gi-data-provider.scss'
@@ -13,6 +15,8 @@ export class GIDataProvider {
     @Prop() baseServerUrl: string;
 
     @Prop() isClassroomModeOn: string;
+
+    @Prop() signalRService: any;
 
     @State()
     private data;
@@ -33,7 +37,6 @@ export class GIDataProvider {
     data$: Observable<any>;
 
     constructor() {
-
     }
     componentDidLoad() {
         this.loadPageContent();
@@ -68,6 +71,11 @@ export class GIDataProvider {
             });
     }
 
+    @Method()
+    callSignalR(data: any, hub: string){
+        console.log("Calling " + hub + " with  ", data);
+        this.signalRService.callSignalR(hub, JSON.stringify(data));
+    }
     @Method()
     getData(key: string): Observable<any> {
         //console.log("requested ", key);

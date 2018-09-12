@@ -26,6 +26,7 @@ import { CreateJsService } from '../girls-platform/services/CreateJsService';
 
 import { CoreModule } from '@app/core/core.module';
 import { SharedModule } from '@app/shared/shared.module';
+import { SignalRService } from '../girls-platform/services/SignalRService';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { SharedModule } from '@app/shared/shared.module';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     courseContentFactoryProvider,
     JsonContentProvider,
+    SignalRService,
     CreateJsService,
     {
       provide: RouterStateSerializer,

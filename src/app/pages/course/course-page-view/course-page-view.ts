@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef, AfterViewInit, ElementRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { tap, takeWhile } from 'rxjs/operators';
 import { Observable, pipe } from 'rxjs/';
@@ -7,6 +7,8 @@ import * as fromRootStore from "../../../../girls-platform/state/";
 import { JsonContentProvider } from "../../../../girls-platform/services/JsonContentProvider";
 import { ActivatedRoute } from "@angular/router";
 import { environment } from "@env/environment";
+import { SignalRService } from '../../../../girls-platform/services/SignalRService';
+
 @Component({
     selector: 'gi-course-page-view',
     templateUrl: 'course-page-view.html',
@@ -22,6 +24,8 @@ export class CoursePageView {
     public pageContentUrl: string = "none yet";
     private alive: boolean = true;
     classRoomMode$: Observable<boolean>;
+    private eventEmitter : (user,data) => void;
+
     pageRef: any;
     constructor(
         private sanitizer: DomSanitizer,
@@ -29,7 +33,16 @@ export class CoursePageView {
         private cd: ChangeDetectorRef,
         private route: ActivatedRoute,
         private jsonContentProvider: JsonContentProvider,
+        public signalR: SignalRService,
+        private el: ElementRef
     ) {
+        this.eventEmitter = (user, data) => {
+            console.log(user, data, this.el.nativeElement);
+            let event = new CustomEvent('receivedSignalREvent', { detail: JSON.parse(data) });
+            document.body.dispatchEvent(event);
+        }
+        this.signalR.signalRConn.on("SendMessage", this.eventEmitter);
+
         this.baseServerUrl = environment.apiUrl;
         this.pageRef = {
             courseModuleUrlPart: route.snapshot.params.courseModuleUrlPart,
@@ -63,6 +76,7 @@ export class CoursePageView {
     ionViewDidLeave() {
         this.alive = false;
         this.callWebComponentsMethod('gi-animation', 'destroyAnimation');
+        this.signalR.signalRConn.off("SendMessage", this.eventEmitter);
     }
     public safeHtml(html) {
         if (html && html.length) {
@@ -70,6 +84,9 @@ export class CoursePageView {
             html = html.replace(/BASE_URL/g, this.baseUrl);
             return this.sanitizer.bypassSecurityTrustHtml(html);
         }
+    }
+    public getStateObservable(name) {
+        return this[name];
     }
 
     callWebComponentMethod(elementName: string, methodName: string, ...args: any[]) {
