@@ -450,28 +450,29 @@ export class AppAnimation {
               />
             </div>
             <div class="button-panel">
-              <ion-button color="transperant" onClick={() => this.rewind5Sec()}>
+              <ion-button size="small" color="transperant" onClick={() => this.rewind5Sec()}>
                 {" "}
-                <ion-icon name="rewind" />{" "}
+                <ion-icon src="/assets/img/rewind.svg"></ion-icon>
+                {" "}
               </ion-button>
 
-              <ion-button
+              <ion-button size="small"
                 color="transperant"
                 onClick={() => this.playButtonAction()}
               >
                 {" "}
                 {this.paused ? (
-                  <ion-icon name="play" />
+                  <ion-icon name="pause"></ion-icon>
                 ) : (
-                    <ion-icon name="pause" />
+                    <ion-icon src="/assets/img/play-symbol.svg"></ion-icon>
                   )}
               </ion-button>
-              <ion-button
+              <ion-button size="small"
                 color="transperant"
                 onClick={() => this.fastForward5Sec()}
               >
                 {" "}
-                <ion-icon name="fastforward" />{" "}
+                <ion-icon src="/assets/img/forward.svg"></ion-icon>
               </ion-button>
             </div>
             {/*<div class="volume-controls">

@@ -3,7 +3,7 @@ import { tap } from 'rxjs/operators';
 
 @Component({
     tag: 'gi-post-to-feed',
-    styleUrl: 'gi-post-to-feed.css'
+    styleUrl: 'gi-post-to-feed.scss'
 })
 export class GiPostToFeed {
 
@@ -24,6 +24,19 @@ export class GiPostToFeed {
                 node = node.parentElement;
             }
         }
+    }
+
+    getToken(): any {
+        let tokenStr = window.localStorage["currentUser"];
+        if (tokenStr) {
+            let token = JSON.parse(tokenStr);
+            token = JSON.parse(token);
+            console.log(token);
+            if (new Date(token["Expiration"]).getTime() > new Date().getTime()) {
+                return token;
+            }
+        }
+        return null;
     }
 
     submitPost() {
@@ -49,12 +62,36 @@ export class GiPostToFeed {
         //TODO can we return data from the dataSvc so we know if it's successful and can update the form? (Perhaps replace it with the post itself?)
     }
 
+    renderUserInfo() {
+        var tokenInfo = this.getToken();
+        if (tokenInfo != null && tokenInfo.Token) {
+            return (
+                <ion-avatar class="header-avatar" slot="end">
+                    {tokenInfo.ProfileImageUrl
+                        ? <img src={tokenInfo.ProfileImageUrl} />
+                        : <img src="/assets/img/avatar.png" />
+                    }
+                </ion-avatar>
+            )
+        }
+        else {
+            return (
+                <ion-button slot="end" href="/login">Login to Post</ion-button>
+            );
+        }
+    }
+
     render() {
+        const userInfo = this.renderUserInfo();
         return (
             <ion-card>
+                <ion-item class="header">
+                    <ion-card-title>Great White Wall</ion-card-title>
+                    {userInfo}
+                </ion-item>
                 <ion-card-content>
                     <form>
-                        <ion-card-title>Great White Wall</ion-card-title>
+
                         <ion-item>
                             <ion-label>Public</ion-label>
                             <ion-radio class="IsPublic" slot="end" color="primary" value="IsPublic" name="IsPublic"></ion-radio>
@@ -62,7 +99,9 @@ export class GiPostToFeed {
                         <ion-item>
                             <ion-input class="PostText" required type="text" placeholder="Post Text" name="PostText"></ion-input>
                         </ion-item>
-                        <ion-button onClick={(evt) => this.submitPost()} size="small">Post</ion-button>
+                        <ion-item>
+                            <ion-button slot="end" onClick={(evt) => this.submitPost()} disabled={this.getToken() == null} >Post</ion-button>
+                        </ion-item>
                     </form>
                 </ion-card-content>
             </ion-card>

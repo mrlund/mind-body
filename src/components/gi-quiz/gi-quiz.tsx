@@ -95,6 +95,7 @@ export class GiQuiz {
             this.questions.map(q =>
                 <div class={'question'}>
                     <h3>{q.question}</h3>
+                     <hr />
                     {this.renderOptions(q)}
                 </div>
             )
