@@ -38,7 +38,6 @@ export class GreatWallItemComponent implements OnInit {
     this.store.dispatch(new fromRootStore.PostComment(obj))
   }
   public safeHtml(html) {
-    console.log(html)
     if (html && html.length) {
       return this.sanitizer.bypassSecurityTrustHtml(html);
     }

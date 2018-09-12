@@ -4,7 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Store, select } from '@ngrx/store';
-
+import { NavController } from "@ionic/angular"
 import * as fromRootStore from "../girls-platform/state/";
 import { Observable, of } from "rxjs"
 import { ActivatedRoute, Router, NavigationEnd, ActivatedRouteSnapshot } from "@angular/router";
@@ -29,6 +29,7 @@ export class AppComponent {
     private store: Store<fromRootStore.State>,
     private router: Router,
     private route: ActivatedRoute,
+    private navCtrl: NavController
   ) {
     this.appPages$ = this.store.select(fromRootStore.getTableOfContents);
     this.isUserAuthenticate$ = this.store.select(fromRootStore.getUserAuthenticated);
@@ -66,7 +67,12 @@ export class AppComponent {
       return listItem;
     });
   }
-
+  navigateToCoursePage(moduleUrlName, sessionUrlName, pageUrlName) {
+    this.navCtrl.navigateRoot('/course/' + moduleUrlName + "/" + sessionUrlName + "/" + pageUrlName);
+  }
+  navigateToPage(url) {
+    this.navCtrl.navigateRoot(url);
+  }
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();

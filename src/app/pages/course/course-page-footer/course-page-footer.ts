@@ -19,7 +19,7 @@ export class CoursePageFooter {
     nextOrPrev(url) {
         if (url && this.pageModel.page) {
             // this.pauseAnimation('app-animation', 'canvasPlayAnimation');
-            this.navCtrl.goRoot('/course/' + this.pageModel.page.pageReference.courseModuleUrlPart + "/" + this.pageModel.page.pageReference.sessionUrlPart + "/" + url)
+            this.navCtrl.navigateRoot('/course/' + this.pageModel.page.pageReference.courseModuleUrlPart + "/" + this.pageModel.page.pageReference.sessionUrlPart + "/" + url)
             // return ['/course', this.pageModel.page.pageReference.courseModuleUrlPart, this.pageModel.page.pageReference.sessionUrlPart, url];
         }
         return [];
