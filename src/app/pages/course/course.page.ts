@@ -34,6 +34,5 @@ export class CoursePage implements OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('dest');
   }
 }

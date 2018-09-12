@@ -36,7 +36,6 @@ export class AppAnimation {
 
   componentWillLoad() {
     // if (!this.isScriptLoaded(this.src)) {
-    console.log("script not loaded", this.src);
     this.classMode = this.initialClassMode;
     const script = document.createElement("script");
     this.firstFramePath = this.src.replace(".js", ".png");

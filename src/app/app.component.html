@@ -46,8 +46,7 @@
                 <ion-label auto-hide="false">&nbsp;{{p.name}}</ion-label>
               </ion-item-divider>
               <ul class="timeline" *ngIf="p.open">
-                <li *ngFor="let s of p.sessions" [routerDirection]="'root'" [routerLink]="['course', p.urlName, s.urlName, s.pages[0]?.urlName]"
-                  [class.active]="pageUrlName==p.urlName && sessionUrlName==s.urlName">
+                <li *ngFor="let s of p.sessions" (click)="navigateToCoursePage(p.urlName,s.urlName,s.pages[0]?.urlName)" [class.active]="pageUrlName==p.urlName && sessionUrlName==s.urlName">
                   <div class="direction-r">
                     <div class="flag-wrapper">
                       <span class="flag">{{s.name}}</span>
@@ -59,18 +58,18 @@
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false">
             <ion-item-group>
-              <ion-item-divider color="light" [routerDirection]="'root'" #accoutPanel>
+              <ion-item-divider color="light">
                 <ion-label>ACCOUNT</ion-label>
               </ion-item-divider>
               <ul class="timeline">
-                <li [routerLink]="['login']" *ngIf="!(isUserAuthenticate$|async)" [class.active]="url=='login'">
+                <li (click)="navigateToPage('/login')" *ngIf="!(isUserAuthenticate$|async)" [class.active]="url=='login'">
                   <div class="direction-r">
                     <div class="flag-wrapper">
                       <span class="flag">Login</span>
                     </div>
                   </div>
                 </li>
-                <li [routerLink]="['profile']" *ngIf="isUserAuthenticate$|async" [class.active]="url=='profile'">
+                <li (click)="navigateToPage('/profile')" *ngIf="isUserAuthenticate$|async" [class.active]="url=='profile'">
                   <div class="direction-r">
                     <div class="flag-wrapper">
                       <span class="flag">Profile</span>
