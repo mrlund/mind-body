@@ -1,0 +1,17 @@
+
+.people{
+    display: flex;
+}
+ .character-intro {
+    position: absolute;
+    width: 100%;
+    padding: 15px;
+    border: 1px red solid;
+    border-radius: 5px;
+}
+.character-image{
+    opacity: 0.5
+}
+.character-image:hover{
+    opacity: 1
+}

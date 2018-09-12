@@ -37,7 +37,7 @@
 <div class="footer">
   <div *ngIf="post.Comments.length" text-right><small (click)="presentModal(post.Comments)">{{post.Comments.length}} Comments</small></div>
   <hr/>
-  <ion-grid>
+  <!--<ion-grid>
     <ion-row justify-content-between>
       <ion-col size="4">
         <small>
@@ -50,7 +50,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <hr/>
+  <hr/>-->
   <ng-container *ngFor="let item of post.Comments">
     <div class="comment-box" style="padding:5px 10px;background-color: #f5f5f5;border-radius: 10px;" (click)="presentModal(post.Comments)">
       <small><b>{{item.Name}}</b> {{item.PostText}}</small></div>

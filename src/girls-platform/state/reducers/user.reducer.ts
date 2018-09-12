@@ -62,6 +62,7 @@ export function reducer(state: UserState = initialState, action: fromUser.UserAc
         }
 
         case fromUser.UPDATE_USER_INFO_SUCCESS: {
+            updateLocalStorageName(action.payload.Name);
             return {
                 ...state,
                 updateUserLoading: false,
@@ -88,6 +89,7 @@ export function reducer(state: UserState = initialState, action: fromUser.UserAc
 
         case fromUser.UPLOAD_PROFILE_IMAGE_SUCCESS: {
             var user = { ...state.userInfo, ProfileImageUrl: action.payload[0].FullImageUrl };
+            updateLocalStorageProfileImageUrl(action.payload[0].FullImageUrl);
             return {
                 ...state,
                 uploadUserImageLoading: false,
@@ -125,3 +127,15 @@ export const getUpdateUserInfoError = (state: UserState) => state.updateUserErro
 export const getUploadUserImageLoading = (state: UserState) => state.uploadUserImageLoading;
 export const getUploadUserImageComplete = (state: UserState) => state.uploadUserImageComplete;
 export const getUploadUserImageError = (state: UserState) => state.uploadUserImageError;
+
+
+function updateLocalStorageProfileImageUrl(profileUrl) {
+    var currentUser = JSON.parse(JSON.parse(localStorage.getItem('currentUser')));
+    currentUser.ProfileImageUrl = profileUrl;
+    localStorage.setItem("currentUser", JSON.stringify(JSON.stringify(currentUser)));
+}
+function updateLocalStorageName(name) {
+    var currentUser = JSON.parse(JSON.parse(localStorage.getItem('currentUser')));
+    currentUser.Name = name;
+    localStorage.setItem("currentUser", JSON.stringify(JSON.stringify(currentUser)));
+}
