@@ -1,4 +1,4 @@
-<ion-grid *ngIf="post">
+<!--<ion-grid *ngIf="post">
   <ion-row>
     <ion-col size="2">
       <ion-avatar class="header-avatar">
@@ -14,7 +14,21 @@
       <ion-icon name="globe" *ngIf="post.IsPublic"></ion-icon>
     </ion-col>
   </ion-row>
-</ion-grid>
+</ion-grid>-->
+
+<ion-item>
+  <ion-avatar class="header-avatar" slot="start">
+    <img class="deed-avatar-image preload-image" src="/assets/img/avatar.png" />
+  </ion-avatar>
+  <div>
+    <strong class="requester-name" text-capitalize>{{post.Name}}</strong>
+    <div><small> {{post.Created|date}}</small></div>
+  </div>
+  <div slot="end">
+    <ion-icon name="lock" *ngIf="!post.IsPublic"></ion-icon>
+    <ion-icon name="globe" *ngIf="post.IsPublic"></ion-icon>
+  </div>
+</ion-item>
 <div padding>
   <!--<div [innerHTML]="post.PostText"></div>-->
   <div [innerHTML]="safeHtml(post.PostText)"></div>
@@ -42,21 +56,13 @@
       <small><b>{{item.Name}}</b> {{item.PostText}}</small></div>
     <hr>
   </ng-container>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="2" align-self-center>
-        <ion-avatar class="footer-avatar">
-          <img src="/assets/img/avatar.png" />
-        </ion-avatar>
-      </ion-col>
-      <ion-col>
-        <ion-input placeholder="Write a comment" [(ngModel)]="comment"></ion-input>
-      </ion-col>
-      <ion-col size="2" align-self-center>
-        <ion-button (click)="postComment()" [disabled]="!comment">
-          <ion-icon name="send"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-item>
+    <ion-avatar class="footer-avatar" slot="start">
+      <img src="/assets/img/avatar.png" />
+    </ion-avatar>
+    <ion-input placeholder="Write a comment" [(ngModel)]="comment"></ion-input>
+    <ion-button (click)="postComment()" [disabled]="!comment" slot="end">
+      <ion-icon name="send"></ion-icon>
+    </ion-button>
+  </ion-item>
 </div>

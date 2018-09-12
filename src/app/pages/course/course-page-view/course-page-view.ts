@@ -22,7 +22,7 @@ export class CoursePageView {
     public pageContentUrl: string = "none yet";
     private alive: boolean = true;
     classRoomMode$: Observable<boolean>;
-
+    pageRef: any;
     constructor(
         private sanitizer: DomSanitizer,
         private store: Store<fromRootStore.State>,
@@ -31,7 +31,7 @@ export class CoursePageView {
         private jsonContentProvider: JsonContentProvider,
     ) {
         this.baseServerUrl = environment.apiUrl;
-        let pageRef = {
+        this.pageRef = {
             courseModuleUrlPart: route.snapshot.params.courseModuleUrlPart,
             sessionUrlPart: route.snapshot.params.sessionUrlPart,
             pageUrlPart: route.snapshot.params.pageUrlPart,
@@ -41,14 +41,14 @@ export class CoursePageView {
         };
         this.baseUrl = "/assets/content/" + route.snapshot.params.courseModuleUrlPart + "/" + route.snapshot.params.sessionUrlPart;
         this.pageContentUrl = this.baseUrl + "/" + route.snapshot.params.pageUrlPart;
-        this.store.dispatch(new fromRootStore.GetNextAndPrevPage(pageRef));
+        this.store.dispatch(new fromRootStore.GetNextAndPrevPage(this.pageRef));
 
         this.pageModel$ = this.store.select(fromRootStore.getPageContents);
-        this.pageModel$.pipe(takeWhile(() => this.alive)).subscribe((x) => {
-            //TODO: on refresh not calling getIdInfo function
-            var data = this.jsonContentProvider.getIdFromPage(pageRef);
-            this.callWebComponentMethod('gi-data-provider', 'getIdInfo', data);
-        })
+        // this.pageModel$.pipe(takeWhile(() => this.alive)).subscribe((x) => {
+        //     //TODO: on refresh not calling getIdInfo function
+        //     var data = this.jsonContentProvider.getIdFromPage(this.pageRef);
+        //     this.callWebComponentMethod('gi-data-provider', 'getIdInfo', data);
+        // })
         this.classRoomMode$ = this.store.select(fromRootStore.getClassRoomMode);
         this.classRoomMode$.pipe(takeWhile(() => this.alive)).subscribe((val) => {
             this.callWebComponentsMethod('gi-animation', 'classRoomModeChanged', val);
@@ -56,7 +56,10 @@ export class CoursePageView {
         })
 
     }
-
+    getPageIdInfo() {
+        var data = this.jsonContentProvider.getIdFromPage(this.pageRef);
+        this.callWebComponentMethod('gi-data-provider', 'getIdInfo', data);
+    }
     ionViewDidLeave() {
         this.alive = false;
         this.callWebComponentsMethod('gi-animation', 'destroyAnimation');
@@ -81,7 +84,7 @@ export class CoursePageView {
         var componentArray = Array.from(components);
         for (var i = 0; i < componentArray.length; i++) {
 
-          //  console.log("webcomp call", componentArray[i]);
+            //  console.log("webcomp call", componentArray[i]);
             if (componentArray[i]) {
                 await componentArray[i].componentOnReady();
                 await (componentArray[i] as any)[methodName].apply(componentArray[i], args);

@@ -36,10 +36,14 @@ export class GiOpinion {
         console.log(question, option);
         this.dataSvc.saveData(
             {
-                questionId: question.questionId,
-                question: question.question,
-                answer: option.option,
-                responseType: question.responseType
+                QuestionId: question.questionId,
+                Question: question.question,
+                Response: option,
+                ResponseType: question.responseType,
+                ResponseId: 1,
+                ResponseName: "demo",
+                CourseClassId: 1,
+                ExtraResponseData: ""
             }, "/api/student/quiz-response")
             .subscribe(x => {
                 // this.presentToast('Success');

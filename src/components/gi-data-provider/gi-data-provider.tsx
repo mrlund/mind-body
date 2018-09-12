@@ -1,4 +1,4 @@
-import { Component, Prop, State, Method } from '@stencil/core';
+import { Component, Prop, State, Method, Event, EventEmitter } from '@stencil/core';
 import { map, tap, mergeMap, share, switchMap, filter } from 'rxjs/operators';
 import { Observable, from, of } from 'rxjs';
 @Component({
@@ -26,7 +26,10 @@ export class GIDataProvider {
     getIdInfo(obj) {
         this.idInfo = obj;
     }
-
+    @Event() valueChanged: EventEmitter;
+    getPageIdInfoHandler() {
+        this.valueChanged.emit();
+    }
     data$: Observable<any>;
 
     constructor() {
@@ -34,6 +37,7 @@ export class GIDataProvider {
     }
     componentDidLoad() {
         this.loadPageContent();
+        this.getPageIdInfoHandler();
     }
     loadData() {
         this.data$ = from(fetch(this.pageContentUrl + ".json")).pipe(
@@ -88,28 +92,32 @@ export class GIDataProvider {
     saveData(data: any, api: string) {
         let token = this.getToken();
         if (token) {
-            let postData = {
-                ResponseType: data.responseType,
-                ResponseId: 1,
-                ResponseName: "demo",
-                CourseClassId: 1,
-                Question: data.question,
-                Response: data.answer,
-                ExtraResponseData: "",
-                CourseId: this.idInfo.CourseId,
-                CourseModuleId: this.idInfo.CourseId,
-                SessionId: this.idInfo.CourseId,
-                PageId: this.idInfo.CourseId
-            };
+            // let postData = {
+            //     ResponseType: data.responseType,
+            //     ResponseId: 1,
+            //     ResponseName: "demo",
+            //     CourseClassId: 1,
+            //     Question: data.question,
+            //     Response: data.answer,
+            //     ExtraResponseData: "",
+            //     CourseId: this.idInfo.CourseId,
+            //     CourseModuleId: this.idInfo.CourseId,
+            //     SessionId: this.idInfo.CourseId,
+            //     PageId: this.idInfo.CourseId
+            // };
+            data.CourseId = this.idInfo.CourseId;
+            data.CourseModuleId = this.idInfo.CourseId;
+            data.SessionId = this.idInfo.CourseId;
+            data.PageId = this.idInfo.CourseId;
             return from(fetch(this.baseServerUrl + api, {
                 method: 'POST',
-                body: JSON.stringify(postData),
+                body: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 }
             })).pipe(
-                switchMap(x => {  return x.json(); })
+                switchMap(x => { return x.json(); })
             );
         } else {
             console.log("No token, cant save");
@@ -121,8 +129,9 @@ export class GIDataProvider {
         if (tokenStr) {
             let token = JSON.parse(tokenStr);
             token = JSON.parse(token);
-            if (new Date(token["expiration"]).getTime() > new Date().getTime()) {
-                return token.token;
+            console.log(token);
+            if (new Date(token["Expiration"]).getTime() > new Date().getTime()) {
+                return token.Token;
             }
         }
         return null;

@@ -2,11 +2,11 @@
   <div class="header-bar">
     <div class="header-text-container">
       <h2>EDUCATION</h2>
-      <div class="mind-body-header" [routerLink]="['home']">
+      <div class="mind-body-header" (click)="navigateToPage('/home')">
         <h2>MIND & BODY</h2>
       </div>
     </div>
-    <div class="header-logo-container" [routerLink]="['home']">
+    <div class="header-logo-container" (click)="navigateToPage('/home')">
       <img class="header-logo" src="/assets/img/logo-primary.png">
     </div>
   </div>
@@ -23,7 +23,7 @@
         <ion-list>
           <ion-menu-toggle>
             <ion-item-group>
-              <ion-item [routerLink]="['home']">
+              <ion-item (click)="navigateToPage('/home')">
                 <ion-icon name="home" item-left></ion-icon>
                 Home
               </ion-item>

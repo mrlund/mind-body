@@ -7,7 +7,7 @@
             <ng-container *ngIf="pageModel && pageModel.page">
               <!--{{pageModel?.page?.name}}-->
               <gi-data-provider *ngIf="pageContentUrl" [baseServerUrl]="baseServerUrl" [pageContentUrl]="pageContentUrl" [baseContentUrl]="baseUrl"
-                [isClassroomModeOn]="classRoomMode$|async">
+                [isClassroomModeOn]="classRoomMode$|async" (valueChanged)="getPageIdInfo()">
                 <!--<div [innerHTML]="safeHtml(pageModel?.page?.htmlContent)"></div>-->
               </gi-data-provider>
             </ng-container>

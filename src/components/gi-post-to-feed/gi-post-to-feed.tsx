@@ -27,12 +27,25 @@ export class GiPostToFeed {
     }
 
     submitPost() {
-        let formData = new FormData(this.el.querySelector("form")) as any;
-        var data = {};
-        formData.forEach(function (value, key) {
-            data[key] = value;
-        });
-        this.dataSvc.saveData(data, "feed");
+
+        //let formData = new FormData(this.el.querySelector("form")) as any;
+        var postText = this.el.getElementsByClassName("PostText")[0] as HTMLInputElement;
+        var isPublic = this.el.getElementsByClassName("IsPublic")[0] as HTMLInputElement;
+        var data = {
+            PostText: postText.value,
+            IsPublic: isPublic.checked,
+            CourseClassId: 1,
+            ExternalResourceUrl: ""
+        };
+        console.log(data);
+        this.dataSvc.saveData(data, "/api/class/feed")
+            .subscribe(x => {
+                console.log("success");
+                // this.presentToast('Success');
+            }, error => {
+                console.log("error");
+                //  this.presentToast('There is an error');
+            });;
         //TODO can we return data from the dataSvc so we know if it's successful and can update the form? (Perhaps replace it with the post itself?)
     }
 
@@ -44,12 +57,12 @@ export class GiPostToFeed {
                         <ion-card-title>Great White Wall</ion-card-title>
                         <ion-item>
                             <ion-label>Public</ion-label>
-                            <ion-radio slot="end" color="danger" name="true"></ion-radio>
+                            <ion-radio class="IsPublic" slot="end" color="primary" value="IsPublic" name="IsPublic"></ion-radio>
                         </ion-item>
                         <ion-item>
-                            <ion-input required type="text" placeholder="Post Text"></ion-input>
+                            <ion-input class="PostText" required type="text" placeholder="Post Text" name="PostText"></ion-input>
                         </ion-item>
-                        <ion-button size="small">Post</ion-button>
+                        <ion-button onClick={(evt) => this.submitPost()} size="small">Post</ion-button>
                     </form>
                 </ion-card-content>
             </ion-card>
