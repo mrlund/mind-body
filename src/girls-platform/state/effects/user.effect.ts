@@ -114,6 +114,7 @@ export class UserEffects {
         });
         toast.present();
     }
+    
     constructor(private actions$: Actions, private userService: UserService, private toastController: ToastController, private router: Router) { }
 
 }

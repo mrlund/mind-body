@@ -18,7 +18,7 @@
         <div [formGroup]="profileForm" class="profile-form">
           <ion-list padding>
             <input type="file" #fileInput (change)="uploadImage($event)" style="display:none;" accept="image/*" />
-            <div padding>
+            <div class="image-upload-part" padding>
               <ion-avatar>
                 <img [src]="profileForm.get('ProfileImageUrl').value==''?'/assets/img/avatar.png':profileForm.get('ProfileImageUrl').value">
               </ion-avatar>
