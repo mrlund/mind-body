@@ -4,7 +4,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
     tag: 'gi-poll',
-    styleUrl: 'gi-poll.css'
+    styleUrl: 'gi-poll.scss'
 })
 export class GiPoll {
 
@@ -100,17 +100,32 @@ export class GiPoll {
         } else if (question.responseType == 2) {
             let options = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
             return (
-                <ul>
-                    {options.map(opt =>
-                        <li onClick={(evt) => this.selectOption(evt, question, opt)}>{opt}</li>
-                    )}
-                </ul>
+                <ion-item>
+                    <ion-label>Choose Option <ion-icon name="arrow-back" mode="ios"></ion-icon></ion-label>
+                    <ion-select id="customAlertSelect" interface="alert" >
+                        <ion-select-option value="bacon">Bacon</ion-select-option>
+                        <ion-select-option value="olives">Black Olives</ion-select-option>
+                        <ion-select-option value="xcheese">Extra Cheese</ion-select-option>
+                        <ion-select-option value="peppers">Green Peppers</ion-select-option>
+                        <ion-select-option value="mushrooms">Mushrooms</ion-select-option>
+                        <ion-select-option value="onions">Onions</ion-select-option>
+                        <ion-select-option value="pepperoni">Pepperoni</ion-select-option>
+                        <ion-select-option value="pineapple">Pineapple</ion-select-option>
+                        <ion-select-option value="sausage">Sausage</ion-select-option>
+                        <ion-select-option value="Spinach">Spinach</ion-select-option>
+                    </ion-select>
+                </ion-item>
+
             )
         } else {
             return (
                 <div>
-                    <input type="text" />
-                    <input type="button" value="Suggest" />
+
+                    <input slot="start" type="text" placeholder="Type suggestion" />
+
+                    <ion-item>
+                        <ion-button class="suggetion-btn" size="default" slot="end" color="primary">ADD SUGGESTION</ion-button>
+                    </ion-item>
                 </div>
             )
         }
