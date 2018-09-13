@@ -11,7 +11,7 @@ export class GiAssignment {
 
     render() {
         return (
-            <div>
+            <div class="assignment">
                 <div class="assignment-header">
                     <slot name="header" />
                 </div>
