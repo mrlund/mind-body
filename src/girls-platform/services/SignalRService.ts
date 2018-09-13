@@ -12,7 +12,7 @@ export class SignalRService {
     constructor() {
         console.log("Starting signalR");
         this.signalRConn = new signalR.HubConnectionBuilder()
-            .withUrl("https://localhost:44399/hubs/chat", { accessTokenFactory: () => this.getToken()})
+            .withUrl("https://localhost:44399/hubs/girls", { accessTokenFactory: () => this.getToken()})
             .build();
 
         this.signalRConn.on("SendMessage", (user, data) => {
@@ -23,15 +23,25 @@ export class SignalRService {
             console.log("Closed: ", x);
             this.isOpen = false;
         });
+
+        if (this.getToken()){
+            this.signalRConn.start()
+                .then(() => this.isOpen = true);
+        }
         
-        this.signalRConn.start()
-            .then(() => this.isOpen = true);
     }
     callSignalR(hub: string, data: any){
         //console.log("Service calling " + hub + " with  ", data);
+        if (!this.getToken()){
+            console.log("Cannot connect to signalR. Not logged in");
+            return;
+        }
         if (!this.isOpen){
             this.signalRConn.start()
-                .then(() => this.signalRConn.invoke(hub, JSON.stringify(data)));
+                .then(() => {
+                    this.isOpen = true;
+                    this.signalRConn.invoke(hub, JSON.stringify(data));
+                });
         } else {
 
             this.signalRConn.invoke(hub, JSON.stringify(data));
@@ -43,9 +53,11 @@ export class SignalRService {
             let token = JSON.parse(tokenStr);
             token = JSON.parse(token);
             if (new Date(token["Expiration"]).getTime() > new Date().getTime()) {
+                //console.log("returned token", token.Token);
                 return token.Token;
             }
         }
+        console.log("No token");
         return null;
     }
 

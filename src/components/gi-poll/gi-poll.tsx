@@ -1,5 +1,6 @@
 import { Component, Element, State, Prop, Listen } from '@stencil/core';
 import { tap } from 'rxjs/operators';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
     tag: 'gi-poll',
@@ -16,14 +17,30 @@ export class GiPoll {
     questions: Array<any> = [];
 
 
+    @State()
+    isTeacherMode: boolean = true;
+
+    @State()
+    responses: Array<any> = [];
+
     //Any child component can liste for server events like
     @Listen('body:receivedSignalREvent')
     gotServerUpdate(evt) {
         console.log(evt.detail);
+        if (evt.detail.name == "PollSubmission") {
+
+        }
     }
     // @Prop({ connect: 'ion-toast-controller' })
     // toastCtrl: HTMLIonToastControllerElement;
 
+    addSubmission(response) {
+        if (!this.responses[response.question].responses[response.answer]) {
+            this.responses[response.question].responses[response.answer] = 0;
+        }
+        this.responses[response.question].responses[response.answer]++;
+        this.responses[response.question].total++;
+    }
     componentDidLoad() {
         let node = this.el.parentElement;
         while (node.parentElement && !this.dataSvc) {
@@ -34,11 +51,21 @@ export class GiPoll {
             }
         }
         let data$ = this.dataSvc.getData("quiz").pipe(
-            tap(val => this.questions = val)
+            tap(val => {
+                this.questions = val;
+                this.setupResponseGraph(this.questions);
+            })
         );
         data$.subscribe();
     }
 
+    setupResponseGraph(questions) {
+        questions.forEach(q => {
+            let obj = { question: q.question, responses: { "Yes": 13, "No": 23}, total: 36 };
+            this.responses[q.question] = obj;
+        })
+        console.log(this.responses);
+    }
     selectOption(evt, question, option) {
         evt.target.parentElement.childNodes.forEach(e => e.classList.remove("selected"));
         evt.target.classList.add("selected");
@@ -58,8 +85,9 @@ export class GiPoll {
     //     });
     //     await toast.present();
     // }
-
-
+    toggleMode(){
+        this.isTeacherMode = !this.isTeacherMode;
+    }
     renderOptions(question) {
         if (question.responseType == 1) {
             return (
@@ -101,15 +129,44 @@ export class GiPoll {
                 </div>
             )
         }
+
     }
-    render() {
+    renderQuestions() {
         return (
             this.questions.map(q =>
                 <div class={'question'}>
-                    <h3>{q.question}</h3>
+                    <h3>{q.question} <span class="toggle-mode" onClick={()=>this.toggleMode()}>.</span></h3>
                     {this.renderOptions(q)}
                 </div>
             )
-        );
+        )
+    }
+    columnHeight(responseCount, totalResponseCount){
+        let maxScale = 500;
+        let scaleUnit = maxScale / totalResponseCount;
+        var size = scaleUnit  * responseCount;
+        return {height: `${size}px`}
+    }
+    renderResults() {
+        return (
+            Object.keys(this.responses).map(q =>
+            <div class="graph-container">
+                <p class="question-title">{q} <span class="toggle-mode" onClick={()=>this.toggleMode()}>.</span></p>
+                {
+                    Object.keys(this.responses[q].responses).map(r =>
+                        <div class={'question'}>
+                            <div class="answer-column" style={this.columnHeight(this.responses[q].responses[r], this.responses[q].total )}>{this.responses[q].responses[r]}</div>
+                            <p>{r}</p>
+                        </div>
+                    )
+                }
+            </div>
+            )
+        )
+    }
+    render() {
+        return (
+            this.isTeacherMode ? this.renderResults() : this.renderQuestions()
+        )
     }
 }
