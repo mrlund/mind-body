@@ -22,3 +22,30 @@ div.question li.selected {
     font-weight: bold;
     background: #9e0428;
 }
+.graph-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+.graph-container .question-title {
+    width: 100%;
+}
+.graph-container div.question {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex-basis: 100px;
+}
+.graph-container div.question p {
+    text-align: center;
+}
+.answer-column {
+    background-color: antiquewhite;
+    flex: 0 0 auto;
+    text-align: center;
+    color: #c0873c;
+}
+.toggle-mode {
+    color: #888;
+}
