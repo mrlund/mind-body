@@ -49,4 +49,12 @@ gi-data-provider{
         transform: rotate(-90deg);   
         margin-right: 10px;
     }
+    .center-x{
+        display: flex;
+        justify-content: center;
+    }
+     .center-y{
+        display: flex;
+        align-items: center;
+    }
 }
