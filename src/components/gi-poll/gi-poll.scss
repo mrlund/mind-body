@@ -1,0 +1,106 @@
+div.question {
+    margin-bottom: 5px;
+}
+div.question ul {
+    padding-left: 5px;
+}
+div.question li {
+    list-style-type: none;
+    cursor: pointer;    
+    background: #e5053a;
+    border-radius: 4px;
+    vertical-align: middle;
+    line-height: 40px;
+    padding-left: 20px;
+    color: #fff;
+    margin-bottom: 5px;
+    width: 30%;
+}
+.question h3{
+        color: #333;
+    padding-top: 14px;
+    margin-bottom: 4px;
+    font-size: 16px;
+}
+div.question li.selected {
+    font-weight: bold;
+    background: #9e0428;
+}
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+input[type=text]:focus {
+    border: 2px solid  var(--ion-color-primary);
+}
+ion-item .item-native{
+    padding-left: 0px !important;
+}
+ion-button.suggetion-btn{
+    margin-left: 0px !important;
+}
+
+ion-alert{
+    .alert-wrapper{
+        --min-width:320px;
+         border: 1px solid  #e5053a !important;
+    }
+    .alert-button{
+     background-color: var(--ion-color-primary);
+     color: #fff;   
+    }
+    .alert-button-group button{
+        background-color: var(--ion-color-primary) !important;
+     color: #fff !important;   
+    }
+    .alert-button-group{
+        justify-content: space-between !important;
+        padding: 10px 12px 10px 24px !important;
+    }
+    .alert-radio-icon{
+        display: none !important;
+    }
+.alert-head {
+    display: none;
+}
+.alert-radio-label{
+padding: 13px 26px 13px 34px !important;
+}
+.alert-radio-group {
+    padding: 20px 0px  !important;
+    border-bottom: none !important;;
+}
+    .alert-radio-button {
+    &[aria-checked="true"] {
+        border-top: 1px solid  #e5053a !important;
+        border-bottom: 1px solid  #e5053a !important;
+        .alert-radio-label {
+color:#e5053a !important;
+        }
+        
+    }
+    }
+    ion-backdrop{
+    opacity: 0.1 !important;
+}
+
+
+}
+ion-item{
+ion-label{
+  color:var(--ion-color-primary) !important;
+  ion-icon{
+      transform: rotate(-90deg)  !important;
+  }
+}
+}
+.select-icon{
+    display: none !important;
+}
