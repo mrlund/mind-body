@@ -2,17 +2,17 @@ import { Injectable } from "@angular/core";
 import * as signalR from '@aspnet/signalr';
 import { Subject } from "rxjs";
 
+import { environment } from "@env/environment";
 @Injectable()
 export class SignalRService {
 
     public signalRConn: any;
 
     isOpen: boolean;
-
     constructor() {
         console.log("Starting signalR");
         this.signalRConn = new signalR.HubConnectionBuilder()
-            .withUrl("https://localhost:44399/hubs/girls", { accessTokenFactory: () => this.getToken()})
+            .withUrl(`${environment.apiUrl}/hubs/girls`, { accessTokenFactory: () => this.getToken() })
             .build();
 
         this.signalRConn.on("SendMessage", (user, data) => {
@@ -24,19 +24,19 @@ export class SignalRService {
             this.isOpen = false;
         });
 
-        if (this.getToken()){
+        if (this.getToken()) {
             this.signalRConn.start()
                 .then(() => this.isOpen = true);
         }
-        
+
     }
-    callSignalR(hub: string, data: any){
+    callSignalR(hub: string, data: any) {
         //console.log("Service calling " + hub + " with  ", data);
-        if (!this.getToken()){
+        if (!this.getToken()) {
             console.log("Cannot connect to signalR. Not logged in");
             return;
         }
-        if (!this.isOpen){
+        if (!this.isOpen) {
             this.signalRConn.start()
                 .then(() => {
                     this.isOpen = true;
