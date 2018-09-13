@@ -3,7 +3,7 @@
         {
             "questionId": "101",
             "question": "Which feeling is being expressed?",
-            "responseType": 2,
+            "responseType": 1,
             "options": [
                 {"option": "Anger"},
                 {"option": "Fear"},
