@@ -133,6 +133,11 @@
                         },
                         {
                             "id": 5,
+                            "name": "Make Comics",
+                            "urlName": "make-comics"
+                        },
+                        {
+                            "id": 5,
                             "name": "Summary",
                             "urlName": "summary"
                         }
@@ -201,6 +206,11 @@
                             "id": 4,
                             "name": "Activity: Miracle Morning",
                             "urlName": "miracle-morning"
+                        },
+                        {
+                            "id": 5,
+                            "name": "Take Action Project",
+                            "urlName": "savers-action-project"
                         },
                         {
                             "id": 5,
