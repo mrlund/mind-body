@@ -36,6 +36,8 @@ export class GiCompass {
 
     componentDidLoad() {
         this.drawOnCompass();
+        window.addEventListener('resize', () => this.drawOnCompass());
+
         //context.beginPath();
         // context.fillStyle = "rgba(96, 187,70, 0.5)";
         // // Go to center of the Chart
@@ -54,10 +56,10 @@ export class GiCompass {
 
     }
 
-    @Listen("window:resize")
-    resize() {
-        this.drawOnCompass()
-    }
+    // @Listen("window:resize")
+    // resize() {
+    //     this.drawOnCompass()
+    // }
 
     drawOnCompass() {
         this.canvas = this.el.querySelector(".myCanvas");
@@ -148,6 +150,9 @@ export class GiCompass {
             return defaultRadius;
         }
         else {
+            if (section > 5) {
+                return defaultRadius + (section - 1) * sectionRadius + 1;
+            }
             return defaultRadius + (section - 1) * sectionRadius;
         }
     }
