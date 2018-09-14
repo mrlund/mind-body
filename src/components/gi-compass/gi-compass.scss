@@ -1,0 +1,22 @@
+#compassImage{
+    position:absolute;z-index:1;
+}
+#compassOverImage{
+      position: absolute;
+    z-index: 30;
+    top: 11.6%;
+    left: 11.8%;
+    width: 76.5%;
+    height: 76.5%;
+}
+.myCanvas{
+    position:relative;
+    z-index:20;
+}
+#container{
+    display:inline-block;
+    // width:500px; 
+    // height:500px;
+    margin: 0 auto; 
+    position:relative; 
+}
