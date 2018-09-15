@@ -8,25 +8,25 @@ export class GiCompass {
 
     @Element()
     el: HTMLElement;
-    @State()
-    resilence: number = 3;
-    @State()
-    care: number = 7;
+    @Prop()
+    resiliance: number;
+    @Prop()
+    care: number;
 
-    @State()
-    org: number = 5;
-    @State()
-    school: number = 8;
+    @Prop()
+    org: number;
+    @Prop()
+    school: number;
 
-    @State()
-    relationship: number = 2;
-    @State()
-    emotions: number = 1;
+    @Prop()
+    relationship: number;
+    @Prop()
+    emotions: number;
 
-    @State()
-    spirituality: number = 4;
-    @State()
-    rest: number = 6;
+    @Prop()
+    spirituality: number;
+    @Prop()
+    rest: number;
 
     @State()
     canvas: any;
@@ -80,7 +80,7 @@ export class GiCompass {
         context.beginPath();
         context.moveTo(centerX, centerY);
         context.fillStyle = "rgba(96, 187,70, 0.5)";
-        var radius = this.getRadiusFromSection(this.resilence);
+        var radius = this.getRadiusFromSection(this.resiliance);
         context.arc(centerX, centerY, radius, 0, Math.PI / 4);
         context.fill();
 
@@ -146,7 +146,10 @@ export class GiCompass {
     getRadiusFromSection(section) {
         var defaultRadius = 0.09 * this.canvas.width;
         var sectionRadius = 0.028 * this.canvas.width;
-        if (section == 1) {
+        if (section == 0) {
+            return 0;
+        }
+        else if (section == 1) {
             return defaultRadius;
         }
         else {

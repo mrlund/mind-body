@@ -72,7 +72,7 @@ export class GIDataProvider {
     }
 
     @Method()
-    callSignalR(data: any, hub: string){
+    callSignalR(data: any, hub: string) {
         console.log("Calling " + hub + " with  ", data);
         this.signalRService.callSignalR(hub, JSON.stringify(data));
     }
@@ -131,6 +131,27 @@ export class GIDataProvider {
             console.log("No token, cant save");
         }
     }
+    @Method()
+    getServerData(api: string) {
+        let token = this.getToken();
+        if (token) {
+            return from(fetch(this.baseServerUrl + api, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })).pipe(
+                switchMap(x => {
+                    return x.text().then(function (text) {
+                        return text ? JSON.parse(text) : {}
+                    })
+                })
+            );
+        } else {
+            console.log("No token, cant save");
+        }
+    }
 
     getToken(): String {
         let tokenStr = window.localStorage["currentUser"];
@@ -144,6 +165,8 @@ export class GIDataProvider {
         }
         return null;
     }
+
+
     render() {
         return (
             <div innerHTML={this.innerHtmlData}></div>

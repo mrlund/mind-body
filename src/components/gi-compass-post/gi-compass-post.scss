@@ -1,0 +1,47 @@
+// ion-card{
+//     margin: 0px;
+// }
+// ion-item.header{
+//     background-color: rgba(213,213,213,0.5);;
+// }
+
+gi-compass-post{
+    .compass-post{
+        padding-top: 10px;
+    }
+    
+  .compass-post-header{
+   padding: 15px;
+   background-color: rgba(213,213,213,0.5);
+   text-transform: uppercase;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+  .compass-post-header ion-avatar{
+   width: 32px;
+   height: 32px;
+}
+
+.compass-post-header h3{
+   color: #333;
+   padding-top:0px;
+   padding-bottom:0px; 
+   margin: 0px;
+}
+
+.compass-post-body{
+    padding: 15px;
+    background-color: #fff;
+}
+.error{
+    color:red;
+}
+.success{
+    color:green;
+}
+.footer{
+    display: flex;
+    justify-content: space-between;
+}
+}
