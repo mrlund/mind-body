@@ -18,7 +18,8 @@
 
 <ion-item>
   <ion-avatar class="header-avatar" slot="start">
-    <img  src="/assets/img/avatar.png" />
+    <img *ngIf="post.ProfileImageUrl" [src]="post.ProfileImageUrl" />
+    <img *ngIf="!post.ProfileImageUrl" src="/assets/img/avatar.png" />
   </ion-avatar>
   <div>
     <strong class="requester-name" text-capitalize>{{post.Name}}</strong>
@@ -35,7 +36,7 @@
   <!--<gi-mood-image src="assets/img/mood/depression.jpg"></gi-mood-image>-->
 </div>
 <div class="footer">
-  <div *ngIf="post.Comments.length" text-right><small (click)="presentModal(post.Comments)">{{post.Comments.length}} Comments</small></div>
+  <div *ngIf="post.Comments.length" text-right class="comment-overwiew"><small (click)="presentModal(post.Comments)">{{post.Comments.length}} Comments</small></div>
   <hr/>
   <!--<ion-grid>
     <ion-row justify-content-between>
@@ -58,7 +59,7 @@
   </ng-container>
   <ion-item>
     <ion-avatar class="footer-avatar" slot="start">
-      <img src="/assets/img/avatar.png" />
+      <img [src]="userImage" />
     </ion-avatar>
     <ion-input placeholder="Write a comment" [(ngModel)]="comment"></ion-input>
     <ion-button (click)="postComment()" [disabled]="!comment" slot="end">

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, EventEmitter, Input, Output, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 
 import * as d3 from 'd3';
 
@@ -20,14 +20,27 @@ interface Graph {
 @Component({
   selector: 'gi-gww-graph',
   templateUrl: './gww-graph.component.html',
-  styleUrls: ['./gww-graph.component.scss']
+  styleUrls: ['./gww-graph.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GwwGraphComponent implements OnInit {
+export class GwwGraphComponent implements OnInit, OnChanges {
   @Output() nodeClick: EventEmitter<any> = new EventEmitter();
-
+  @Input() nodes: any[];
+  @Input() links: any[];
   canvas: any;
   canvas_container: any;
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
+    if (changes && changes.links && changes.nodes) {
+      this.drawGraph();
+    }
+  }
   ngOnInit() {
+   // this.drawGraph();
+  }
+
+  drawGraph() {
     // this.canvas = document.querySelector(".mySvg");
     // this.canvas_container = document.querySelector("#container");
     // this.canvas_container.style.width = "100%";
@@ -49,85 +62,85 @@ export class GwwGraphComponent implements OnInit {
       .force('charge', d3.forceManyBody().strength(-1000))
       .force('center', d3.forceCenter(width / 2, height / 2));
 
-    d3.json('/assets/miserables.json').then((data: any) => {
+    //3.json('/assets/miserables.json').then((data: any) => {
 
 
-      const nodes: Node[] = [];
-      const links: Link[] = [];
+    const nodes: Node[] = [];
+    const links: Link[] = [];
 
-      data.nodes.forEach((d) => {
-        nodes.push(<Node>d);
-      });
-
-      data.links.forEach((d) => {
-        links.push(<Link>d);
-      });
-      const graph: Graph = <Graph>{ nodes, links };
-
-      const link = svg.append('g')
-        .attr('class', 'links')
-        .selectAll('line')
-        .data(graph.links)
-        .enter()
-        .append('line')
-        .attr('stroke-width', 2)
-        .attr('stroke', '#E5E5E5');
-
-      var node = svg.selectAll(".node")
-        .data(graph.nodes)
-        .enter().append("g")
-        .attr("class", "node")
-      node.append("image")
-        .attr("xlink:href", (d: any) => { return d.img; })
-        .attr("x", -8)
-        .attr("y", -8)
-        .attr("width", 24)
-        .attr("height", 24);
-
-
-      node.append("text")
-        .attr("dx", 18)
-        .attr("dy", ".35em")
-        .text((d: any) => { return d.name });
-
-
-
-      svg.selectAll('.node').call(d3.drag()
-        .on('start', dragstarted)
-        .on('drag', dragged)
-        .on('end', dragended)
-      );
-
-      node.append('title')
-        .text((d: any) => d.name);
-
-      node.on("click", (d) => { this.nodeClick.emit(d); })
-
-      simulation
-        .nodes(graph.nodes)
-        .on('tick', ticked);
-
-      simulation.force<d3.ForceLink<any, any>>('link')
-        .links(graph.links);
-
-      function ticked() {
-        link
-          .attr('x1', (d: any) => { return d.source.x; })
-          .attr('y1', (d: any) => { return d.source.y; })
-          .attr('x2', (d: any) => { return d.target.x; })
-          .attr('y2', (d: any) => { return d.target.y; });
-        node.attr("transform", (d: any) => { return "translate(" + d.x + "," + d.y + ")"; });
-        // node
-        //   .attr('cx', function (d: any) { return d.x; })
-        //   .attr('cy', function (d: any) { return d.y; });
-
-        // text
-        //   .attr('dx', function (d: any) { return d.x; })
-        //   .attr('dy', function (d: any) { return d.y; });
-      }
-    }).catch((err) => {
-      if (err) { throw new Error('Bad data file!'); }
+    this.nodes.forEach((d) => {
+      nodes.push(<Node>d);
     });
+
+    this.links.forEach((d) => {
+      links.push(<Link>d);
+    });
+    const graph: Graph = <Graph>{ nodes, links };
+
+    const link = svg.append('g')
+      .attr('class', 'links')
+      .selectAll('line')
+      .data(graph.links)
+      .enter()
+      .append('line')
+      .attr('stroke-width', 2)
+      .attr('stroke', '#E5E5E5');
+
+    var node = svg.selectAll(".node")
+      .data(graph.nodes)
+      .enter().append("g")
+      .attr("class", "node")
+    node.append("image")
+      .attr("xlink:href", (d: any) => { return d.img; })
+      .attr("x", -8)
+      .attr("y", -8)
+      .attr("width", 24)
+      .attr("height", 24);
+
+
+    node.append("text")
+      .attr("dx", 18)
+      .attr("dy", ".35em")
+      .text((d: any) => { return d.name });
+
+
+
+    svg.selectAll('.node').call(d3.drag()
+      .on('start', dragstarted)
+      .on('drag', dragged)
+      .on('end', dragended)
+    );
+
+    node.append('title')
+      .text((d: any) => d.name);
+
+    node.on("click", (d) => { this.nodeClick.emit(d); })
+
+    simulation
+      .nodes(graph.nodes)
+      .on('tick', ticked);
+
+    simulation.force<d3.ForceLink<any, any>>('link')
+      .links(graph.links);
+
+    function ticked() {
+      link
+        .attr('x1', (d: any) => { return d.source.x; })
+        .attr('y1', (d: any) => { return d.source.y; })
+        .attr('x2', (d: any) => { return d.target.x; })
+        .attr('y2', (d: any) => { return d.target.y; });
+      node.attr("transform", (d: any) => { return "translate(" + d.x + "," + d.y + ")"; });
+      // node
+      //   .attr('cx', function (d: any) { return d.x; })
+      //   .attr('cy', function (d: any) { return d.y; });
+
+      // text
+      //   .attr('dx', function (d: any) { return d.x; })
+      //   .attr('dy', function (d: any) { return d.y; });
+    }
+    // }).catch((err) => {
+    //   if (err) { throw new Error('Bad data file!'); }
+    // });
 
     function dragstarted(d) {
       if (!d3.event.active) { simulation.alphaTarget(0.3).restart(); }

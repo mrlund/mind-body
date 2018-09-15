@@ -12,7 +12,8 @@
   <ion-list lines>
     <ion-item *ngFor="let comment of comments">
       <ion-avatar class="footer-avatar" slot="start">
-        <img src="/assets/img/avatar.png" />
+        <img *ngIf="comment.ProfileImageUrl" [src]="comment.ProfileImageUrl" />
+        <img *ngIf="!comment.ProfileImageUrl" src="/assets/img/avatar.png" />
       </ion-avatar>
       <div> <b>{{comment.Name}}</b>
         <br/>

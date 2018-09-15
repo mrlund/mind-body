@@ -79,3 +79,9 @@ export const getLoginWithGoogleError = createSelector(
     fromAuth.getLoginWithGoogleError
 );
 
+
+export const getUserImage = createSelector(
+    getAuthSelectorState,
+    fromAuth.getLoggedinUserImage
+);
+

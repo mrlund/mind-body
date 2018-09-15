@@ -176,6 +176,7 @@ export const getSignupUserComplete = (state: AuthState) => state.signupUserCompl
 export const getSignupUserError = (state: AuthState) => state.signupUserError;
 
 export const getUserAuthenticated = (state: AuthState) => state.isUserAuthenticated;
+export const getLoggedinUserImage = (state: AuthState) => getUserImage();
 
 
 export const getForgotPasswordLoading = (state: AuthState) => state.forgotPasswordLoading;
@@ -184,4 +185,16 @@ export const getForgotPasswordError = (state: AuthState) => state.forgotPassword
 
 export const getClassRoomMode = (state: AuthState) => state.classRoomMode;
 
+function getUserImage() {
+    let tokenStr = window.localStorage["currentUser"];
+    if (tokenStr) {
+        let token = JSON.parse(tokenStr);
+        token = JSON.parse(token);
+        console.log(token);
+        if (new Date(token["Expiration"]).getTime() > new Date().getTime()) {
+            return token.ProfileImageUrl;
+        }
+    }
+    return "/assets/img/avatar.png";
+}
 

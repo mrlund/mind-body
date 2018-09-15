@@ -13,10 +13,13 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class GreatWallItemComponent implements OnInit {
   @Input() post: any;
+  @Input() userImage: string;
   comment: string;
+
   constructor(private sanitizer: DomSanitizer, private store: Store<fromRootStore.State>, private modalController: ModalController) { }
 
   ngOnInit() {
+
   }
 
   async presentModal(comments: any[]) {
