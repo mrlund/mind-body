@@ -1,0 +1,19 @@
+{
+  "nodes": [
+    {"id": "Martin", "name": "Martin",  "group": 1, "posx": 100, "posy": 100, "img": "assets/img/avatar.png"},
+    {"id": "Akash",  "name": "Akash",  "group": 2,"posx": 100, "posy": 100, "img": "https://cdn0.iconfinder.com/data/icons/flat-round-system/512/android-128.png"},
+    {"id": "Brijesh","name": "Brijesh", "group": 3,"posx": 100, "posy": 100, "img": "https://cdn0.iconfinder.com/data/icons/flat-round-system/512/android-128.png"},
+    {"id": "Parth",  "name": "Parth",   "group": 4,"posx": 100, "posy": 100, "img": "https://cdn0.iconfinder.com/data/icons/flat-round-system/512/android-128.png"},
+    {"id": "Mood",   "name": "Mood",   "group": 5,"posx": 100, "posy": 100, "img": "https://cdn0.iconfinder.com/data/icons/flat-round-system/512/android-128.png"},
+    {"id": "Health", "name": "Health", "group": 6,"posx": 100, "posy": 100, "img": "https://cdn0.iconfinder.com/data/icons/flat-round-system/512/android-128.png"},
+    {"id": "Goals",  "name": "Goals",   "group": 7,"posx": 100, "posy": 100, "img": "https://cdn0.iconfinder.com/data/icons/flat-round-system/512/android-128.png"}
+  ],
+  "links": [
+    {"source": "Martin", "target": "Akash", "value": 1},
+    {"source": "Brijesh", "target": "Akash", "value": 8},
+    {"source": "Akash", "target": "Parth", "value": 10},
+    {"source": "Parth", "target": "Mood", "value": 6},
+    {"source": "Parth", "target": "Health", "value": 1},
+    {"source": "Parth", "target": "Goals", "value": 1}
+  ]
+}

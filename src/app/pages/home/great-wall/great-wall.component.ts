@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from "rxjs";
+import { filter, map } from "rxjs/operators";
 import * as fromRootStore from "../../../../girls-platform/state/";
 import { Store } from '@ngrx/store';
 
@@ -20,6 +21,13 @@ export class GreatWallComponent implements OnInit {
     this.posts$ = this.store.select(fromRootStore.getAllPosts);
     this.loading$ = this.store.select(fromRootStore.getPostLoadLoading);
     this.isAuthorized$ = this.store.select(fromRootStore.getUserAuthenticated);
+  }
+  nodeClick(item) {
+    console.log(item);
+    this.posts$ = this.posts$.pipe(map(post => {
+      let list = post.filter(item => item.Name === "Akash12");
+      return list
+    }));
   }
 
 }

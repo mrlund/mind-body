@@ -5,11 +5,12 @@ import * as fromServices from "./services";
 import * as fromGuards from "./guards";
 import { TokenInterceptorService } from "./services/token-interceptor.service";
 
+import * as fromDirectives from './directives';
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [],
+  declarations: [...fromDirectives.D3_DIRECTIVES],
   providers: [
     ...fromGuards.guards,
     {

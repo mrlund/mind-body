@@ -15,7 +15,7 @@ import { CommentListPage } from './great-wall/comment-list/comment-list.page';
 import { GoalFormPage } from './my-goals/goal-form/goal-form.page';
 import { GoalItemComponent } from './my-goals/goal-item/goal-item.component';
 import { GoalProgressPage } from './my-goals/goal-progress/goal-progress.page';
-
+import { GwwGraphComponent } from './gww-graph/gww-graph.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -49,7 +49,7 @@ import { GoalProgressPage } from './my-goals/goal-progress/goal-progress.page';
       }
     ])
   ],
-  declarations: [HomePage, CommentListPage, GoalFormPage, MyMoodComponent, MyHealthComponent, MyGoalsComponent, FindHelpComponent, GreatWallComponent, GreatWallItemComponent, GoalItemComponent,GoalProgressPage],
+  declarations: [HomePage, CommentListPage, GoalFormPage, MyMoodComponent, MyHealthComponent, MyGoalsComponent, FindHelpComponent, GreatWallComponent, GreatWallItemComponent, GoalItemComponent, GoalProgressPage, GwwGraphComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [CommentListPage, GoalFormPage, GoalProgressPage]
 })
