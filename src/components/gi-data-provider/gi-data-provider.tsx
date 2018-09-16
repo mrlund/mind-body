@@ -18,7 +18,7 @@ export class GIDataProvider {
 
     @Prop() signalRService: any;
 
-    @Prop() pageIdInfo: any; 
+    @Prop() pageIdInfo: any;
 
     @State()
     private data;
@@ -116,9 +116,9 @@ export class GIDataProvider {
             //     PageId: this.idInfo.CourseId
             // };
             data.CourseId = this.pageIdInfo.CourseId;
-            data.CourseModuleId = this.pageIdInfo.CourseId;
-            data.SessionId = this.pageIdInfo.CourseId;
-            data.PageId = this.pageIdInfo.CourseId;
+            data.CourseModuleId = this.pageIdInfo.CourseModuleId;
+            data.SessionId = this.pageIdInfo.SessionId;
+            data.PageId = this.pageIdInfo.PageId;
             return from(fetch(this.baseServerUrl + api, {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -160,7 +160,6 @@ export class GIDataProvider {
         if (tokenStr) {
             let token = JSON.parse(tokenStr);
             token = JSON.parse(token);
-            console.log(token);
             if (new Date(token["Expiration"]).getTime() > new Date().getTime()) {
                 return token.Token;
             }
