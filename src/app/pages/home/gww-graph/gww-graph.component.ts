@@ -41,6 +41,7 @@ export class GwwGraphComponent implements OnInit, OnChanges {
   }
 
   drawGraph() {
+    d3.select("svg").selectAll("*").remove();
     // this.canvas = document.querySelector(".mySvg");
     // this.canvas_container = document.querySelector("#container");
     // this.canvas_container.style.width = "100%";
