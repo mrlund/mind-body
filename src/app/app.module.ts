@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, RouteReuseStrategy, Routes } from '@angular/router';
@@ -28,7 +28,6 @@ import { CoreModule } from '@app/core/core.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { SignalRService } from '../girls-platform/services/SignalRService';
 
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -51,6 +50,12 @@ import { SignalRService } from '../girls-platform/services/SignalRService';
     EffectsModule.forRoot(effects)
   ],
   providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: tocProviderFactory,
+      multi: true,
+      deps: [JsonContentProvider]
+    },
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
@@ -66,3 +71,7 @@ import { SignalRService } from '../girls-platform/services/SignalRService';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export function tocProviderFactory(provider: JsonContentProvider) {
+  return () => provider.getTOC();
+}
+

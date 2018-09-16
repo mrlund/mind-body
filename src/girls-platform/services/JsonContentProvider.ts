@@ -93,6 +93,15 @@ export class JsonContentProvider implements ICourseContentProvider {
         );
         return req;
     }
+    getTOC(): Promise<any> {
+        const promise = this.http.get<ICourse>('/assets/content/toc.json')
+            .toPromise()
+            .then(toc => {
+                this.toc = toc;
+                return toc;
+            });
+        return promise;
+    }
     constructor(private http: HttpClient) { }
 }
 
