@@ -18,29 +18,31 @@ export class GIDataProvider {
 
     @Prop() signalRService: any;
 
+    @Prop() pageIdInfo: any; 
+
     @State()
     private data;
     @State()
     private innerHtmlData;
 
-    @State()
-    private idInfo;
+    // @State()
+    // private idInfo;
 
-    @Method()
-    getIdInfo(obj) {
-        this.idInfo = obj;
-    }
-    @Event() valueChanged: EventEmitter;
-    getPageIdInfoHandler() {
-        this.valueChanged.emit();
-    }
+    // @Method()
+    // getIdInfo(obj) {
+    //     this.idInfo = obj;
+    // }
+    // @Event() valueChanged: EventEmitter;
+    // getPageIdInfoHandler() {
+    //     this.valueChanged.emit();
+    // }
     data$: Observable<any>;
 
     constructor() {
     }
     componentDidLoad() {
         this.loadPageContent();
-        this.getPageIdInfoHandler();
+        //this.getPageIdInfoHandler();
     }
     loadData() {
         this.data$ = from(fetch(this.pageContentUrl + ".json")).pipe(
@@ -113,10 +115,10 @@ export class GIDataProvider {
             //     SessionId: this.idInfo.CourseId,
             //     PageId: this.idInfo.CourseId
             // };
-            data.CourseId = this.idInfo.CourseId;
-            data.CourseModuleId = this.idInfo.CourseId;
-            data.SessionId = this.idInfo.CourseId;
-            data.PageId = this.idInfo.CourseId;
+            data.CourseId = this.pageIdInfo.CourseId;
+            data.CourseModuleId = this.pageIdInfo.CourseId;
+            data.SessionId = this.pageIdInfo.CourseId;
+            data.PageId = this.pageIdInfo.CourseId;
             return from(fetch(this.baseServerUrl + api, {
                 method: 'POST',
                 body: JSON.stringify(data),

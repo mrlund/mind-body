@@ -26,6 +26,8 @@ export class CoursePageView {
     classRoomMode$: Observable<boolean>;
     private eventEmitter : (user,data) => void;
 
+    public pageIdInfo: any; 
+
     pageRef: any;
     constructor(
         private sanitizer: DomSanitizer,
@@ -56,6 +58,8 @@ export class CoursePageView {
         this.pageContentUrl = this.baseUrl + "/" + route.snapshot.params.pageUrlPart;
         this.store.dispatch(new fromRootStore.GetNextAndPrevPage(this.pageRef));
 
+        this.pageIdInfo = this.jsonContentProvider.getIdFromPage(this.pageRef);
+
         this.pageModel$ = this.store.select(fromRootStore.getPageContents);
         // this.pageModel$.pipe(takeWhile(() => this.alive)).subscribe((x) => {
         //     //TODO: on refresh not calling getIdInfo function
@@ -69,10 +73,10 @@ export class CoursePageView {
         })
 
     }
-    getPageIdInfo() {
-        var data = this.jsonContentProvider.getIdFromPage(this.pageRef);
-        this.callWebComponentMethod('gi-data-provider', 'getIdInfo', data);
-    }
+    // getPageIdInfo() {
+    //     var data = this.jsonContentProvider.getIdFromPage(this.pageRef);
+    //     this.callWebComponentMethod('gi-data-provider', 'getIdInfo', data);
+    // }
     ionViewDidLeave() {
         this.alive = false;
         this.callWebComponentsMethod('gi-animation', 'destroyAnimation');
