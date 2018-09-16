@@ -192,7 +192,7 @@ function getUserImage() {
         token = JSON.parse(token);
         console.log(token);
         if (new Date(token["Expiration"]).getTime() > new Date().getTime()) {
-            return token.ProfileImageUrl;
+            return token.ProfileImageUrl || '/assets/img/avatar.png';
         }
     }
     return "/assets/img/avatar.png";
