@@ -56,15 +56,15 @@ export class GreatWallComponent implements OnInit {
         result.nodes.push(this.newNode(post.UserId, post.Name, 1, post.ProfileImageUrl || 'assets/img/avatar.png'));
       }
       //Add apps to nodes
-      if (!distinctNodes[post.MiniAppId]) {
-        distinctNodes[post.MiniAppId] = true;
+      if (!distinctNodes[post.MiniAppId || 1]) {
+        distinctNodes[post.MiniAppId || 1] = true;
         var image = this.getImageForMiniApp(post.MiniAppName);
-        result.nodes.push(this.newNode(post.MiniAppId, post.MiniAppName.replace('_', ' '), 2, image));
+        result.nodes.push(this.newNode(post.MiniAppId || 1, post.MiniAppName.replace('_', ' ') || "MY_GOALS", 2, image));
       }
       //Link users to apps
-      if (!distinctLinks[post.UserId + post.MiniAppId]) {
-        distinctLinks[post.UserId + post.MiniAppId] = true;
-        result.links.push(this.newLink(post.MiniAppId, post.UserId, 1)); // Could "value" be 1 = user-to-app, 2 = user-to-user?
+      if (!distinctLinks[post.UserId + (post.MiniAppId || 1)]) {
+        distinctLinks[post.UserId + (post.MiniAppId || 1)] = true;
+        result.links.push(this.newLink(post.MiniAppId || 1, post.UserId, 1)); // Could "value" be 1 = user-to-app, 2 = user-to-user?
       }
 
       //Links users to other users 
