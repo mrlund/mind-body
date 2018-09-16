@@ -25,7 +25,8 @@ export class MyHealthComponent implements OnInit {
       CourseClassId: 1,
       PostText: "Heart rate " + this.heartRate + " bpm",
       ExternalResourceUrl: "",
-      IsPublic: this.isPublic
+      IsPublic: this.isPublic,
+      MiniAppId:2
     }
     console.log(model);
     this.store.dispatch(new fromRootStore.PostMood(model));

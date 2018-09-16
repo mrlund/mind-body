@@ -62,6 +62,7 @@ export class GoalProgressPage implements OnInit {
       IsProgress: true,
       StudentAppDataId: this.studentAppDataId,
       GoalText: this.progressForm.get('GoalText').value,
+      MiniAppId: 1
     }
     console.log(model);
     this.store.dispatch(new fromRootStore.PostGoalProgress(model));

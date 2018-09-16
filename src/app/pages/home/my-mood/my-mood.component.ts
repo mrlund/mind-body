@@ -42,7 +42,8 @@ export class MyMoodComponent implements OnInit {
       CourseClassId: 1,
       PostText: `Mood- ${this.mood} and Level: ${this.moodLevel} <gi-mood-image src="${this.picture}"></gi-mood-image>`,
       ExternalResourceUrl: "",
-      IsPublic: this.isPublic
+      IsPublic: this.isPublic,
+      MiniAppId: 3,
     }
     this.store.dispatch(new fromRootStore.PostMood(model));
   }
