@@ -37,7 +37,7 @@ export class GwwGraphComponent implements OnInit, OnChanges {
     }
   }
   ngOnInit() {
-   // this.drawGraph();
+    this.drawGraph();
   }
 
   drawGraph() {
@@ -59,7 +59,7 @@ export class GwwGraphComponent implements OnInit, OnChanges {
 
     const simulation = d3.forceSimulation()
       .force('link', d3.forceLink().id((d: any) => d.id))
-      .force('charge', d3.forceManyBody().strength(-1000))
+      .force('charge', d3.forceManyBody().strength(-700))
       .force('center', d3.forceCenter(width / 2, height / 2));
 
     //3.json('/assets/miserables.json').then((data: any) => {
@@ -99,9 +99,10 @@ export class GwwGraphComponent implements OnInit, OnChanges {
 
 
     node.append("text")
-      .attr("dx", 18)
-      .attr("dy", ".35em")
-      .text((d: any) => { return d.name });
+      .attr("dx", 0)
+      .attr("dy", 25)
+      .text((d: any) => { return d.name })
+      .style("font-size", (d) => { return "12px"; });
 
 
 
@@ -130,6 +131,7 @@ export class GwwGraphComponent implements OnInit, OnChanges {
         .attr('x2', (d: any) => { return d.target.x; })
         .attr('y2', (d: any) => { return d.target.y; });
       node.attr("transform", (d: any) => { return "translate(" + d.x + "," + d.y + ")"; });
+      // node.attr("transform", (d: any) => { return "translate(100,100)"; });
       // node
       //   .attr('cx', function (d: any) { return d.x; })
       //   .attr('cy', function (d: any) { return d.y; });

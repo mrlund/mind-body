@@ -3,6 +3,9 @@
     <ion-buttons slot="start">
       <ion-back-button text="Back" defaultHref="/home"></ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="clearFilters()"> Clear</ion-button>
+    </ion-buttons>
 
     <ion-title>
       THE GREAT WHITE WALL
@@ -10,10 +13,10 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="great-wall-content">
+  <gi-gww-graph (nodeClick)="nodeClick($event)" [nodes]="nodes" [links]="links"></gi-gww-graph>
   <ion-grid fixed>
     <ion-row justify-content-center>
       <ion-col size-xl="6" size-xs="12" size-sm="10" size-md="8">
-        <!--<gi-gww-graph (nodeClick)="nodeClick($event)" [nodes]="nodes" [links]="links"></gi-gww-graph>-->
         <div class="class-feed" *ngFor="let item of posts$ | async">
           <gi-great-wall-item [post]="item" [userImage]="userImage$|async"></gi-great-wall-item>
         </div>
