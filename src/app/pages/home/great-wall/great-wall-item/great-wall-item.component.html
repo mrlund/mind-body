@@ -26,7 +26,7 @@
     <div><small> {{post.Created|date}}</small></div>
   </div>
   <div slot="end">
-    
+
     <ion-icon color="primary" name="eye" *ngIf="!post.IsPublic"></ion-icon>
     <ion-icon color="primary" name="ios-globe" *ngIf="post.IsPublic"></ion-icon>
   </div>
@@ -44,7 +44,8 @@
     <hr>-->
     <ion-item class="comment-box" style="background-color: #fff" (click)="presentModal(post.Comments)">
       <ion-avatar class="footer-avatar" slot="start">
-        <img [src]="item.ProfileImageUrl" />
+        <img *ngIf="item.ProfileImageUrl" [src]="item.ProfileImageUrl" />
+        <img *ngIf="!item.ProfileImageUrl" src="/assets/img/avatar.png" />
       </ion-avatar>
       <small><b>{{item.Name|uppercase}}</b> {{item.PostText}}</small>
       <ion-icon slot="end" name="git-merge" color="primary"></ion-icon>
