@@ -4,3 +4,13 @@ ion-card{
 ion-item.header{
     background-color: rgba(213,213,213,0.5);;
 }
+.post-footer{
+    display: flex;
+    justify-content: space-between;
+}
+.error{
+    color:red;
+}
+.success{
+    color:green;
+}

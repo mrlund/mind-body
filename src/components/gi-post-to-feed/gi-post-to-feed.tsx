@@ -12,6 +12,11 @@ export class GiPostToFeed {
 
     dataSvc: HTMLGiDataProviderElement;
 
+    @State() errorMessage: string;
+
+    @State() successMessage: string;
+
+
     // @Prop({ connect: 'ion-toast-controller' })
     // toastCtrl: HTMLIonToastControllerElement;
 
@@ -40,7 +45,8 @@ export class GiPostToFeed {
     }
 
     submitPost() {
-
+        this.errorMessage = "";
+        this.successMessage = "";
         //let formData = new FormData(this.el.querySelector("form")) as any;
         var postText = this.el.getElementsByClassName("PostText")[0] as HTMLInputElement;
         var isPublic = this.el.getElementsByClassName("IsPublic")[0] as HTMLInputElement;
@@ -48,14 +54,17 @@ export class GiPostToFeed {
             PostText: postText.value,
             IsPublic: isPublic.checked,
             CourseClassId: 1,
-            ExternalResourceUrl: ""
+            ExternalResourceUrl: "",
+            MiniAppId: 1
         };
         console.log(data);
         this.dataSvc.saveData(data, "/api/class/feed")
             .subscribe(x => {
                 console.log("success");
+                this.successMessage = 'Posted Successfully.'
                 // this.presentToast('Success');
             }, error => {
+                this.errorMessage = 'There is an error while posting.'
                 console.log("error");
                 //  this.presentToast('There is an error');
             });;
@@ -99,7 +108,11 @@ export class GiPostToFeed {
                         <ion-item>
                             <ion-input class="PostText" required type="text" placeholder="Post Text" name="PostText"></ion-input>
                         </ion-item>
-                        <ion-item>
+                        <ion-item class="post-footer">
+                            <div>
+                                <div class="error">{this.errorMessage}</div>
+                                <div class="success">{this.successMessage}</div>
+                            </div>
                             <ion-button slot="end" onClick={(evt) => this.submitPost()} disabled={this.getToken() == null} >Post</ion-button>
                         </ion-item>
                     </form>
