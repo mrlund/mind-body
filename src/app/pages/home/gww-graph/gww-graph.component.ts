@@ -92,12 +92,20 @@ export class GwwGraphComponent implements OnInit, OnChanges {
       .enter().append("g")
       .attr("class", "node");
 
+      node.append("clipPath")
+    .attr("id", "clipCircle")
+  .append("circle")
+    .attr("r", 20)
+    .attr("cx", 12)
+    .attr("cy", 12);
+
     node.append("image")
       .attr("xlink:href", (d: any) => { return d.img; })
       .attr("x", -8)
       .attr("y", -8)
       .attr("width", 40)
-      .attr("height", 40);
+      .attr("height", 40)
+      .attr("clip-path", "url(#clipCircle)");
 
 
     node.append("text")
