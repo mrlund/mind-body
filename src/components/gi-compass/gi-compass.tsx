@@ -8,24 +8,25 @@ export class GiCompass {
 
     @Element()
     el: HTMLElement;
-    @Prop()
+
+    @Prop({ reflectToAttr: true })
     resiliance: number;
-    @Prop()
+    @Prop({ reflectToAttr: true })
     care: number;
 
-    @Prop()
+    @Prop({ reflectToAttr: true })
     org: number;
-    @Prop()
+    @Prop({ reflectToAttr: true })
     school: number;
 
-    @Prop()
+    @Prop({ reflectToAttr: true })
     relationship: number;
-    @Prop()
+    @Prop({ reflectToAttr: true })
     emotions: number;
 
-    @Prop()
+    @Prop({ reflectToAttr: true })
     spirituality: number;
-    @Prop()
+    @Prop({ reflectToAttr: true })
     rest: number;
 
     @State()
@@ -60,8 +61,9 @@ export class GiCompass {
     // resize() {
     //     this.drawOnCompass()
     // }
-
+    @Method()
     drawOnCompass() {
+
         this.canvas = this.el.querySelector(".myCanvas");
         this.canvase_container = this.el.querySelector("#container");
         this.canvase_container.style.width = "100%";

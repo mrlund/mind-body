@@ -1,10 +1,9 @@
 ion-content{
-    background-color:#f5f5f5;
+    /*background-color:#f5f5f5;*/
    
 }
 ion-content .class-feed{
-       background-color: #fff;
-       padding: 10px 10px 0px 10px;
+       padding: 10px 0px;
        margin-bottom: 10px;
    }
 
@@ -18,16 +17,17 @@ ion-content .class-feed{
   }
 hr {
   border-width: 1px;
-  border-bottom-color: red;
+  border-bottom-color: #e5053a;
 }
 gi-gww-graph {
     display: block;
     overflow: hidden;
     background-color: #f5f5f5;
-    box-shadow: 0px 2px 15px #ff000021;
-    border-bottom: 1px solid #cfcccc;
+    /*box-shadow: 0px 2px 15px rgba(255,0,0,0.2);
+    border-bottom: 1px solid #cfcccc;*/
 }
 .line {
-  color: red;
-  border-bottom: 1px solid red; 
+  color: #e5053a;
+      padding-bottom: 8px;
+  border-bottom: 1px solid #e5053a; 
 }

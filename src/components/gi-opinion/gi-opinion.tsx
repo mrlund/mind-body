@@ -57,11 +57,11 @@ export class GiOpinion {
 
     }
     @Method()
-    getQuizResults(){
+    getQuizResults() {
         let results = [];
-        this.questions.forEach(x=>{
-            if(x.response){
-                results.push({question: x.question, response: x.response, extraData: x.extraData});
+        this.questions.forEach(x => {
+            if (x.response) {
+                results.push({ question: x.question, response: x.response, extraData: x.extraData });
             }
         });
         //console.log(results);
@@ -80,7 +80,7 @@ export class GiOpinion {
         ]
         )
     }
-    mapPointToValue(point){
+    mapPointToValue(point) {
         let values = [
             "Never",
             "Never",
@@ -94,25 +94,28 @@ export class GiOpinion {
             "Always",
             "Always"
         ]
-        if (point == undefined){
+        if (point == undefined) {
             return values[5];
         }
         return values[point];
     }
-    setQuestionResponse(question, evt){
+    setQuestionResponse(question, evt) {
         //console.log(evt);
-        this.questions.forEach(x=>{
-            if(x.question == question){
+        this.questions.forEach(x => {
+            if (x.question == question) {
                 x.response = evt.detail.value;
             }
         });
         this.questions = [...this.questions];
+        // var compassPostElement = this.el.nextElementSibling as HTMLGiCompassPostElement;
+        // compassPostElement.renderCompass(this.questions);
+
     }
     renderTenPointScale(q) {
         return (
             <div>
                 <ion-item>
-                    <ion-range onIonChange={(evt)=>this.setQuestionResponse(q.question, evt)} min="0" max="10" step="1" pin="true" snaps="true">
+                    <ion-range onIonChange={(evt) => this.setQuestionResponse(q.question, evt)} min="0" max="10" step="1" pin="true" snaps="true">
                         <ion-icon color="primary" size="small" slot="start" name="sunny"></ion-icon>
                         <ion-icon color="primary" slot="end" name="sunny"></ion-icon>
                     </ion-range>

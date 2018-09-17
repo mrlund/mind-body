@@ -16,54 +16,50 @@
   </ion-row>
 </ion-grid>-->
 
-<ion-item>
+<ion-item class="header-item">
   <ion-avatar class="header-avatar" slot="start">
     <img *ngIf="post.ProfileImageUrl" [src]="post.ProfileImageUrl" />
     <img *ngIf="!post.ProfileImageUrl" src="/assets/img/avatar.png" />
   </ion-avatar>
   <div>
-    <strong class="requester-name" text-capitalize>{{post.Name}}</strong>
+    <strong class="requester-name" text-capitalize>{{post.Name |uppercase}}</strong>
     <div><small> {{post.Created|date}}</small></div>
   </div>
   <div slot="end">
-    <ion-icon name="lock" *ngIf="!post.IsPublic"></ion-icon>
-    <ion-icon name="globe" *ngIf="post.IsPublic"></ion-icon>
+    
+    <ion-icon color="primary" name="eye" *ngIf="!post.IsPublic"></ion-icon>
+    <ion-icon color="primary" name="ios-globe" *ngIf="post.IsPublic"></ion-icon>
   </div>
 </ion-item>
-<div padding>
-  <!--<div [innerHTML]="post.PostText"></div>-->
+<hr/>
+<div class="post-item">
   <div [innerHTML]="safeHtml(post.PostText)"></div>
-  <!--<gi-mood-image src="assets/img/mood/depression.jpg"></gi-mood-image>-->
+  <div *ngIf="post.Comments.length" text-left class="comment-overwiew"><small (click)="presentModal(post.Comments)">{{post.Comments.length}} Comments</small></div>
 </div>
+<hr/>
 <div class="footer">
-  <div *ngIf="post.Comments.length" text-right class="comment-overwiew"><small (click)="presentModal(post.Comments)">{{post.Comments.length}} Comments</small></div>
-  <hr/>
-  <!--<ion-grid>
-    <ion-row justify-content-between>
-      <ion-col size="4">
-        <small>
-          <ion-icon name="chatbubbles"></ion-icon> Comment
-        </small>
-      </ion-col>
-      <ion-col size="4">
-        <small>
-          <ion-icon name="share"></ion-icon> Share</small>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <hr/>-->
   <ng-container *ngFor="let item of post.Comments">
-    <div class="comment-box" style="padding:5px 10px;background-color: #f5f5f5;border-radius: 10px;" (click)="presentModal(post.Comments)">
-      <small><b>{{item.Name}}</b> {{item.PostText}}</small></div>
-    <hr>
+    <!--<div class="comment-box" style="padding:5px 10px;background-color: #f5f5f5;border-radius: 10px;" (click)="presentModal(post.Comments)">
+      <small>{{item.Name|uppercase}} {{item.PostText}}</small></div>
+    <hr>-->
+    <ion-item class="comment-box" style="background-color: #fff" (click)="presentModal(post.Comments)">
+      <ion-avatar class="footer-avatar" slot="start">
+        <img [src]="item.ProfileImageUrl" />
+      </ion-avatar>
+      <small><b>{{item.Name|uppercase}}</b> {{item.PostText}}</small>
+      <ion-icon slot="end" name="git-merge" color="primary"></ion-icon>
+    </ion-item>
+    <hr/>
   </ng-container>
-  <ion-item>
+  <ion-item class="comment-footer">
     <ion-avatar class="footer-avatar" slot="start">
       <img [src]="userImage" />
     </ion-avatar>
-    <ion-input placeholder="Write a comment" [(ngModel)]="comment"></ion-input>
-    <ion-button (click)="postComment()" [disabled]="!comment" slot="end">
-      <ion-icon name="send"></ion-icon>
+    <input type="text" placeholder="write a comment" [(ngModel)]="comment">
+    <!--<ion-input placeholder="write a comment" [(ngModel)]="comment"></ion-input>-->
+    <ion-button (click)="postComment()" [disabled]="!comment" slot="end" size="default" style="margin-left: 10px;">
+      <!--<ion-icon name="send"></ion-icon>-->
+      POST COMMENT
     </ion-button>
   </ion-item>
 </div>
