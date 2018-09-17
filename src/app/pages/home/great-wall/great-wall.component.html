@@ -17,6 +17,7 @@
   <ion-grid fixed>
     <ion-row justify-content-center>
       <ion-col size-xl="6" size-xs="12" size-sm="10" size-md="8">
+        <h3 class="line">Wall Feed</h3>
         <div class="class-feed" *ngFor="let item of posts$ | async">
           <gi-great-wall-item [post]="item" [userImage]="userImage$|async"></gi-great-wall-item>
         </div>

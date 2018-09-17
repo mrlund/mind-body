@@ -60,7 +60,7 @@ export class GwwGraphComponent implements OnInit, OnChanges {
 
     const simulation = d3.forceSimulation()
       .force('link', d3.forceLink().id((d: any) => d.id))
-      .force('charge', d3.forceManyBody().strength(-900))
+      .force('charge', d3.forceManyBody().strength(-1800))
       .force('center', d3.forceCenter(width / 2, height / 2));
 
     //3.json('/assets/miserables.json').then((data: any) => {
@@ -84,8 +84,8 @@ export class GwwGraphComponent implements OnInit, OnChanges {
       .data(graph.links)
       .enter()
       .append('line')
-      .attr('stroke-width', 2)
-      .attr('stroke', '#E5E5E5');
+      .attr('stroke-width', 1)
+      .attr('stroke', '#f08888');
 
     var node = svg.selectAll(".node")
       .data(graph.nodes)
@@ -101,8 +101,8 @@ export class GwwGraphComponent implements OnInit, OnChanges {
 
 
     node.append("text")
-      .attr("dx", 0)
-      .attr("dy", 45)
+      .attr("dx", (d: any) => { return (d.group == 2 ? -5 : -2) * d.name.length})
+      .attr("dy", 50)
       .text((d: any) => { return d.name })
       .style("font-size", (d) => { return "17px"; })
       .style("cursor", "pointer");
