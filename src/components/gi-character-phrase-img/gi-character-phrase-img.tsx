@@ -2,20 +2,25 @@ import { Component, Element, State, Prop, Watch, Method, Event, EventEmitter } f
 import { tap } from 'rxjs/operators';
 
 @Component({
-    tag: 'gi-character-pharse-img',
-    styleUrl: 'gi-character-pharse-img.scss'
+    tag: 'gi-character-phrase-img',
+    styleUrl: 'gi-character-phrase-img.scss'
 })
-export class GiCharacterPharseImg {
+export class GiCharacterPhraseImg {
 
     @Element()
     el: HTMLElement;
 
     @Prop()
-    src: string;
+    character: string;
 
     componentDidLoad() {
-        console.log(this.src);
+        console.log(this.character);
     }
+
+    imageWithPath(character){
+        return `/assets/img/${character}.png`
+    }
+
     render() {
         return (
             <div class="character-phrase-block">
@@ -25,7 +30,7 @@ export class GiCharacterPharseImg {
                     </div>
                 </div>
                 <div class="character-image-block">
-                    <img class="image-animation" src="/assets/img/zynab.png" />
+                    <img class="image-animation" src={this.imageWithPath(this.character)} />
                 </div>
             </div>
         )
