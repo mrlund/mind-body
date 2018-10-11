@@ -16,7 +16,7 @@ export class ProfilePage extends BaseFormComponent implements OnInit, OnDestroy 
   profileForm: FormGroup;
   enrollForm: FormGroup;
   submitted = false;
-  enrollLoaing$: Observable<boolean>;
+  enrollLoading$: Observable<boolean>;
   enrollError$: Observable<any>;
   leaveError$: Observable<any>;
   enrollSuccess$: Observable<any>;
@@ -40,7 +40,7 @@ export class ProfilePage extends BaseFormComponent implements OnInit, OnDestroy 
     super();
     this.createForm();
     this.userInfoLoaing$ = this.store.select(fromRootStore.getUserInfoLoading);
-    this.enrollLoaing$ = this.store.select(fromRootStore.getEnrollLoading);
+    this.enrollLoading$ = this.store.select(fromRootStore.getEnrollLoading);
     this.enrollListLoading$ = this.store.select(fromRootStore.getEnrollListLoading);
     this.enrollmentList$ = this.store.select(fromRootStore.getEnrollList);
     this.userInfoError$ = this.store.select(fromRootStore.getUserInfoError);
