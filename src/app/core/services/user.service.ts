@@ -21,6 +21,11 @@ export class UserService {
             `/user/profile`
         ).pipe(catchError(this.handleError));
     }
+    getEnrollmentList() {
+        return this.http.get<any>(
+            `/class/enroll-list`
+        ).pipe(catchError(this.handleError));
+    }
 
     uploadProfileImage(
         files: any
@@ -33,6 +38,18 @@ export class UserService {
         return this.http.post(
             "/profile/mediaitems",
             formData
+        ).pipe(catchError(this.handleError));
+    }
+
+    enrollClass(code: string) {
+        return this.http.get<any>(
+            `/class/enroll/${code}`
+        ).pipe(catchError(this.handleError));
+    }
+
+    leaveClass(id: number) {
+        return this.http.get<any>(
+            `/class/leave-class/${id}`
         ).pipe(catchError(this.handleError));
     }
 

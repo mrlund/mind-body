@@ -107,6 +107,90 @@ export class UserEffects {
                 this.presentToast("Sorry,an error occured while loading user info");
             })
         );
+
+    @Effect()
+    getEnrollmentList$: Observable<Action> = this.actions$
+        .ofType(UserActions.GET_ENROLL_LIST)
+        .pipe(
+            switchMap(payload =>
+                this.userService.getEnrollmentList().pipe(
+                    map(data => new UserActions.GetEnrollListSuccess(data)),
+                    catchError(error =>
+                        of(new UserActions.GetEnrollListFail(error))
+                    )
+                )
+            ));
+    @Effect({ dispatch: false })
+    getEnrollmentListFail$ = this.actions$
+        .ofType(UserActions.GET_ENROLL_LIST_FAIL)
+        .pipe(
+            map(payload => {
+                this.presentToast("Sorry,an error occured while loading enrollment list");
+            })
+        );
+    @Effect()
+    enrollClass$: Observable<Action> = this.actions$
+        .ofType(UserActions.ENROLL_CLASS)
+        .pipe(
+            map((action: UserActions.EnrollClass) => action.payload),
+            mergeMap(payload =>
+                this.userService.enrollClass(payload).pipe(
+                    map(data => new UserActions.EnrollClassSuccess(data)),
+                    catchError(error =>
+                        of(new UserActions.EnrollClassFail(error))
+                    )
+                )
+            ));
+
+    @Effect({ dispatch: false })
+    enrollClassSuccess$ = this.actions$
+        .ofType(UserActions.ENROLL_CLASS_SUCCESS)
+        .pipe(
+            map(payload => {
+                this.presentToast("Enroll to class Successfully");
+            })
+        );
+
+    @Effect({ dispatch: false })
+    enrollClassFail$ = this.actions$
+        .ofType(UserActions.ENROLL_CLASS_FAIL)
+        .pipe(
+            map(payload => {
+                this.presentToast("Sorry,an error occured while enrolling to class");
+            })
+        );
+
+    @Effect()
+    leaveClass$: Observable<Action> = this.actions$
+        .ofType(UserActions.LEAVE_CLASS)
+        .pipe(
+            map((action: UserActions.LeaverClass) => action.payload),
+            mergeMap(payload =>
+                this.userService.leaveClass(payload).pipe(
+                    map(data => new UserActions.LeaverClassSuccess(data)),
+                    catchError(error =>
+                        of(new UserActions.LeaverClassFail(error))
+                    )
+                )
+            ));
+
+    @Effect({ dispatch: false })
+    leaveClassSuccess$ = this.actions$
+        .ofType(UserActions.LEAVE_CLASS_SUCCESS)
+        .pipe(
+            map(payload => {
+                this.presentToast("Successfully leaved from class");
+            })
+        );
+
+    @Effect({ dispatch: false })
+    leaveClassFail$ = this.actions$
+        .ofType(UserActions.LEAVE_CLASS_FAIL)
+        .pipe(
+            map(payload => {
+                this.presentToast("Sorry,an error occured while leaving class");
+            })
+        );
     async presentToast(message: string) {
         const toast = await this.toastController.create({
             message: message,
@@ -114,7 +198,7 @@ export class UserEffects {
         });
         toast.present();
     }
-    
+
     constructor(private actions$: Actions, private userService: UserService, private toastController: ToastController, private router: Router) { }
 
 }

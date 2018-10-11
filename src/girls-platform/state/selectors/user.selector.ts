@@ -59,3 +59,53 @@ export const getUploadUserImageError = createSelector(
     fromRoot.getUserState,
     fromUser.getUploadUserImageError
 );
+
+export const getEnrollLoading = createSelector(
+    fromRoot.getUserState,
+    fromUser.getEnrollLoading
+);
+
+export const getEnrollComplete = createSelector(
+    fromRoot.getUserState,
+    fromUser.getEnrollComplete
+);
+
+export const getEnrollError = createSelector(
+    fromRoot.getUserState,
+    fromUser.getEnrollError
+);
+
+export const getEnrollList = createSelector(
+    fromRoot.getUserState,
+    fromUser.getEnrollList
+);
+export const getEnrollListLoading = createSelector(
+    fromRoot.getUserState,
+    fromUser.getEnrollListLoading
+);
+
+export const getEnrollListComplete = createSelector(
+    fromRoot.getUserState,
+    fromUser.getEnrollListComplete
+);
+
+export const getEnrollListError = createSelector(
+    fromRoot.getUserState,
+    fromUser.getEnrollListError
+);
+
+
+export const getLeaveClassLoading = createSelector(
+    fromRoot.getUserState,
+    fromUser.getLeaveClassLoading
+);
+
+export const getLeaveClassComplete = createSelector(
+    fromRoot.getUserState,
+    fromUser.getLeaveClassComplete
+);
+
+export const getLeaveClassError = createSelector(
+    fromRoot.getUserState,
+    fromUser.getLeaveClassError
+);

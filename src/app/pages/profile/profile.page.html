@@ -44,6 +44,48 @@
             </div>
           </ion-list>
         </div>
+        <div [formGroup]="enrollForm" class="profile-form">
+
+          <ion-list padding>
+            <ion-item>
+              <h3>Enrollment</h3>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked" color="primary">Short Code *</ion-label>
+              <ion-input formControlName="ShortCode" name="shortcode" type="text" required>
+              </ion-input>
+            </ion-item>
+            <ion-text padding>
+              <small *ngIf="enrollForm.get('ShortCode').hasError('required') && enrollForm.get('ShortCode').touched" padding-left>
+              Code is required
+              </small>
+              <small *ngFor="let error of serverErrors('ShortCode',enrollForm,submitted)">{{error.params}}</small>
+            </ion-text>
+            <div padding>
+              <ion-button (click)="enrollToClass()" expand="block" [disabled]="enrollLoading$|async">Enroll
+                <ion-spinner name="bubbles" *ngIf="enrollLoading$|async"></ion-spinner>
+              </ion-button>
+            </div>
+            <h4>Enroll List</h4>
+            <div *ngIf="(enrollmentList$|async)?.length>0">
+              <ion-list lines="full">
+                <ion-item *ngFor="let item of (enrollmentList$|async)">
+                  <ion-label>
+                    {{item.Name}}
+                  </ion-label>
+                  <button ion-button slot="end" (click)="leaveClass(item)">
+                <ion-icon name="trash"></ion-icon>
+              </button>
+                </ion-item>
+              </ion-list>
+            </div>
+            <div *ngIf="(enrollmentList$|async)?.length==0">
+              <ion-item>
+                NO ENROLLED CLASS
+              </ion-item>
+            </div>
+          </ion-list>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
