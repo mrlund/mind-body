@@ -30,31 +30,31 @@
         },
         {
             "questionId": "102",
-            "question": "I am satisfied with the amount of time I spend with the important people in my life.",
+            "question": "I have a clear sense of meaning and purpose in my life.",
             "responseType": 2,
             "options": [],
-            "extraData": { "compass": "relationship" }
+            "extraData": { "compass": "spirituality" }
         },
         {
             "questionId": "102",
-            "question": "I feel good about the relationships that I have with my family members.",
+            "question": "I am pleased with what I give back to the world.",
             "responseType": 2,
             "options": [],
-            "extraData": { "compass": "relationship" }
+            "extraData": { "compass": "spirituality" }
         },
         {
             "questionId": "102",
-            "question": "I am happy with my friendships and other social connections.",
+            "question": "I am involved in an activity that really matters to me.",
             "responseType": 2,
             "options": [],
-            "extraData": { "compass": "relationship" }
+            "extraData": { "compass": "spirituality" }
         },
         {
             "questionId": "102",
-            "question": "My friends and those who know me well would say that I am a good and trusted friend.",
+            "question": "I forgive others and I forgive myself.",
             "responseType": 2,
             "options": [],
-            "extraData": { "compass": "relationship" }
+            "extraData": { "compass": "spirituality" }
         }
     ]
 }

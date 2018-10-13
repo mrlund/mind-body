@@ -1,0 +1,32 @@
+{
+    "quiz": [
+        {
+            "questionId": "101",
+            "question": "I feel good about with the way I get and spend, budget, and keep track of my money, either as an allowance or earnings from a job.",
+            "responseType": 2,
+            "options": [],
+            "extraData": { "compass": "resiliance" }
+        },
+        {
+            "questionId": "102",
+            "question": "I am always on time for school, work, and other commitments",
+            "responseType": 2,
+            "options": [],
+            "extraData": { "compass": "resiliance" }
+        },
+        {
+            "questionId": "102",
+            "question": "I organize my time and plan ahead to make sure that I allow enough time to get everything done.",
+            "responseType": 2,
+            "options": [],
+            "extraData": { "compass": "resiliance" }
+        },
+        {
+            "questionId": "102",
+            "question": "I am happy with the way I organize my priorities, ensuring that I have enough time to dedicate to all the different aspects of my life.",
+            "responseType": 2,
+            "options": [],
+            "extraData": { "compass": "resiliance" }
+        }
+    ]
+}

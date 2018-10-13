@@ -6,14 +6,17 @@
             "responseType": 1,
             "options": [
                 {
-                    "option": "Yes",
+                    "option": "Your thoughts do not effect your body"
+                },
+                {
+                    "option": "They cause bad dreams"
+                },
+                {
+                    "option": "They control the speed of your body"
+                },
+                {
+                    "option": "Negative emotions can have links to serious health problems",
                     "isCorrect": true
-                },
-                {
-                    "option": "No"
-                },
-                {
-                    "option": "Maybe"
                 }
             ]
         },
@@ -23,14 +26,17 @@
             "responseType": 1,
             "options": [
                 {
-                    "option": "Yes"
+                    "option": "Nitrogens"
                 },
                 {
-                    "option": "No",
+                    "option": "Thoughts"
+                },
+                {
+                    "option": "Polymers"
+                },
+                {
+                    "option": "Neurotransmitters",
                     "isCorrect": true
-                },
-                {
-                    "option": "Maybe"
                 }
             ]
         },
@@ -40,14 +46,17 @@
             "responseType": 1,
             "options": [
                 {
-                    "option": "Yes"
-                },
-                {
-                    "option": "No",
+                    "option": "Stress/Anxiety",
                     "isCorrect": true
                 },
                 {
-                    "option": "Maybe"
+                    "option": "Sadness"
+                },
+                {
+                    "option": "Happiness"
+                },
+                {
+                    "option": "Excitement"
                 }
             ]
         },
@@ -57,48 +66,62 @@
             "responseType": 1,
             "options": [
                 {
-                    "option": "Yes"
-                },
-                {
-                    "option": "No",
+                    "option": "Basal Ganglia",
                     "isCorrect": true
                 },
                 {
-                    "option": "Maybe"
+                    "option": "Cerebrum"
+                },
+                {
+                    "option": "Cerebellum"
+                },
+                {
+                    "option": "Unconscious Mind"
                 }
             ]
         },
         {
             "questionId": "102",
-            "question": "Name two practices that can help you improve your mental well-being",
-            "responseType": 1,
+            "question": "_________ and _________ are two practices that can help you improve your mental well-being.",
+            "responseType": 4,
             "options": [
                 {
-                    "option": "Yes"
-                },
-                {
-                    "option": "No",
+                    "option": "Silence",
                     "isCorrect": true
                 },
                 {
-                    "option": "Maybe"
+                    "option": "Affirmations",
+                    "isCorrect": true
+                },
+                {
+                    "option": "Visualization",
+                    "isCorrect": true
+                },
+                {
+                    "option": "Exercise",
+                    "isCorrect": true
+                },
+                {
+                    "option": "Reading",
+                    "isCorrect": true
+                },
+                {
+                    "option": "Journaling",
+                    "isCorrect": true
                 }
             ]
         },
         {
             "questionId": "102",
-            "question": "Does your mental wellbeing improve your physical wellbeing?",
+            "question": "True or false: Your mental wellbeing improves your physical wellbeing.",
             "responseType": 1,
             "options": [
                 {
-                    "option": "Yes"
+                    "option": "False"
                 },
                 {
-                    "option": "No",
+                    "option": "True",
                     "isCorrect": true
-                },
-                {
-                    "option": "Maybe"
                 }
             ]
         }

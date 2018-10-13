@@ -795,14 +795,72 @@
             "number": 3,
             "name": "Stress",
             "urlName": "stress",
-            "sessions": []
+            "sessions": [
+                {
+                    "id": 1,
+                    "number": 0,
+                    "name": "Introduction",
+                    "urlName": "introduction",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 3,
+                            "name": "What do you know?",
+                            "urlName": "what-do-you-know"
+                        },
+                        {
+                            "id": 4,
+                            "name": "What do you think?",
+                            "urlName": "what-do-you-think"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "id": 5,
             "number": 4,
             "name": "The Physical Body",
             "urlName": "the-physical-body",
-            "sessions": []
+            "sessions": [
+                {
+                    "id": 1,
+                    "number": 0,
+                    "name": "Introduction",
+                    "urlName": "introduction",
+                    "pages": [
+                        {
+                            "id": 1,
+                            "name": "Introduction",
+                            "urlName": "introduction"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Objectives",
+                            "urlName": "objectives"
+                        },
+                        {
+                            "id": 3,
+                            "name": "What do you know?",
+                            "urlName": "what-do-you-know"
+                        },
+                        {
+                            "id": 4,
+                            "name": "What do you think?",
+                            "urlName": "what-do-you-think"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "id": 6,

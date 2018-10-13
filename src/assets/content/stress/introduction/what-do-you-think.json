@@ -1,0 +1,60 @@
+{
+    "quiz": [
+        {
+            "questionId": "102",
+            "question": "I am pleased with my overall involvement in school.",
+            "responseType": 2,
+            "options": [],
+            "extraData": { "compass": "school" }
+        },
+        {
+            "questionId": "102",
+            "question": "I am personally happy with my grades",
+            "responseType": 2,
+            "options": [],
+            "extraData": { "compass": "school" }
+        },
+        {
+            "questionId": "102",
+            "question": "I feel good about the connections I have with the the adults at school.",
+            "responseType": 2,
+            "options": [],
+            "extraData": { "compass": "school" }
+        },
+        {
+            "questionId": "102",
+            "question": "I feel good about the relationships I have with other students and how those relationships impact my all-around success at school.",
+            "responseType": 2,
+            "options": [],
+            "extraData": { "compass": "school" }
+        },
+        {
+            "questionId": "102",
+            "question": "I am satisfied with the amount of time I spend with the important people in my life.",
+            "responseType": 2,
+            "options": [],
+            "extraData": { "compass": "relationship" }
+        },
+        {
+            "questionId": "102",
+            "question": "I feel good about the relationships that I have with my family members.",
+            "responseType": 2,
+            "options": [],
+            "extraData": { "compass": "relationship" }
+        },
+        {
+            "questionId": "102",
+            "question": "I am happy with my friendships and other social connections.",
+            "responseType": 2,
+            "options": [],
+            "extraData": { "compass": "relationship" }
+        },
+        {
+            "questionId": "102",
+            "question": "My friends and those who know me well would say that I am a good and trusted friend.",
+            "responseType": 2,
+            "options": [],
+            "extraData": { "compass": "relationship" }
+        }
+    ]
+}
